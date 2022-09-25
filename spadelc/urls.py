@@ -49,6 +49,9 @@ urlpatterns = [
     path('ajax/crud/delete/all',  DeleteCrudUserAll.as_view(), 
         name='crud_ajax_delete_all'),
     path('ajax/crud/create/OneProduct',  CreateOneOrder.as_view(), name='crud_ajax_create_one'),
+
+    path('', include('social_django.urls', namespace='social')),
+
 ]
 
 urlpatterns += [
