@@ -1,0 +1,68 @@
+<li class="item has-submenu">
+    <a tabindex="0" class="fontSamim daste-2"> قطعات و تجهیزات</a>
+    <div class="submenu mega-menu mega-menu-column-4">
+
+        <div class="mobile-menu-head">
+            <div class="mobile-menu-close"><i class="fas fa-times"></i></div>
+        </div>
+
+        <div class="list-item">
+            <h4 class="title fontSamim">  {{categories.1}} </h4>
+            <ul>
+                {% for cate in Cates_1 %}
+                    <li><a href="/products/{{ cate.name }}" class="fontSamim">{{ cate.title }} </a></li>
+                {% endfor %}
+                <!-- <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li> -->
+            </ul>
+            <!-- <h4 class="title fontSamim">زیباترین ها</h4>
+            <ul>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+
+            </ul> -->
+        </div>
+        <div class="list-item">
+            <h4 class="title fontSamim"> {{categories.2}}  </h4>
+            <ul>
+                {% for cate in Cates_2 %}
+                    <li><a href="/products/{{ cate.name }}" class="fontSamim">{{ cate.title }} </a></li>
+                {% endfor %}
+                <!-- <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li> -->
+            </ul>
+            <!-- <h4 class="title fontSamim">مبلمان</h4>
+            <ul>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+            </ul> -->
+        </div>
+        <div class="list-item fontSamim">
+            <h4 class="title fontSamim"> {{categories.0}} </h4>
+            <ul>
+                {% for cate in Cates_0 %}
+                    <li><a href="/products/{{ cate.name }}" class="fontSamim">{{ cate.title }} </a></li>
+                {% endfor %}
+                <!-- <li><a href="#"  class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li>
+                <li><a href="#" class="fontSamim">لیست محصولات</a></li> -->
+            </ul>
+        </div>
+
+
+    </div>
+</li>

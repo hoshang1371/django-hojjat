@@ -1,0 +1,556 @@
+    /* @import url('/static/css/fonts.css');
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color: antiquewhite;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    top: 90px;
+    right: 0;
+    width: 100%;
+    height: 4rem;
+    position: fixed;
+    background: rgba(0, 0, 0, .6);
+    z-index: 1;
+}
+
+.menu.active {
+    background-color: red;
+}
+
+.menu.sticky {
+    top: 0px;
+    padding: 0px 0;
+    margin: 0px;
+    transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+}
+
+.menu div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu div+div {
+    display: block;
+    padding: 15px 5px;
+}
+
+.item {
+    display: none;
+    text-align: center;
+}
+
+.active .item {
+    display: block;
+    border-bottom: 1px solid white;
+    margin-right: 20px;
+    padding: 20px;
+}
+
+.active .item a {
+    font-size: 22px;
+}
+
+.left_icon {
+    color: #fff;
+}
+
+.submenu {
+    display: none;
+}
+
+.has-submenu a:hover+ul {
+    display: block;
+    position: absolute;
+    background: rgba(0, 0, 0, .6);
+    top: 65px;
+}
+
+/ .has-submenu i {
+    font-size: 12px;
+}
+
+.has-submenu a {
+    color: white!important;
+    cursor: pointer;
+}
+
+.item a:hover {
+    color: #ccc!important;
+}
+
+.has-submenu a:hover::after {
+    border-left: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+
+.has-submenu>a::after {
+    content: '';
+    position: absolute;
+    margin: 5px;
+    width: 10px;
+    height: 10px;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(-45deg);
+}
+
+.toggle {
+    font-size: 30px;
+    flex: 0;
+    order: 2;
+    margin-right: 15px;
+}
+
+.search {
+    font-size: 30px;
+    height: 100%;
+}
+
+.basket {
+    font-size: 30px;
+}
+
+@media all and (min-width: 700px) {
+    .toggle {
+        display: none;
+        top: 0;
+    }
+    .menu div+div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0px;
+        width: auto;
+        margin-right: 0px;
+        background: none;
+    }
+    .item {
+        order: 1;
+        position: relative;
+        display: block;
+        width: auto;
+    }
+    .logo {
+        flex: 1;
+    }
+    .logo_h {
+        flex: 10;
+    }
+}
+
+@media all and (min-width: 960px) {
+    .logo {
+        order: 0;
+    }
+    .logo_h {
+        order: 0;
+    }
+    .toggle {
+        display: none;
+        top: 0;
+    }
+    .menu div+div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0px;
+        width: auto;
+        margin-right: 0px;
+        background: none;
+    }
+    .item {
+        order: 1;
+        position: relative;
+        display: block;
+        width: auto;
+    }
+    .active .item {
+        display: block;
+        border-bottom: none;
+        margin-right: 20px;
+    } */
+    /* Basic styling */
+    
+    /* * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    } */
+    
+    /* body {
+        font-family: sans-serif;
+        font-size: 16px;
+    } */
+    
+    nav {
+        background: #3e60a8;
+        padding: 0 15px;
+        z-index: 40;
+    }
+    
+    a {
+        color: white;
+        text-decoration: none;
+    }
+    
+    .menu,
+    .submenu {
+        list-style-type: none;
+        z-index: 200;
+    }
+    
+    .submenu {
+        background-color: #2b3032a1;
+        /* display: absolute; */
+        /* z-index: 201; */
+    }
+    /* .logo {
+        font-size: 20px;
+        padding: 20px 10px 7.5px 0;
+    }
+    
+    .logo_h {
+        font-size: 20px;
+        padding: 20px 10px 7.5px 0;
+    } */
+    
+    .item { 
+        padding: 0px 10px;
+        /* height: 100%; */
+    }
+    
+    /* .item a {
+        height: 100%;
+    } */
+    
+    .item.button {
+        padding: 9px 5px;
+    }
+    
+    .item:not(.button) a:hover,
+    .item a:hover::after {
+        color: #ccc;
+    }
+    /* Mobile menu */
+    
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        top: 106px;
+        right: 0;
+        width: 100%;
+        height: 4rem;
+        position: fixed;
+        background: rgba(0, 0, 0, .6);
+        z-index: 1;
+    }
+    
+    .menu.sticky {
+        top: 0px;
+        padding: 0px 0;
+        margin: 0px;
+        transition: all .3s ease-out;
+        -webkit-transition: all .3s ease-out;
+        -moz-transition: all .3s ease-out;
+        -ms-transition: all .3s ease-out;
+        -o-transition: all .3s ease-out;
+    }
+    
+    .has-submenu>a::after {
+        content: '';
+        position: absolute;
+        margin: 5px;
+        width: 10px;
+        height: 10px;
+        border-left: 2px solid white;
+        border-bottom: 2px solid white;
+        transform: rotate(-45deg);
+    }
+    
+    .search {
+        font-size: 30px;
+        height: 100%;
+        color: #fff;
+        margin-left: 15px;
+        cursor: pointer;
+    }
+    
+    .basket {
+        font-size: 30px;
+        color: #fff;
+        height: 100%;
+        margin-left: 15px;
+        cursor: pointer;
+    }
+    
+    .menu li a {
+        display: block;
+        padding: 15px 5px;
+    }
+    
+    .menu li.subitem a {
+        padding: 15px;
+        /* border-bottom: 1px solid white; */
+    }
+    
+    .submenu li {
+        border-bottom: 1px solid white;
+        margin-right: 30px;
+    }
+    
+    .submenu li:last-child {
+        border-bottom: none;
+    }
+    /* .menu li.submenu  {
+    position: relative;
+} */
+    /* .menu li.submenu > .subitem {
+    position: absolute;
+    border: 2px solid white;
+} */
+    /* .menu li.subitem::after {
+    display: block;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+} */
+    
+    .toggle {
+        order: 1;
+        font-size: 30px;
+        margin-right: 15px;
+    }
+    
+    .item.button {
+        order: 2;
+    }
+    /*+++++++++++++++++++++*/
+    .item {
+        order: 3;
+        width: 100%;
+        text-align: center;
+        display: none;
+        /* background: rgba(0, 0, 0, .6); */
+        background-color: red!important;
+        height: 100%;
+    }
+    
+    .active .item a {
+        font-size: 22px;
+    }
+    
+    .fontSamim {
+        font-family: 'samim';
+    }
+    
+    .active .item {
+        /* padding-right: 20px; */
+        display: block;
+        border-bottom: 1px solid white;
+        /* margin-right: 20px; */
+    }
+    
+    .none_under_line {
+        border-bottom: none!important;
+    }
+    
+    .button.secondary {
+        /* divider between buttons and menu links */
+        border-bottom: 1px #444 solid;
+    }
+    /* Submenu up from mobile screens */
+    
+    /* .submenu {
+        display: block;
+    } */
+    /**/
+    
+    /* .has-submenu a:hover+ul {
+        display: block;
+        z-index: 1000;
+        background: rgba(0, 0, 0, .6);
+    } */
+
+    .submenu:hover {
+        display: block;
+        background-color: red;
+    }
+    /*
+    .has-submenu i {
+        font-size: 12px;
+    }
+    
+    .has-submenu a {
+        color: white!important;
+        cursor: pointer;
+    }
+    
+    .item a:hover {
+        color: #ccc!important;
+    }
+    
+    .has-submenu a:hover::after {
+        border-left: 2px solid #ccc;
+        border-bottom: 2px solid #ccc;
+    }
+    
+    */
+    /**/
+    
+    .submenu-active .submenu {
+        display: block;
+    }
+    
+    .has-submenu i {
+        font-size: 12px;
+    }
+    
+    .has-submenu a {
+        color: white!important;
+        cursor: pointer;
+        /* font-family: 'samim'; */
+    }
+    
+    .has-submenu a:hover {
+        color: #ccc!important;
+    }
+    
+    .subitem a {
+        padding: 10px 15px;
+    }
+    /* .submenu-active {
+    border-radius: 3px;
+} */
+    /* Tablet menu */
+    
+    @media all and (min-width: 700px) {
+        .menu {
+            justify-content: center;
+        }
+        .logo {
+            flex: 1;
+            height: 100%;
+        }
+        .logo_h {
+            flex: 10;
+            height: 100%;
+            top: 10px;
+        }
+        .item.button {
+            width: auto;
+            order: 1;
+            display: block;
+        }
+        .toggle {
+            flex: 1;
+            text-align: right;
+            order: 2;
+        }
+        /* Button up from tablet screen */
+        .menu li.button a {
+            padding: 10px 15px;
+            margin: 5px 0;
+        }
+        .button a {
+            background: #0080ff;
+            border: 1px royalblue solid;
+        }
+        .button.secondary {
+            border: 0;
+        }
+        .button.secondary a {
+            background: transparent;
+            border: 1px #0080ff solid;
+        }
+        .button a:hover {
+            text-decoration: none;
+        }
+        .button:not(.secondary) a:hover {
+            background: royalblue;
+            border-color: darkblue;
+        }
+    }
+    /* Desktop menu */
+    
+    @media all and (min-width: 960px) {
+        .menu {
+            align-items: flex-start;
+            flex-wrap: nowrap;
+            background: none;
+            background: rgba(0, 0, 0, .6);
+        }
+        .logo {
+            order: 0;
+            height: 100%;
+        }
+        .logo_h {
+            order: 0;
+            height: 100%;
+        }
+        .item {
+            order: 1;
+            position: relative;
+            display: block;
+            width: auto;
+            background: none;
+        }
+        .active .item {
+            border-bottom: none;
+        }
+        .button {
+            order: 2;
+        }
+        .has-submenu a:hover+ul {
+            display: block;
+            position: absolute;
+            background: rgba(0, 0, 0, .6);
+            top: 65px;
+        }
+        .has-submenu i {
+            font-size: 12px;
+        }
+        .has-submenu a {
+            color: white!important;
+            cursor: pointer;
+        }
+        .item a:hover {
+            color: #ccc!important;
+        }
+        .has-submenu a:hover::after {
+            border-left: 2px solid #ccc;
+            border-bottom: 2px solid #ccc;
+        }
+        .submenu-active .submenu {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 68px;
+            /* align-items: center!important; */
+        }
+        .toggle {
+            display: none;
+        }
+        /* .submenu-active {
+        border-radius: 0;
+    } */
+    }

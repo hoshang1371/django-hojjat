@@ -1,0 +1,1 @@
+default_app_config = 'spad_account.apps.SpadAccountConfig'

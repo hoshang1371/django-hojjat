@@ -1,0 +1,42 @@
+{% load static %}
+{% load render_partial %}
+
+
+<nav>
+    <ul class="menu">
+        <li class=" logo search-icon">
+            <a class="fas fa-search search"></a>
+        </li>
+        <li class=" logo_h cart__count">
+            {% comment %}{% endcomment %}
+            {% if request.user.is_authenticated %}
+                {% render_partial 'products_number_all_order_partial' %}
+            {% endif %}
+            
+        </li>
+
+        <li class="item"><a href="/contact-us" class="fontSamim">تماس با ما</a></li>
+        <li class="item"><a href="/about-us" class="fontSamim">درباره ی ما</a></li>
+        {% comment %}{% endcomment %}
+        {% render_partial 'products_category' %}
+
+        
+        </li>
+        <li class="item"><a href="/products" class="fontSamim">محصولات</a></li>
+        <li class="item none_under_line "><a href="/" class="fontSamim">خانه</a>
+        </li>
+
+        <li class="toggle"><a ><i class="fas fa-bars"></i></a></li>
+    </ul>
+
+    <div class="search-overlay"></div>
+
+    <div class="search-popup">
+        {% include 'shared/search_product_input_component.html' %}
+    </div>
+</nav>
+
+<div class="cart">
+    {% render_partial 'products_order_partial' %}
+
+</div>

@@ -1,0 +1,1 @@
+default_app_config = 'spad_eshop_tag.apps.SpadEshopTagConfig'

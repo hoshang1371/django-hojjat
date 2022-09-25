@@ -1,0 +1,230 @@
+{% extends 'shared/_MainLayout.html' %} 
+{% load static %} 
+
+{% load render_partial %}
+
+{% block content %}
+
+<section class="banner">
+    <div class="imgBx">
+        {% for slider in sliders %}
+            <img src="{{ slider.image.url }}" class="{{ forloop.first|yesno:'active,' }}" alt="{{ slider.title }}">
+            <p class="{{ forloop.first|yesno:'active,' }}">{{ slider.title }}</p>
+        {% endfor %}
+        <!-- <img src="{% static 'images/1.jpg' %}" class="active" alt="">
+        <p class="active">ما با بازار های هدف ارتباط برقرار می کنیم</p>
+        <img src="{% static 'images/2.jpg' %}" class="" alt="">
+        <p class=""> مشتریان را به طرفداران تبدیل می کنیم </p>
+        <img src="{% static 'images/3.jpg' %}" class="" alt="">
+        <p class=""> حجت شهپر </p> -->
+
+    </div>
+
+
+    <ul class="controls">
+        <li onclick="prevSlide()"></li>
+        <li onclick="nextSlide()"></li>
+    </ul>
+
+</section>
+<section class="bestProduct">
+    <p>محصولات ویژه</p>
+    <div class="product_Slider">
+
+        <div class="controls_productSlider_left" id="slide-left">
+            <div></div>
+        </div>
+
+        <div class="product-container" id="slider">
+
+        {% for vige_product in vige_products %}
+        <div class="product-item product-item-hh">
+            <input type="hidden" id="product__id_one" value="{{vige_product.id}}">
+            <p class="itemParagerafUp">{{vige_product.categories.all|join:", " }}</p>
+            <p class="itemParagerafDown">{{ vige_product.title }}</p>
+            <img src="{{ vige_product.image.url }}" class="" alt="Banner1">
+            <br>
+            <div class="product-detail">
+                <h2>{{vige_product.smallDescription}}</h2>
+                <!-- <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p> -->
+                {% if vige_product.priceOff != NaN %}
+                <p class="product_detail_kh"><span class="ToPersian" >{{vige_product.priceOff}}</span><span>تومان</span></p>
+                {%endif%}
+                <p><span class="ToPersian" >{{vige_product.price}}</span><span>تومان</span></p>
+                <!-- <a href="#">خرید</a>
+                <a href="#">توضیحات</a> -->
+                <a class="kharid_1_add">خرید</a>
+                <a class="get_address" href="{{ vige_product.get_absolute_url }}">مشاهده</a>
+            </div>
+        </div>
+        {% endfor %}
+      
+        </div>
+
+        <div class="controls_productSlider_right" id="slide-right">
+            <div></div>
+        </div>
+
+    </div>
+</section>
+
+<section class="NewProduct">
+    <p>محصولات جدید</p>
+    <div class="product_Slider">
+
+        <div class="controls_productSlider_left" id="slide-left-new">
+            <div></div>
+        </div>
+
+        <div class="product-container" id="sliderNew">
+            {% for latest_product in latest_products %}
+                <div class="product-item-new product-item-hh">
+                    <input type="hidden" id="product__id_one" value="{{latest_product.id}}">
+                    <p class="itemParagerafUp">{{latest_product.categories.all|join:", " }}</p>
+                    <p class="itemParagerafDown">{{ latest_product.title }}</p>
+                    <img src="{{ latest_product.image.url }}" class="" alt="Banner1">
+                    <br>
+                    <div class="product-detail">
+                        <h2>{{latest_product.smallDescription}}</h2>
+                        <!-- <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
+                        <a href="#">خرید</a>
+                        <a href="#">توضیحات</a> -->
+                        {% if latest_product.priceOff != NaN %}
+                        <p class="product_detail_kh"><span class="ToPersian" >{{latest_product.priceOff}}</span><span>تومان</span></p>
+                        {%endif%}
+                        <p><span class="ToPersian" >{{latest_product.price}}</span><span>تومان</span></p>
+                        <a class="kharid_1_add">خرید</a>
+                        <a class="get_address" href="{{ latest_product.get_absolute_url }}">مشاهده</a>        
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div> 
+
+        <div class="controls_productSlider_right" id="slide-right-new">
+            <div></div>
+        </div>
+
+    </div>
+</section>
+
+<section class="PopularProduct">
+    <p>محصولات پر طرفدار</p>
+    <div class="popular-product-container">
+        {% for most_visi in most_visit %}
+            <input type="hidden" id="product__id_one" value="{{most_visi.id}}">
+            <div class="product-item-new product-item-hh">
+                <input type="hidden" id="product__id_one" value="{{most_visi.id}}">
+                <p class="itemParagerafUp">{{most_visi.categories.all|join:", " }}</p>
+                <p class="itemParagerafDown">{{ most_visi.title }}</p>
+                <img src="{{ most_visi.image.url }}" class="" alt="Banner1">
+                <br>
+                <div class="product-detail">
+                    <h2>{{most_visi.smallDescription}}</h2>
+                    <!-- <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
+                    <a href="#">خرید</a>
+                    <a href="#">توضیحات</a> -->
+                    {% if most_visi.priceOff != NaN %}
+                        <p class="product_detail_kh"><span class="ToPersian" >{{most_visi.priceOff}}</span><span>تومان</span></p>
+                    {%endif%}
+                        <p><span class="ToPersian" >{{most_visi.price}}</span><span>تومان</span></p>
+                        <a class="kharid_1_add">خرید</a>
+                        <a class="get_address" href="{{ most_visi.get_absolute_url }}">مشاهده</a>        
+                </div>           
+            </div>
+        {%endfor%}
+
+    </div>
+</section>
+ 
+
+<script src="{% static 'js/banner.js' %}"></script>
+<script src="{% static 'js/product-slider.js' %}"></script>
+<script src="{% static 'js/new-product-slider.js' %}"></script>
+{% if request.user.is_authenticated %}
+<script>
+    //const cartDOM1 = document.querySelector('.cart__items');
+
+    document.querySelectorAll('.product-item-hh').forEach(item_new => {
+        item_new.addEventListener('click', function(){      
+            //console.log(item_new.querySelector('.get_address').href)
+            location.replace(item_new.querySelector('.get_address').href);
+        })
+    });
+
+    function addItemToTheDom(product) {
+        document.querySelector('.mobile-cart-head').insertAdjacentHTML("afterend",`
+        <div class="cart__item">
+            <input type="hidden" id="product__id" value="${product.productId}">
+            <img src="${product.productImage}" id="product__" alt="">
+            <h4 class="product__name">${product.productName}</h4>
+            <a  class="btn__small" action="decrease">&minus;</a>
+            <h4 class="product__quantity ToPersian fontSamim fontSize_16">${product.productCount}</h4>
+            <a class="btn__small" action="increase">&plus;</a>
+            <h4 class="product_price ToPersian fontSamim fontSize_16">${product.product_All_price}</h4>
+            <a class="btn__small btn__remove " action="remove">&times;</a>
+        </div>
+    `)
+    }
+    const product_item_new = document.querySelectorAll('.product-item-hh');
+    product_item_new.forEach(inItem => {
+        inItem.querySelector(".kharid_1_add").addEventListener('click', function (e) {
+            e.stopPropagation()
+            let IdP = inItem.querySelector("#product__id_one").value
+            //console.log(IdP);
+            $.ajax({
+                url: '{% url "crud_ajax_create_one" %}',
+                data: {
+                    'id': IdP,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.user) {     
+                        addItemToTheDom(data.user);
+                       const cartDOMItems = document.querySelectorAll('.cart__item');
+                       cartDOMItems.forEach(inItem => {
+                            if(inItem.querySelector('#product__id').value === (data.user.productId).toString()){
+                                inItem.querySelector('.product__quantity').innerText = ((data.user.productCount).toString()).toPersinaDigit();
+                                inItem.querySelector('.product_price').innerText = ((data.user.product_All_price).toString()).toPersinaDigit();
+                                increaseItem(inItem);
+                                decreaseItem(inItem);
+                                removeItem(inItem);
+                                calculateAllTotal();
+                                //var cont_of_all=document.querySelector(".total__counter a").innerText.toEnglishDigit()
+                                var cont_of_all =((data.user.Total_count_for_all_product).toString());
+                                if(!(cont_of_all == "0")){
+                                    document.querySelector(".total__counter a").style.display ="block";
+                                    document.querySelector(".total__counter").style.display ="block";
+                                }
+                                document.querySelector(".total__counter a").innerText =((data.user.Total_count_for_all_product).toString()).toPersinaDigit();
+                                if(data.user.Total_count_for_product > 3){ 
+                                    document.querySelector(".cart__items").style.height= "70vh";
+                                    //document.querySelector(".cart__items").style.overflowY= "scroll";
+                                }
+                            }
+                        })
+                        alert("محصول به سبد خرید اضافه شد")
+                    }
+                    else if (!data.addedOne) {     
+                        alert("این محصول در سبد خرید موجود است")
+                    }
+                }
+            });
+
+         });
+    });
+
+</script>
+{% else %}
+<script>
+    const product_item_new = document.querySelectorAll('.product-item-hh');
+    product_item_new.forEach(inItem => {
+        inItem.querySelector(".kharid_1_add").addEventListener('click', function (e) {
+            document.location.href = '/login';
+        });
+    });
+</script>
+<!-- <meta http-equiv="REFRESH" content="0;url=/login"> -->
+{% endif %}
+
+{% endblock %}

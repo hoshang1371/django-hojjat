@@ -1,0 +1,76 @@
+@import url('/static/css/fonts.css');
+
+/* header{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(0,0,0,.6);
+    height: 100px;
+    z-index: 1000;
+} */
+
+.startMenu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-color: #a1a4e0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 106px;
+    z-index: 1;
+}
+
+.text-end p a {
+    padding: 2px 20px 2px 20px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.text-white {
+    color: antiquewhite;
+    font-family: 'mikhak';
+}
+
+.font-samim,
+.fontSamim {
+    font-family: 'samim';
+}
+
+.font-mikhak {
+    font-family: 'mikhak';
+}
+
+.site-title {
+    font-size: 2rem;
+    transform: translateX(+50%);
+    -webkit-transform: translateX(+50%);
+    -moz-transform: translateX(+50%);
+    -ms-transform: translateX(+50%);
+    -o-transform: translateX(+50%);
+}
+
+.header-links {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+/* .header-links a{
+    padding: 10px;
+    font-size: 15px;
+} */
+
+
+/* Desktop menu */
+
+@media all and (min-width: 960px) {
+    .header-links {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

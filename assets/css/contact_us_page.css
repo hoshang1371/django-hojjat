@@ -1,0 +1,133 @@
+.container{
+    /* background-color: red;
+    position: relative;*/
+    height: 150vh; 
+    background: url(/static/images/login_image.jpg);
+    top: 106px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    /* height: 100vh; */
+    padding: 0;
+    margin-bottom: 106px;
+}
+
+.container:after{
+    position: absolute;
+    margin-top: 00px;
+    content: '';
+    /* top: 162px; */
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7); 
+}  
+
+.bg{
+    /* position: absolute;
+    top: 25%; */
+    position: absolute;
+    margin-top: 300px;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
+    width: 370px;
+    padding: 60px 32px;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
+}
+
+.text-center{
+    color: white;  
+    font-size: 33px;
+    font-weight: 500;
+    margin: 0 0 35px 0;
+    /* font-family: 'Montserrat',sans-serif; */
+    font-family: 'byekan';
+}
+
+address p{
+    color: white; 
+    font-family: 'samim';
+}
+
+.field{
+    position: relative;
+    z-index: 0;
+    height: 45px;
+    width: 100%;
+    display: flex;
+    background: rgba(255,255,255,0.94);
+    /* background: red; */
+}
+
+.field input{
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #222;
+    font-size: 16px;
+    /* font-family: 'Poppins',sans-serif; */
+    font-family: 'samim';
+}
+
+input[type="submit"]{
+    background: #dbd067;
+    border: 1px solid #f0db1d;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-size: 600;
+    cursor: pointer;
+    font-family: 'byekan';
+}
+input[type="submit"]:hover{
+    background: #c9bf6a;
+}
+.user-icon,.pass-icon{
+    color: #222;
+    width: 40px;
+    line-height: 45px;
+    float: right;
+    position: absolute;
+    right: 10px;
+}
+.rtl{
+    /* unicode-bidi:bidi-override;  */
+    direction: RTL;
+    margin-right: 50px; 
+    /* margin-left: 80px;  */
+}
+
+.space{
+    margin-top: 16px;
+}
+
+.field_title{
+    position: relative;
+    z-index: 0;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    background: rgba(255,255,255,0.94);
+}
+/*
+.form-control{
+    font-family: 'samim';
+}*/
+.field_title textarea{
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #222;
+    font-size: 16px;
+    font-family: 'samim';
+    margin-top: 4%;
+}

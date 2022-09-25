@@ -1,0 +1,32 @@
+@import url('/static/css/fontsGoogle.css');
+
+
+@font-face {
+    font-family: 'samim';
+    src: url('/static/fonts/Samim.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'vazir';
+    src: url('../fonts/vazir.eot') format('eot'),
+     url('../fonts/vazir.ttf') format('truetype'),
+    url('../fonts/vazir.woff') format('woff'),
+    url('../fonts/vazir.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'mikhak';
+    src: url('/static/fonts/Mikhak-Black.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=Open+Sans&family=Quicksand&family=Roboto&display=swap');
+
+@font-face {
+    font-family: 'byekan';
+    src: url('/static/fonts/Mikhak-Black.ttf');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -1,0 +1,28 @@
+.abutAs{
+    /*top: 50%;
+    display: relative;*/
+    width: auto;
+    height: 100vh;
+}
+
+.abutAs ul{
+    top: 50%;
+    position: relative;
+    direction: rtl;
+    /* margin-right: 10px; */
+    right: 0%;
+}
+
+.abutAs ul li{
+    position: flex; 
+    right: 0%;
+    direction: rtl;
+}
+
+.abutAs ul li p{
+    font-family: 'samim';
+    margin-right: 50%;
+    transform: translateX(50%);
+    font-size: 19px;
+    padding: 5px;
+}

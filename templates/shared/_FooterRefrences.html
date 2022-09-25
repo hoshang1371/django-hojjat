@@ -1,0 +1,47 @@
+{% load static %}
+
+<script src="{% static 'js/alll.min.js' %}"></script>
+<script src="{% static 'js/nav.js' %}"></script>
+{% if request.user.is_authenticated %}
+<script>
+    function basket_click(event) {
+        event.stopPropagation();
+        cartDOM.classList.toggle('active');
+    }
+    function cartDOM_click(event) {
+        event.stopPropagation();
+    }
+    basket.addEventListener('click', basket_click);
+    cartDOM.addEventListener('click', cartDOM_click);
+
+    window.onclick = function () {
+        if (cartDOM.classList.contains("active")) {
+            cartDOM.classList.remove("active");
+        }
+      }
+
+/*    $(document).mouseup(function (e) {
+        var container = $(".cart__items");
+        var basket1 = $(".clickBasket");
+        if(!container.is(e.target) && 
+        !basket1.is(e.target) &&
+        container.has(e.target).length === 0 ) {
+
+            console.log("out");
+            console.log(basket1);
+        }
+    });*/
+    /*$(document).click(function (event) {//when anywhere is clicked on the page    
+        if (!$(event.target).hasClass('.cart__items')) {//if the clicked item has this class
+            console.log("out")
+        }      
+    });*/
+</script>
+{%endif%}
+
+<script src="{% static 'js/search.js' %}"></script>
+
+<script src="{% static 'js/numberOfPersian.js' %}"></script>
+
+<!-- <script src="{% static 'js/login.js' %}"></script> -->
+<!-- <script src="{% static 'js/body.js' %}"></script> -->

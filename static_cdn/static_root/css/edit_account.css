@@ -1,0 +1,191 @@
+@import url('/static/css/fonts.css');
+
+.content_accunt {
+    position: relative;
+    top: 200px;
+    width: 100%;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+    margin-bottom: 200px;
+}
+
+.rtl{
+    margin-right: 10px;
+    padding-right: 20px;
+}
+
+.show{
+    position: absolute;
+    margin-top: 10px;/**/
+    top: 15%;
+    left: 3%;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    cursor: pointer;
+    display: none;
+    font-family: 'byekan';
+}
+.password:valid ~ .show{
+    display: block;
+}
+
+.errror{
+    background-color: red!important;
+}
+
+/* .rtl::placeholder{
+    color: red;
+    padding-right: 20px;
+} */
+
+.form-group {
+    text-align: center;
+    font-size: 30px;
+    background-color: #3e60a8;
+    padding: 30px 0px 30px 0px;
+    color: antiquewhite;
+    font-family: 'samim';
+    margin-bottom: 5px;
+}
+
+.form_name{
+    position: relative;
+    /* height: 45px;
+    width: 100%; */
+    height: 100%;
+    display: block;
+    direction: rtl;
+    /* flex-direction: row-reverse;
+    justify-content: space-around;  */
+}
+.rdio_button{
+    position: relative;
+    height: 100%;
+    display: block;
+    direction: rtl;
+}
+
+.rdio_button label{
+    position: absolute;
+    right: 20px;
+    top: 20%;
+}
+.rdio_button ul {
+    position: absolute;
+    left: 20px;
+    top: 20%;
+    height: 60%;
+    width: 38%;
+    font-size: 25px;
+    font-family: 'samim';
+}
+
+.rdio_button ul li:first-child{
+    position: absolute;
+    margin-left: 20px;
+    width: 50%;
+    top: 20%;
+    /* display: flex; */
+    left: 0px;
+}
+
+.rdio_button ul li:first-child label{
+    width: 100%;
+}
+
+.rdio_button ul li:last-child{
+    position: absolute;
+    margin-left: 20px;
+    width: 50%;
+    top: 20%;
+}
+
+.rdio_button ul li:last-child label{
+    width: 100%;
+}
+
+.form_name label{
+    position: absolute;
+    right: 20px;
+    top: 20%;
+}
+
+
+
+
+.form_name input{
+    position: absolute;
+    left: 20px;
+    top: 20%;
+    height: 60%;
+    width: 38%;
+    border: none;
+    outline: none;
+    color: #222;
+    font-size: 16px;
+    font-family: 'samim';
+}
+
+.send-group {
+    text-align: center;
+    font-size: 30px;
+    padding: 30px 0px 30px 0px;
+    color: antiquewhite;
+    font-family: 'samim';
+    margin-bottom: 5px;
+}
+.send-group input{
+    background: #dbd067;
+    border: 1px solid #f0db1d;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-size: 600;
+    cursor: pointer;
+    font-family: 'byekan',sans-serif;
+    height: 60px;
+    width: 38%;
+}
+
+.birth_day_content{
+    position: absolute;
+    top: 20%;
+    left: 20px;
+    width: 38%;
+    height: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.birth_day_content select{
+
+    top: 0;
+    height: 100%;
+    border: none;
+    outline: none;
+    color: rgba(97, 93, 93, 0.822);
+    font-size: 16px;
+    font-family: 'samim';
+}
+
+/* .birth_day_content select:nth-child(1){
+    padding: 0px 0px 0px 5%;
+}
+.birth_day_content select:nth-child(2){
+    padding: 0px 5% 0px 5%;
+}
+.birth_day_content select:nth-child(3){
+    padding: 0px 5% 0px 0px;
+} */
+
+.birth_day_content select option{
+    color: rgba(97, 93, 93, 0.822);
+}
+
+/* .fontSamim{
+    font-family: 'samim';
+} */

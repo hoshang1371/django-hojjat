@@ -1,0 +1,307 @@
+
+.font_item {
+    font-family: 'samim';
+}
+
+.bg-img {
+    background: url("/static/images/login_image.jpg");
+    /* height: 50rem; */
+    top: 106px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    height: 110vh;
+    padding: 0;
+    /* margin: 0; */
+    margin-bottom: 106px;
+}
+
+
+/*________________*/
+
+.bg-img:after {
+    position: absolute;
+    margin-top: 00px;
+    content: '';
+    /* top: 162px; */
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.content {
+    /* display:flex; */
+    position: absolute;
+    margin-top: 350px;
+    /* top: 50%; */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
+    width: 370px;/**/
+    padding: 60px 32px;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
+}
+
+.content h5 {
+    color: white;
+    font-size: 33px;
+    font-weight: 500;
+    margin: 0 0 35px 0;
+    /* font-family: 'Montserrat',sans-serif; */
+    font-family: 'byekan';
+}
+
+/*nemidonam chera ghier faal karde bodam*/
+.field input::placeholder {
+    padding-right: 5px;
+    text-align: right;
+}
+
+.field {
+    position: relative;
+    height: 45px;/**/
+    width: 100%;
+    display: flex;
+    background: rgba(255, 255, 255, 0.94);
+}
+
+/* .field svg {
+    color: #222;
+    width: 40px;
+    line-height: 45px;
+    float: right;
+    position: absolute;
+    right: 10px;
+} */
+.user-icon,.pass-icon{
+    color: #222;
+    width: 40px;
+    line-height: 45px;
+    float: right;
+    position: absolute;
+    right: 10px;
+}
+
+.rtl {
+    /* unicode-bidi:bidi-override;  */
+    direction: RTL;
+    margin-right: 50px;
+    margin-left: 80px;
+}
+
+
+/* .pass_left{
+    margin-left: 70px; 
+} */
+
+.field input {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #222;
+    font-size: 16px;
+    /* font-family: 'Poppins',sans-serif; */
+    font-family: 'samim';
+}
+
+/* .show {
+    position: absolute;
+    margin-top: 10px;
+    
+    left: 13px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    cursor: pointer;
+    display: none;
+    font-family: 'byekan';
+} */
+.show{
+    position: absolute;
+     margin-top: 10px;
+    top: 10%;
+    left: 3%;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    cursor: pointer;
+    display: none;
+    font-family: 'byekan'; 
+}
+
+.password:valid~.show {
+    display: block;
+}
+
+.password-confirm:valid~.show {
+    display: block;
+}
+
+/*confirm show*/
+
+.show-confirm  {
+    position: absolute;
+    margin-top: 10px;
+    /**/
+    left: 13px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    cursor: pointer;
+    display: none;
+    /* font-family: 'Montserrat',sans-serif; */
+    font-family: 'byekan';
+}
+
+.password:valid~.show-confirm  {
+    display: block;
+}
+
+.password-confirm:valid~.show-confirm {
+    display: block;
+}
+
+/**/
+.space {
+    margin-top: 16px;
+}
+
+.pass {
+    text-align: right;
+    margin: 10px 0;
+}
+
+.pass a {
+    color: white;
+    /* font-family: 'Poppins',sans-serif; */
+    font-family: 'samim';
+    text-decoration: none;
+}
+
+.pass:hover a {
+    text-decoration: underline;
+}
+
+input[type="submit"] {
+    background: #dbd067;
+    border: 1px solid #f0db1d;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-size: 600;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+
+input[type="submit"]:hover {
+    background: #c9bf6a;
+}
+
+.login {
+    color: white;
+    margin: 20px 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.link {
+    display: flex;
+    cursor: pointer;
+    color: white;
+    margin: 0 0 20px 0;
+}
+
+.facebook,
+.instagram {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.facebook {
+    margin-left: 0px;
+    background: #4267b2;
+    border: 1px solid #3e61a8;
+}
+
+.instagram {
+    background: #e1306c;
+    border: 1px solid #df2060;
+}
+
+.link i {
+    font-size: 17px;
+}
+
+.link span {
+    font-size: 16px;
+    margin-left: 8px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+}
+
+.singup {
+    margin-top: 15px;
+    color: white;
+    font-size: 15px;
+    /* font-family: 'Poppins',sans-serif; */
+    font-family: 'samim';
+}
+
+.singup a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.singup a:hover {
+    text-decoration: underline;
+}
+
+input[type=submit] {
+    font-family: 'byekan';
+}
+
+@media all and (max-width: 375px) {
+    .content {
+        width: 275px;
+        padding: 60px 10px;
+    }
+}
+
+/* Desktop menu */
+@media all and (min-width: 960px) {
+    .content {
+        width: 1000px;/**/
+   }
+
+    .form-display {
+        display: flex;
+        flex-wrap: wrap;
+        /* align-content: space-between; */
+        justify-content: space-between;
+        align-items: center;
+
+    }
+    .field {
+        width: 400px;
+        margin: 20px;
+        /* margin-right: 20px; */
+    }
+    .field-right{
+        right: -497px;
+    }
+
+    .field-sabt{
+        /* align-items: center!important; */
+        /* align-self: center; */
+        right: -15rem;
+    }
+}

@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+*{
+    list-style: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+/* 
+body{
+    background-color: #e9e9e9;
+} */
+
+.wrapper .navbar{
+    background-color: #2b3032a1;
+    height: 65px;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    padding: 0 50px;
+    align-items: center;
+    position: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.wrapper .navbar .logo{
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.wrapper .navbar .login_btn a{
+    display: block;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 5px 15px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.wrapper .navbar .login_btn a:hover{
+    background: #fff;
+    color: #222222;
+}
+
+
+.main_container{
+    margin-top: 65px;/**/
+    padding: 50px;
+}
+
+.main_container .item{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 25px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.125);
+}
+
+.main_container .item .img_holder{
+    width: 350px;
+    height: auto;
+}
+
+.main_container .item .img_holder img{
+    width: 100%;
+    display: block;
+    height: auto;
+    margin: 0 auto;
+}
+
+.main_container .item .item_info{
+    width: calc(100% - 375px);
+    line-height: 24px;
+    margin-left: 25px;
+}
+
+.footer{
+    background-color: #3e60a8;
+    padding: 50px;
+}
+
+.footer .footer_menu{
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    direction: rtl;
+    margin: 0 auto 25px;
+    justify-content: space-between;   
+}
+
+.footer .footer_menu .title{
+    font-family: 'samim';
+    font-size: 20px;
+    margin-bottom: 10px;
+    /* padding-left: 30px; */
+    color: #adadad;
+}
+
+/* .col_1_ ul {
+    left: 0px;
+} */
+
+.footer .footer_menu ul li a{
+    font-family: 'samim';
+    display: block;
+    margin-bottom: 6px;
+    color: #fff;
+    /* transition: all 0.3s ease; */
+}
+
+/*.footer .footer_menu ul li{
+    width: 33%;
+}*/
+
+.footer .footer_menu ul li p{
+    font-family: 'samim';
+    display: block;
+    margin-bottom: 6px;
+    color: #fff;
+    /*width: 33%;*/
+}
+.footer .footer_menu ul li p span{
+    font-family: 'samim';
+    margin-bottom: 6px;
+    color: #fff;
+}
+
+.footer .footer_menu ul li a:hover{
+    text-decoration: underline;
+}
+
+.footer .footer_menu > div{
+    margin-right: 9px;   
+    width: 33%;
+}
+
+.footer .partners ul{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+
+.footer .partners ul li a{
+    background: url('partners.png') no-repeat 0 0;
+	width: 101px;
+	height: 100px;
+    display: block;
+    margin: 0 5px;
+}
+
+.footer .partners ul li a.partner1{
+    background-position: 0 0;
+	width: 100px;
+	height: 100px;
+}
+
+.footer .partners ul li a.partner2{
+    background-position: 0 -108px;
+	width: 100px;
+	height: 101px;
+}
+
+
+.footer .partners ul li a.partner3{
+    background-position: 0 -216px;
+	width: 100px;
+	height: 101px
+}
+
+.footer .partners ul li a.partner4{
+    background-position: 0 -325px;
+	width: 100px;
+	height: 101px;
+}
+
+.footer .partners ul li a.partner5{
+    background-position: 0 -446px;
+	width: 100px;
+	height: 100px;;
+} 
+
+.footer .social_media{
+    text-align: center;
+}
+
+.footer .social_media ul{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.footer .social_media ul li a{
+    list-style: none;
+    text-decoration: none;
+    display: block;
+    margin: 0 5px;
+    color: #fff;
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    color: #222222;
+    line-height: 50px;
+    border: none;
+    border-radius: 3px;
+}
+
+.footer .social_media ul li a:hover{
+    color: #fff;
+}
+
+.footer .social_media ul li a.facebook:hover{
+    background: #3b5998;
+}
+
+.footer .social_media ul li a.twitter:hover{
+    background: #1da1f2;
+}
+
+.footer .social_media ul li a.instagram:hover{
+    background: #c32aa3;
+}
+
+.footer .social_media ul li a.whatsapp:hover{
+    background: #25d366;
+}
+
+.footer .social_media{
+    color: #adadad;
+}
+
+@media (max-width: 768px){
+    .wrapper .navbar .logo{
+        font-size: 20px;
+    }
+    .main_container{
+        padding: 25px;
+    }
+    .main_container .item{
+        flex-direction: column;
+    }
+    .main_container .item .img_holder{
+        max-width: 750px;
+        width: 100%;
+    }
+    .main_container .item .item_info{
+        margin-left: 0;
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .footer .footer_menu{
+        flex-direction: column;
+        width: 220px;
+        margin: 0 auto 25px;
+    }
+
+    .footer .footer_menu > div{
+        margin: 10px 0;
+    }
+
+    .footer .partners ul li a{
+        margin: 5px;
+    }
+}

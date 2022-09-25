@@ -1,0 +1,212 @@
+@import url('/static/css/fonts.css');
+ 
+
+.content{
+    position: relative;
+    height: 750vh;
+    top: 106px;
+    margin-bottom: 106px;
+}
+
+.category-products {
+    position: absolute;
+    top: 140px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    right: 5%;
+}
+
+.lsit-product-container {
+    position: absolute;
+    top: 150px;
+    width: 100%;
+    padding: 0 1.5%;
+    left: 1%;
+}
+
+.product-item-new {
+    display: block;
+    flex: 0 0 auto;
+    object-fit: cover;
+    cursor: pointer;
+    margin: 5px;
+    border: 1px solid lightblue;
+    border-radius: 3px;
+    overflow: hidden;
+    transform: scale(0.95);
+    width: 200px;
+    height: 450px;
+    transition: all .05s ease-in-out;
+}
+
+.PopularProduct p {
+    text-align: center;
+    font-size: 24px;
+    color: antiquewhite;
+    font-family: 'samim';
+    width: 100%;
+
+
+}
+
+.product-item-new .itemParagerafUp {
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    margin: 0px;
+    background-color: #a2b8e7;
+    color: antiquewhite;
+    font-family: 'samim';
+    font-size: 18px;
+
+}
+
+.product-item-new .itemParagerafDown {
+    text-align: center;
+    margin: 0px;
+    padding: 10px 0px 10px 0px;
+    background-color: #3e60a8;
+    color: antiquewhite;
+    font-family: 'samim';
+    font-size: 18px;
+}
+.ProductCategory .category-products .panel{
+    /* position: absolute; */
+    /* display: flex;
+    justify-content: center;
+    flex-direction: column; */
+    top: 150px;
+    width: 95%;
+    height: 100%;
+    right: 2.5%;
+    direction: rtl;
+    margin-bottom: 0px;
+}
+
+/* .ProductCategory .panel .panel-heading{
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 20%;
+}
+.ProductCategory .panel .panel-heading .panel-title{
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 20%;
+} */
+.ProductCategory .panel .panel-heading .panel-title a{
+    /* position: absolute; */
+    right: 10%;
+    font-family: "mikhak";
+    color: #3a3b38;
+}
+
+.ProductCategory{
+    position: absolute;
+    width: 20%;
+    height: 100%;
+    right: 0;
+}
+
+.ProductCategory p{
+    position: absolute;
+    width: 95%;
+    left: 2.5%;
+    top: 70px;
+    text-align: center;
+    font-size: 18px;
+    background-color: #3e60a8;
+    padding: 15px 0px 15px 0px;
+    color: antiquewhite;
+    font-family: 'samim';
+}
+
+.ProductList{
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    left: 0;
+}
+
+.ProductList>p{
+    position: absolute;
+    width: 98.25%;
+    right: 0;
+    top: 70px;
+    text-align: center;
+    font-size: 18px;
+    background-color: #3e60a8;
+    padding: 15px 0px 15px 0px;
+    color: antiquewhite;
+    font-family: 'samim';
+}
+
+.pagination{
+    position: absolute;
+    display: block;
+    top: 175vh;
+    width: 100%;
+    height: 100px;
+    /* background-color: red; */
+}
+
+.pagination div{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    /* background-color: yellow; */
+    top: 50%;
+    left: 50%;
+    height: 50%;
+    width: 30%;
+    transform: translate(-50%,-50%);
+}
+
+.pagination div a{
+    font-family: "mikhak";
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    background-color: #3e60a8;
+    margin: 1%;
+    padding: 5%;
+    border-radius: 1px;
+   /* top: 50%;
+    transform: translateY(-50%);*/
+}
+
+.pagination div a:hover{
+    background-color: #dbd067;
+}
+
+.pagination div a.active{
+    background-color: #dbd067;
+
+}
+
+@media all and (min-width: 700px) {
+
+    .lsit-product-container {
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+    .content{
+        position: relative;
+        height: 400vh;
+    }
+}
+
+
+/* Desktop menu */
+@media all and (min-width: 1030px) {
+    .lsit-product-container {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+    }
+
+    .content{
+        height: 195vh;
+    }
+}

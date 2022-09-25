@@ -1,0 +1,158 @@
+{% extends 'shared/_MainLayout.html' %} 
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+
+<!-- <script type="text/javascript">
+    var replaceDigits = function() {
+        var map = ["&\#1776;","&\#1777;","&\#1778;","&\#1779;","&\#1780;","&\#1781;","&\#1782;","&\#1783;","&\#1784;","&\#1785;"]
+        document.body.innerHTML = document.body.innerHTML.replace(/\d(?=[^<>]*(<|$))/g, function($0) { return map[$0]});
+    }
+    window.onload = replaceDigits;
+    </script> -->
+
+<section class="content">
+
+    <section class="content_right">
+        <!-- <a href="#">خانه/محصولات/ساعت/ساعت موچ</a> -->
+        <!-- ToDo -->
+        <div>
+            <a href="">خانه</a><a href="">/محصولات</a><a href="">/{{product.categories.all|join:", " }}</a><a href="">/{{ product.title }}</a>
+        </div>
+        <!-- <img src="{{ product.image.url }}" class="content_img" alt=""> -->
+        <img src="{{ galleries.0.0.image.url }}" class="content_img" alt="">
+        <span class="content_span"></span>
+        <section class="image_group">
+
+        {% for gallery_list in galleries %}
+            {% for product_gallery in gallery_list %}
+                <img src="{{ product_gallery.image.url }}" 
+                alt="{{ product_gallery.title }}" class="indicator {{ forloop.parentloop.first|yesno:'active,' }}">
+            {% endfor %}
+        {% endfor %}
+            <!-- <img src="{% static 'images/may1.jpg' %}" alt="" class="indicator">
+            <img src="{% static 'images/may2.jpg' %}" alt="" class="indicator active">
+            <img src="{% static 'images/may3.jpg' %}" alt="" class="indicator">
+            <img src="{% static 'images/may4.jpg' %}" alt="" class="indicator"> -->
+        </section>
+    </section>
+    <div class="product_view">
+    </div>
+    <section class="content_left">
+        <section class="title">
+            <h1>{{ product.title }}</h1>
+            <h4>{{ product.smallDescription }}</h4>
+            <h2><span class="ToPersian">{{ product.price }}</span>تومان</h2>
+            <!-- hh -->
+            <!-- <form method="post" action="/add-user-order">
+                {% csrf_token %}
+                
+                <input type="submit" value="افزودن به سبد خرید">
+            </form> -->
+            <h3 class="toph3">  تعداد موجود در انبار :  <span>{% if product.number != "0" %} {{ product.number }}{% else %} در انبار موجود نمی باشد {%endif%}</span></h3>
+            
+            <h3>   دسته بندی     :  <span>  {{product.categories.all|join:", " }}</span></h3>
+            {% if product.brand != None%}
+                <h3>   برند :  <span> {{ product.brand }} </span></h3>
+            {%endif%}
+        </section>
+        <section class=numberOfProduct>
+            <form method="post" action="/add-user-order">
+                {% csrf_token %}
+                {{ new_order_form.product_id }}
+                
+                <div class="number">
+                    
+                    <!-- <input type="text" value="۱" id="numberProduct"> -->
+                    {{ new_order_form.count }}
+                    <!-- <span>۲۴</span> -->
+                    <a class="up">
+                        <div class ='BCup'><i  class="fas fa-chevron-up"></i></div>
+                        <div class ='BCdown'><i class="fas fa-chevron-down"></i></div>
+                    </a>
+                </div>
+
+                
+                <input class="kharid" type="submit" value="افزودن به سبد خرید">
+            </form>
+        </section>
+
+        <section class="description">
+            <h5> توضیحات </h5>
+            <div class="khat"></div>
+            <div><p>{{ product.smallDescription }}<br> {{ product.description }} </p></div>
+        </section>
+    </section>
+
+</section>
+<section class="customerComment">
+    <section class="addComment">
+                <div class="contact-form">
+                    <h2 class="title text-center"> نظرات </h2>
+                    <div class="status alert alert-success" style="display: none"></div>
+                    <form id="main-contact-form" class="contact-form row" name="contact-form" method="post"
+                    action=''>
+                    {% csrf_token %}
+                        <div class="field">
+                            {{ contact_form_comment.full_name }}
+                            <div class="user-icon"><span class="fa fa-user "></span></div>
+                            {% for error in contact_form_comment.full_name.errors %}
+                            <p class="text-danger">{{error}}</p>
+                            {% endfor %}
+                            </div>
+                        <div class="field space">
+                            <div class="user-icon"><span class="fa fa-envelope"></span></div>
+                            {{ contact_form_comment.email }}
+                            {% for error in contact_form_comment.email.errors %}
+                            <p class="text-danger">{{error}}</p>
+                            {% endfor %}
+                        </div>
+                        <div class="field space">
+                            <div class="user-icon"><span class="fa fa-check-square"></span></div>
+                            {{ contact_form_comment.subject }}
+                            {% for error in contact_form_comment.subject.errors %}
+                            <p class="text-danger">{{error}}</p>
+                            {% endfor %}
+                        </div>
+                        <div class="field_title space">
+                            <div class="user-icon"><span class="fa fa-quote-left"></span></div>
+                            {{ contact_form_comment.text }}
+                            {% for error in contact_form_comment.text.errors %}
+                            <p class="text-danger">{{error}}</p>
+                            {% endfor %}
+                        </div>    
+                   
+                        <div class="field space">
+                            <input type="submit" name="submit"  value="ارسـال">
+                        </div>
+                    </form>
+                </div>
+    </section>
+    <section class="Comments">
+        {% for customercomment in customercomments %}
+            <div>
+                <div class="userNameCustomer">{{ customercomment.full_name }}</div>
+                <div class="commentCustomer"> {{ customercomment.text }} </div>
+                <div class="khat"></div>
+                {% if customercomment.ansewerText is not None%}
+                    <div class="ansewerCommentCustomer"> پاسخ:   {{ customercomment.ansewerText }}  </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <!-- <div>
+            <div class="userNameCustomer">hhh</div>None
+            <div class="commentCustomer"> باطری ه توپیه </div>
+            <div class="khat"></div>
+            <div class="ansewerCommentCustomer"> پاسخ: بله باتری ه خوبیه </div>
+        </div> -->
+    </section>
+</section>
+<script src="{% static 'js/product_detail.js' %}"></script>
+<script>
+    var toPe =document.querySelector(".toPe").value;
+    document.querySelector(".toPe").value =toPe.toPersinaDigit()
+</script>
+<!-- <script src="{% static 'js/numberOfPersian.js' %}"></script> -->
+
+{% endblock %}

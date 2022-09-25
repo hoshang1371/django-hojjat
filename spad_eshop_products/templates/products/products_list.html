@@ -1,0 +1,225 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+
+{% load render_partial %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/product_list.css' %}">
+
+<section class="content">
+    <section class="ProductCategory">
+        {% render_partial 'products_categories_partial' %}
+    </section>
+
+    <section class="ProductList">
+        <p> لیست محصولات </p>
+        <div class="lsit-product-container">
+            {{cate.title}}
+            {% for product in page_obj %}
+                {% include 'products/product_item_component.html' with product=product %}
+                              
+            {% endfor %}
+    <!--    <div class="product-item-new">
+            <p class="itemParagerafUp">item1</p>
+            <p class="itemParagerafDown">item1</p>
+            <img src="{% static 'images/350x180_1.png' %}" class="" alt="Banner1">
+            <br>
+            <div class="product-detail">
+                <h2>محصول دمو</h2>
+                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
+                <a href="#">خرید</a>
+                <a href="#">توضیحات</a>
+            </div>
+        </div>
+
+         <div class="product-item-new">
+            <p class="itemParagerafUp">item1</p>
+            <p class="itemParagerafDown">item1</p>
+            <img src="{% static 'images/350x180_2.png' %}" class="" alt="Banner1">
+            <br>
+            <div class="product-detail">
+                <h2>محصول دمو</h2>
+                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
+                <a href="#">خرید</a>
+                <a href="#">توضیحات</a>
+            </div>
+        </div>
+        <div class="product-item-new">
+            <p class="itemParagerafUp">item1</p>
+            <p class="itemParagerafDown">item1</p>
+            <img src="{% static 'images/350x180_2.png' %}" class="" alt="Banner1">
+            <br>
+            <div class="product-detail">
+                <h2>محصول دمو</h2>
+                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
+                <a href="#">خرید</a>
+                <a href="#">توضیحات</a>
+            </div>
+        </div>
+        <div class="product-item-new">
+            <p class="itemParagerafUp">item1</p>
+            <p class="itemParagerafDown">item1</p>
+            <img src="{% static 'images/350x180_2.png' %}" class="" alt="Banner1">
+            <br>
+            <div class="product-detail">
+                <h2>محصول دمو</h2>
+                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
+                <a href="#">خرید</a>
+                <a href="#">توضیحات</a>
+            </div>
+        </div>
+        <div class="product-item-new">
+            <p class="itemParagerafUp">item1</p>
+            <p class="itemParagerafDown">item1</p>
+            <img src="{% static 'images/350x180_1.png' %}" class="" alt="Banner1">
+            <br>
+            <div class="product-detail">
+                <h2>محصول دمو</h2>
+                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
+                <a href="#">خرید</a>
+                <a href="#">توضیحات</a>
+            </div>
+        </div>
+        <div class="product-item-new">
+            <p class="itemParagerafUp">item1</p>
+            <p class="itemParagerafDown">item1</p>
+            <img src="{% static 'images/350x180_2.png' %}" class="" alt="Banner1">
+            <br>
+            <div class="product-detail">
+                <h2>محصول دمو</h2>
+                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
+                <a href="#">خرید</a>
+                <a href="#">توضیحات</a>
+            </div>
+        </div>
+        <div class="product-item-new">
+            <p class="itemParagerafUp">item1</p>
+            <p class="itemParagerafDown">item1</p>
+            <img src="{% static 'images/350x180_2.png' %}" class="" alt="Banner1">
+            <br>
+            <div class="product-detail">
+                <h2>محصول دمو</h2>
+                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
+                <a href="#">خرید</a>
+                <a href="#">توضیحات</a>
+            </div>
+        </div>
+        <div class="product-item-new">
+            <p class="itemParagerafUp">item1</p>
+            <p class="itemParagerafDown">item1</p>
+            <img src="{% static 'images/350x180_2.png' %}" class="" alt="Banner1">
+            <br>
+            <div class="product-detail">
+                <h2>محصول دمو</h2>
+                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
+                <a href="#">خرید</a>
+                <a href="#">توضیحات</a>
+            </div>
+        </div> -->
+
+    </div>
+    </section>
+
+    <section class="pagination">
+        <div>
+            {% if page_obj.has_previous %}
+                <a href="?page=1">اواین</a>
+                <a href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+            {% endif %}
+            {% for page in paginator.page_range %}
+                    <!-- <a class="ToPersian" href="?page={{ page }}">{{ page }}</a> -->
+                    <a {% if page == page_obj.number %} class="ToPersian active" {%else%} class="ToPersian" {% endif %} href="?page={{ page }}">{{ page }}</a>
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a class="" href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                <a class="" href="?page={{ page_obj.paginator.num_pages }}">اخرین</a>
+            {% endif %}
+        </div>
+    </section>
+</section>
+<!-- <script src="{% static 'js/numberOfPersian.js' %}"></script> -->
+{% if request.user.is_authenticated %}
+<script>
+    //const cartDOM1 = document.querySelector('.cart__items');
+
+    document.querySelectorAll('.product-item-new').forEach(item_new => {
+        item_new.addEventListener('click', function(){      
+            //console.log(item_new.querySelector('.get_address').href)
+            location.replace(item_new.querySelector('.get_address').href);
+        })
+    });
+
+    function addItemToTheDom(product) {
+        document.querySelector('.mobile-cart-head').insertAdjacentHTML("afterend",`
+        <div class="cart__item">
+            <input type="hidden" id="product__id" value="${product.productId}">
+            <img src="${product.productImage}" id="product__" alt="">
+            <h4 class="product__name">${product.productName}</h4>
+            <a  class="btn__small" action="decrease">&minus;</a>
+            <h4 class="product__quantity ToPersian fontSamim fontSize_16">${product.productCount}</h4>
+            <a class="btn__small" action="increase">&plus;</a>
+            <h4 class="product_price ToPersian fontSamim fontSize_16">${product.product_All_price}</h4>
+            <a class="btn__small btn__remove " action="remove">&times;</a>
+        </div>
+    `)
+    }
+    const product_item_new = document.querySelectorAll('.product-item-new');
+    product_item_new.forEach(inItem => {
+        inItem.querySelector(".kharid_1_add").addEventListener('click', function (e) {
+            e.stopPropagation()
+            let IdP = inItem.querySelector("#product__id_one").value
+            $.ajax({
+                url: '{% url "crud_ajax_create_one" %}',
+                data: {
+                    'id': IdP,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.user) {     
+                        addItemToTheDom(data.user);
+                       const cartDOMItems = document.querySelectorAll('.cart__item');
+                       cartDOMItems.forEach(inItem => {
+                            if(inItem.querySelector('#product__id').value === (data.user.productId).toString()){
+                                inItem.querySelector('.product__quantity').innerText = ((data.user.productCount).toString()).toPersinaDigit();
+                                inItem.querySelector('.product_price').innerText = ((data.user.product_All_price).toString()).toPersinaDigit();
+                                increaseItem(inItem);
+                                decreaseItem(inItem);
+                                removeItem(inItem);
+                                calculateAllTotal();
+                                //var cont_of_all=document.querySelector(".total__counter a").innerText.toEnglishDigit()
+                                var cont_of_all =((data.user.Total_count_for_all_product).toString());
+                                if(!(cont_of_all == "0")){                                  
+                                    document.querySelector(".total__counter a").style.display ="block";
+                                    document.querySelector(".total__counter").style.display ="block";
+                                }
+                                document.querySelector(".total__counter a").innerText =((data.user.Total_count_for_all_product).toString()).toPersinaDigit();
+                                if(data.user.Total_count_for_product > 3){ 
+                                    document.querySelector(".cart__items").style.height= "70vh";
+                                    //document.querySelector(".cart__items").style.overflowY= "scroll";
+                                }
+                            }
+                        })
+                        alert("محصول به سبد خرید اضافه شد")
+                    }
+                    else if (!data.addedOne) {     
+                        alert("این محصول در سبد خرید موجود است")
+                    }
+                }
+            });
+
+         });
+    });
+
+</script>
+{% else %}
+<script>
+    const product_item_new = document.querySelectorAll('.product-item-hh');
+    product_item_new.forEach(inItem => {
+        inItem.querySelector(".kharid_1_add").addEventListener('click', function (e) {
+            document.location.href = '/login';
+        });
+    });
+</script>
+{%endif%}
+{% endblock %}

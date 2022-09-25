@@ -1,0 +1,651 @@
+@import url('/static/css/fonts.css');
+ 
+
+.content{
+    position: relative;
+    height: 100vh;
+    top: 150px;
+    margin-bottom: 150px;
+}
+
+.content_right{
+    position: absolute;
+    right: 0;
+    width: calc(50% - 45px);
+    top: 5%;
+    height: 90%;
+    /* border: 1px solid #707566; */
+    /* border-radius: 5px; */
+    margin-right: 40px;
+    margin-left: 10px;
+}
+
+.content_right a{
+    position: absolute;
+    color: #3a3b38;
+    background-color: #3e60a8;
+    width: calc(100% - 10px);
+    text-align: right;
+    padding: 5px;
+    font-size: 1rem;
+    font-family: "mikhak";
+    margin: 5px;
+    /* right: 1px; */
+}
+
+.content_right div{
+    position: absolute;
+    color: #3a3b38;
+    background-color: #3e60a8;
+    width: calc(100% - 10px);
+    text-align: right;
+    padding: 5px;
+    font-size: 1rem;
+    font-family: "mikhak";
+    margin: 5px;
+}
+
+.content_right div a{
+    position: relative!important;
+    background-color: transparent;
+    padding: 0px; 
+    margin: 0px;
+}
+
+.content_right >img{
+    position: absolute;
+    top: 50px;
+    left: 5%;
+    width: 90%;
+    height: 60%;
+    /* transition: all 0.5s ease-in-out; */
+    /* animation-name: example;
+    animation-duration: 4s; */
+}
+
+.content_right span{
+    width: 95px;
+    height: 75px;
+    background-color: rgba(0, 0, 0, .3);
+    position: absolute;
+    cursor: pointer;
+    border: 1px solid #8a8a8a;
+    visibility: hidden;
+}
+
+/*--------------product_view------465--------*/
+.product_view{
+    background-size: 600% 450%;
+    /* background-size: 4000px 2500px; */
+    background-repeat: no-repeat;
+    position: absolute;
+    left:5vh;
+    width: 50%;
+    height: 80%;
+    border: 1px solid #e5e5e5;
+    align-self: center;
+    top: 5vh;
+    z-index: 100;
+    visibility: hidden;
+}
+
+
+/* @keyframes example {
+    from {background-color: red;}
+    to {background-color: yellow;}
+  } */
+
+.content_right .image_group{
+    position: absolute;
+    /* top: 300px; */
+    bottom: 20px;
+    display: flex;
+    justify-content:space-around;
+    width: 80%;
+    height: 16vh;
+    right: 5%;
+}
+
+.content_right .image_group img{
+    cursor: pointer;
+    width: 20%;
+    height: 100%;
+    border: 1px solid #707566;
+    padding: 4px;
+    border-radius: 2px;
+    opacity: 0.5;
+    transition: all 0.5s ease-in-out;
+}
+
+.content_right .image_group .indicator.active{
+    border: 1px solid #3e60a8!important;
+    opacity: 1;
+    /* background-color: #3e60a8; */
+}
+
+.content_left{
+    position: absolute;
+    left: 0;
+    top: 5%;
+    height: 90%;
+    width: calc(50% - 45px);
+    margin-left: 40px;
+    /* border: 1px solid #707566; */
+    border-radius: 5px;
+}
+/*==========================*/
+.content_left .title{
+    position: absolute;
+    width: 60%;
+    height: 70%;
+    right: 0;
+    top: 0;
+    overflow-y: none;
+}
+/*scroll*/
+/* @media all and (max-width: 1120px){
+    .content_left .title{
+        overflow-y: scroll;
+    }
+
+} */
+
+.content_left .title h1{
+    position: initial;
+    color: #3a3b38;
+    width: calc(100% - 10px);
+    text-align: right;
+    padding: 5px;
+    font-size: 1.5rem;
+    font-family: "mikhak";
+    margin: 5px;
+}
+.content_left .title h4{
+    position: initial;
+    color: #3a3b3885;
+    width: calc(100% - 10px);
+    text-align: right;
+    /* top: 2.5rem; */
+    padding: 5px;
+    font-size: 1rem;
+    font-family: "mikhak";
+    margin: 5px;
+    letter-spacing: 2px;
+}
+
+.content_left .title h2{
+    display: flex;
+    direction: rtl;
+    position: initial;
+    color: #3a3b38a2;
+    width: calc(100% - 10px);
+    text-align: right;
+    /* top: 2.5rem; */
+    padding: 5px;
+    font-size: 1.5rem;
+    font-family: "mikhak";
+    margin: 5px;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    letter-spacing: 3px;
+}
+.content_left .title h2 span{
+    font-size: 1.5rem;
+    font-family: "mikhak";
+}
+
+.content_left .numberOfProduct .kharid{
+    position: absolute;
+    direction: rtl;
+    top: 40%;
+    right: 3vh;
+    margin: 10px;
+    margin-top: 1.5vh;
+    background: #dbd067;
+    border: 1px solid #f0db1d;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-size: 600;
+    cursor: pointer;
+    font-family: 'byekan',sans-serif;
+    height: 60px;
+    width: 80%;
+    transition: all 0.2s ease-in-out;
+}
+
+.content_left .numberOfProduct .kharid:hover{
+    background: #83a83e;
+}
+
+/* .content_left .title input:hover{
+    background: #83a83e;
+} */
+
+/* .content_left .title .toph3{
+    margin-top: 19vh;
+} */
+
+.content_left .title h3{
+    display: flex;
+    direction: rtl;
+    position: initial;
+    color: #3a3b38a2;
+    width: calc(100% - 10px);
+    text-align: right;
+    padding: 2px;
+    /* font-family: "mikhak"; */
+    font-size: 1rem;
+    margin: 1px;
+    /* letter-spacing: 2px; */
+}
+.content_left .title h3 span{
+    font-size: 1rem;
+    margin-right: 10px;
+    /* font-family: "mikhak"; */
+}
+
+.description{
+    position: absolute;
+    direction: rtl;
+    width: 100%;
+    height: 30%;
+    bottom: 20vh;
+    /* overflow-y: scroll; */
+}
+
+.content_left .description h5{
+    display: flex;
+    direction: rtl;
+    position: initial;
+    color: #3a3b38;
+    width: calc(100% - 10px);
+    text-align: right;
+    padding: 5px;
+    font-family: "samim";
+    font-size: 1rem;
+    margin: 5px;
+}
+
+.content_left .description .khat{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: calc(100% - 20px);
+    content: '';
+    height: 2px;
+    background-color: #3a3b385e;
+    right: 2vh;
+}
+.content_left .description div p{
+    display: flex;
+    justify-content: right;
+    direction: rtl;
+    position: initial;
+    color: #3a3b38;
+    width: calc(100% - 10px);
+    text-align: right;
+    padding: 5px;
+    font-family: "samim";
+    font-size: 1rem;
+    margin: 5px;
+}
+
+/* .content_left .title div{
+} */
+/*==========================*/
+
+.content_left .numberOfProduct{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 40%;
+    height: 70%;
+    left: 0;
+}
+
+.content_left .numberOfProduct .number{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 17vh;
+    height: 7vh;
+    transform: translate(-50%,-50%);
+    border: 1px solid #707566;
+    border-radius: 5px;
+}
+
+/* .content_left .numberOfProduct .number span{
+    top: 50%;
+    transform: translateY(-46%);
+    position: absolute;
+    font-size: 5vh;
+    color: #3a3b38;
+    left: 2vh;
+    font-family: "samim";
+} */
+
+.content_left .numberOfProduct .number input{
+    position: absolute;
+    border: none;
+    top: 50%;
+    left: 0;
+    width: 69%;
+    z-index: -2;
+    outline: none;
+    font-family: "samim";
+    padding-left: 5%;
+    font-size: 150%;
+    transform: translateY(-50%);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.content_left .numberOfProduct .number::before{
+    content: '';
+    height: 1px;
+    width: 5vh;
+    background-color: #707566;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+}
+
+.content_left .numberOfProduct .number::after{
+    content: '';
+    height: 6.8vh;
+    width: 1px;
+    background-color: #707566;
+    position: absolute;
+    right: 5vh;
+}
+/* 
+.content_left .numberOfProduct .number .up::after{
+    content: '\25B2';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1.2vh 0 0;
+    cursor: pointer;
+    color: #707566;
+
+}
+
+.content_left .numberOfProduct .number .up::before{
+    content: '\25BC';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0 1.2vh 0 0;
+    cursor: pointer;
+    color: #707566;
+} */
+
+.content_left .numberOfProduct .number .up .BCdown{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0 1.2vh 0 0;
+    cursor: pointer;
+    width: 5.2vh;
+    height: 3.4vh;
+    z-index: -1;
+}
+
+.content_left .numberOfProduct .number .up .BCdown svg{
+    width: 130%;
+    color: #3a3b38;
+}
+
+.content_left .numberOfProduct .number .up .BCup{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1.2vh 0 0;
+    cursor: pointer;
+    width: 5.2vh;
+    height: 3.4vh;
+    z-index: -1;
+}
+
+.content_left .numberOfProduct .number .up .BCup.active,
+.content_left .numberOfProduct .number .up .BCdown.active
+{
+    background-color: #dbd067;
+}
+
+.content_left .numberOfProduct .number .up .BCup svg{
+    width: 130%;
+    color: #3a3b38;
+}
+
+#non-persian {
+    display: block;
+    width: 512px;
+    height: 48px;
+    margin: 0 auto;
+    padding: 0 32px;
+    border: 2px solid #ccc;
+    font: 16px Tahoma, Ubuntu, Arial, sans-serif;
+  }
+
+.customerComment{
+    display: block;
+    width: 100%;
+    height: 70vh;
+}
+
+.addComment{
+    width: 35%;
+    height: 70vh;
+    position: absolute;
+    right: 0px;
+}
+
+/****/
+.text-center{
+    /* color: white;   */
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 35px 0;
+    display: flex;
+    justify-content: center;
+    /* font-family: 'Montserrat',sans-serif; */
+    font-family: 'byekan';
+}
+
+address p{
+    /* color: white;  */
+    font-family: 'samim';
+}
+
+.field{
+    position: relative;
+    z-index: 0;
+    height: 45px;
+    width: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    border: 1px solid #3a3b3885;
+    background: rgba(255,255,255,0.94);
+    /* background: red; */
+}
+
+.field input{
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #222;
+    font-size: 16px;
+    /* font-family: 'Poppins',sans-serif; */
+    font-family: 'samim';
+}
+
+input[type="submit"]{
+    background: #dbd067;
+    border: 1px solid #f0db1d;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-size: 600;
+    cursor: pointer;
+    font-family: 'byekan';
+}
+input[type="submit"]:hover{
+    background: #c9bf6a;
+}
+.user-icon,.pass-icon{
+    color: #222;
+    width: 40px;
+    line-height: 45px;
+    float: right;
+    position: absolute;
+    right: 0px;
+}
+.rtl{
+    /* unicode-bidi:bidi-override;  */
+    direction: RTL;
+    margin-right: 50px; 
+    /* margin-left: 80px;  */
+}
+
+.space{
+    margin-top: 16px;
+}
+
+.field_title{
+    position: relative;
+    z-index: 0;
+    height: 100px;
+    width: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    border: 1px solid #3a3b3885;
+    background: rgba(255,255,255,0.94);
+}
+/*
+.form-control{
+    font-family: 'samim';
+}*/
+.field_title textarea{
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #222;
+    font-size: 16px;
+    font-family: 'samim';
+    margin-top: 4%;
+}
+/****/
+.Comments{
+    padding: 2%;
+    width: 65%;
+    height: 70vh;
+    position: absolute;
+    direction: rtl;
+    overflow-y: auto;
+}
+
+.Comments::-webkit-scrollbar {
+    width: 14px;
+  }
+  
+.Comments::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: #AAAAAA;
+  }
+
+.Comments div .userNameCustomer{
+    position: initial;
+    color: #3a3b3885;
+    width: calc(100% - 10px);
+    text-align: right;
+    padding: 5px;
+    font-size: 1rem;
+    font-family: "mikhak";
+    margin: 5px;
+    letter-spacing: 2px;
+}
+
+.Comments div .commentCustomer{
+    position: initial;
+    color: #3a3b38;
+    width: calc(100% - 10px);
+    text-align: right;
+    padding: 5px;
+    font-size: 1rem;
+    font-family: "mikhak";
+    overflow-x: auto;
+}
+
+.Comments div .commentCustomer::-webkit-scrollbar {
+    width: 14px;
+  }
+  
+.Comments div .commentCustomer::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: #AAAAAA;
+  }
+
+.Comments div .khat{
+    position: initial;
+    background-color: #3a3b3885;
+    width: calc(100% - 10px);
+    content: '';
+    height: 2px;
+}
+
+.Comments div .ansewerCommentCustomer{
+    position: initial;
+    color: #3a3b38;
+    width: calc(100% - 10px);
+    text-align: right;
+    padding: 5px;
+    font-size: 1rem;
+    font-family: "mikhak";
+    margin-right: 10px;
+    overflow-x: auto;
+}
+
+.Comments div .ansewerCommentCustomer::-webkit-scrollbar {
+    width: 14px;
+  }
+  
+.Comments div .ansewerCommentCustomer::-webkit-scrollbar-thumb {
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: #AAAAAA;
+  }
+
+.Comments>div {
+    top: 100px;
+    display: block;
+    margin-top: 3rem;
+}

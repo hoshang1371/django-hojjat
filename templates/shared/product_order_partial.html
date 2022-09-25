@@ -1,0 +1,231 @@
+{% load static %}
+
+<div class="cart__items">
+    <div class="req"></div>
+    <div class="mobile-cart-head">
+        <div class="mobile-cart-close"><i class="fas fa-times"></i></div>
+    </div>
+    {% for order_partial in order_partials %}
+    <div class="cart__item">
+        <input type="hidden" id="product__id" value="{{order_partial.id}}">
+        <img src="{{order_partial.product.image.url}}" id="product__" alt="">
+        <h4 class="product__name fontSamim fontSize_16">{{order_partial.product.title}}</h4>
+        <a class="btn__small" action="decrease">&minus;</a>
+        <h4 class="product__quantity ToPersian fontSamim fontSize_16">{{order_partial.count}}</h4>
+        <a class="btn__small" action="increase">&plus;</a>
+        <h4 class="product_price ToPersian fontSamim fontSize_16">{% widthratio order_partial.count 1 order_partial.price %}</h4>
+        <a class="btn__small btn__remove " action="remove">&times;</a>
+    </div>
+    {%endfor%}
+
+    <div class="check_out">
+        <h4 class="total-price fontSize_20 fontSamim">مجموع :</h4>
+        <h4 class="total__cost ToPersian fontSize_20 fontSamim">{{Total_price_for_all_product}}</h4>
+        <div class=" fontSize_20 fontSamim" style="font-weight: bold;">تومان</div>
+        <button class="btn check_out_btn btn__remove fontSamim fontSize_24">حذف همه</button>
+        <button class="btn kharidUp fontSize_24">خرید</button>
+    </div>
+</div>
+
+<!-- <script src="{% static 'js/numberOfPersian.js' %}"></script> -->
+<!-- <script src="{% static 'js/orderTop.js' %}"></script> -->
+{% if request.user.is_authenticated %}
+<script>
+    const check_out_btn = document.querySelector('.check_out_btn');
+    const totalCost = document.querySelector('.total__cost');
+    var cont_of_all_product =document.querySelector(".total__counter a").innerText
+    document.addEventListener("DOMContentLoaded", loadData)
+    
+    const Url ='{% url "crud_ajax_update" %}';
+
+    var totalAllhh =0;
+    //var carName = "Volvo";
+check_out_btn.addEventListener('click', function(){
+    if(confirm('آیا از حذف محصولات در سبد خرید مطمئنید؟')){
+        clearCatItems();
+        $.ajax({
+            url: '{% url "crud_ajax_delete_all" %}',
+            data: {
+                'id': "all",
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.deleted) {
+                    document.querySelector(".total__counter a").style.display ="none";
+                }
+            }
+        });
+    }
+});
+
+let  bufferCount = "";//bufferId = "",
+function loadData(){
+    const cartDOMItems = document.querySelectorAll('.cart__item');
+    cartDOMItems.forEach(inItem => {
+        increaseItem(inItem);
+        decreaseItem(inItem);
+        removeItem(inItem);
+    });
+}
+
+
+function removeItem(inItem) {
+    let IdD = inItem.querySelector('#product__id').value;
+    inItem.querySelector("[action='remove']").addEventListener('click', function () {
+        $.ajax({           
+            url: '{% url "crud_ajax_delete" %}',
+            data: {
+                'id': IdD,
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.user) {
+                    document.querySelector(".total__counter a").innerText =(data.user.Total_count_for_all_product.toString()).toPersinaDigit();
+                    document.querySelector(".total__cost").innerText =(data.user.Total_price_for_all_product.toString()).toPersinaDigit();
+               
+                    var cont_of_all=data.user.Total_count_for_all_product.toString()
+                    if(cont_of_all == "0"){
+                        document.querySelector(".total__counter a").style.display ="none";
+                    }
+                   // console.log(data.user.Total_count_for_product)
+                    if(data.user.Total_count_for_product < 3){ 
+                        document.querySelector(".cart__items").style.height= "auto";
+                        //document.querySelector(".cart__items").style.overflowY= "auto";
+                    }
+                inItem.remove();
+                
+                }
+
+                /*if (data.deleted) {
+                    var cont_of_all=data.user.Total_count_for_all_product.toString()
+                        if(cont_of_all == "0"){
+                            document.querySelector(".total__counter a").style.display ="none";
+                        }
+                    inItem.remove();
+                }*/
+            }
+        });
+
+    });
+}
+
+function decreaseItem(inItem) {
+    inItem.querySelector("[action='decrease']").addEventListener('click', function () {
+
+        let IdDec = inItem.querySelector('#product__id').value;
+        bufferCount = inItem.querySelector('.product__quantity').innerText;
+        var bufferCountB = parseInt(bufferCount.toEnglishDigit());
+
+        if (bufferCountB > 1) {
+            --bufferCountB;
+            saveToStorage(IdDec, bufferCountB, inItem);
+        } else {
+            $.ajax({
+                url: '{% url "crud_ajax_delete" %}',
+                data: {
+                    'id': IdDec,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.user) {
+                        document.querySelector(".total__counter a").innerText =(data.user.Total_count_for_all_product.toString()).toPersinaDigit();
+                        document.querySelector(".total__cost").innerText =(data.user.Total_price_for_all_product.toString()).toPersinaDigit();
+                    }
+                    if (data.deleted) {
+                        inItem.remove();
+
+                        var cont_of_all=(document.querySelector(".total__counter a").innerText).toEnglishDigit()
+
+                        if(cont_of_all == "0"){
+                            document.querySelector(".total__counter a").style.display ="none";
+                        }
+                    }
+                }
+            });
+        }
+    });
+};
+
+function increaseItem(inItem) {
+
+    inItem.querySelector("[action='increase']").addEventListener('click', function () {
+        let IdInc = inItem.querySelector('#product__id').value;
+        bufferCount = inItem.querySelector('.product__quantity').innerText;
+        var bufferCountA = parseInt(bufferCount.toEnglishDigit()) + 1;
+
+        saveToStorage(IdInc, bufferCountA, inItem);
+
+    });
+}
+
+function saveToStorage(bufferId, bufferCountA, inItem) {
+    $.ajax({
+        url: '{% url "crud_ajax_update" %}',
+        data: {
+            'id': bufferId,
+            'count': bufferCountA
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data.user) {
+                inItem.querySelector('.product__quantity').innerText = (bufferCountA.toString()).toPersinaDigit();
+                inItem.querySelector('.product_price').innerText = ((data.user.price).toString()).toPersinaDigit();
+                document.querySelector(".total__counter a").innerText =(data.user.Total_count_for_all_product.toString()).toPersinaDigit();
+                calculateAllTotal();
+            }
+        }
+    });
+};
+
+//const totalCost = document.querySelector('.total__cost');
+
+
+function calculateAllTotal(){
+    totalAllhh =0;
+    const cartDOMItems = document.querySelectorAll('.cart__item');
+
+    cartDOMItems.forEach(inItemh => {
+       // console.log(parseInt((inItemh.querySelector(".product_price").innerText).toEnglishDigit()));
+        totalAllhh = totalAllhh+parseInt((inItemh.querySelector(".product_price").innerText).toEnglishDigit());
+        document.querySelector(".total__cost").innerText =(totalAllhh.toString()).toPersinaDigit();
+    });
+    //return totalAllhh;
+}
+
+function clearCatItems(){      
+    document.querySelectorAll('.cart__item').forEach(item => {
+        let IdCat = item.querySelector('#product__id').value;
+        $.ajax({
+            url: '{% url "crud_ajax_delete" %}',
+            data: {
+                'id': IdCat,
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.deleted) {
+                    total =0;
+                    totalCost.innerText = (total.toString()).toPersinaDigit();
+                    item.remove();
+                }
+            }
+        });
+    })
+}
+$(document).ready(function() {
+    //console.log(Url)
+    document.querySelector(".total__counter a").innerText =(cont_of_all_product).toPersinaDigit();
+    if(cont_of_all_product == "0"){
+        document.querySelector(".total__counter").style.display = "none";
+    }
+    if(parseInt(cont_of_all_product) > 3){ 
+        document.querySelector(".cart__items").style.height= "70vh";
+        //document.querySelector(".cart__items").style.overflowY= "scroll";
+    }
+    if(parseInt(cont_of_all_product) < 3){ 
+        document.querySelector(".cart__items").style.height= "auto";
+        //document.querySelector(".cart__items").style.overflowY= "scroll";
+    }
+});
+
+</script>
+{% endif %}

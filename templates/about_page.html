@@ -1,0 +1,18 @@
+{% extends 'shared/_MainLayout.html' %} 
+{% load static %} 
+
+{% load render_partial %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/abutepage.css' %}">
+
+    <div class="abutAs">
+        <ul>
+            <li><p>تلفن {{setting.phone}} </p></li>
+            <li><p>فکس {{setting.fax}}</p></li>
+            <li><p>رایانامه {{setting.email}}</p></li>
+            <li><p>{{setting.address}}</p></li>
+          </ul>
+    </div>
+{% endblock %}

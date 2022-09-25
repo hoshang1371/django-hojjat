@@ -1,0 +1,93 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %} 
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/edit_account.css' %}">
+
+<section class="content_accunt">
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="form-group rdio_button {% if edit_form.choice_field.errors %} errror {% endif %}">
+            <label for="{{ edit_form.choice_field.id_for_label }}">{{ edit_form.choice_field.label }}</label>
+            {{ edit_form.choice_field }}
+            {% for error in edit_form.choice_field.errors %}
+            <p class="text-danger">{{error}}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group form_name {% if edit_form.first_name.errors %} errror {% endif %}">
+            <label for="{{ edit_form.first_name.id_for_label }}">{{ edit_form.first_name.label }}</label>
+            {{ edit_form.first_name }} {% for error in edit_form.first_name.errors %}
+            <p class="text-danger">{{error}}</p>
+            {% endfor %}
+        </div>
+        <div class="form-group form_name {% if edit_form.last_name.errors %} errror {% endif %}">
+            <label for="{{ edit_form.last_name.id_for_label }}">{{ edit_form.last_name.label }}</label>
+            {{ edit_form.last_name }} {% for error in edit_form.last_name.errors %}
+            <p class="text-danger">{{error}}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group form_name {% if edit_form.email.errors %} errror {% endif %}">
+            <label for="{{ edit_form.email.id_for_label }}">{{ edit_form.email.label }}</label>
+            {{ edit_form.email }} {% for error in edit_form.email.errors %}
+            <p class="text-danger">{{error}}</p>
+            {% endfor %}
+        </div>
+        <!-- <div class="form-group form_name">
+            <label for="{{ edit_form.birth_date.id_for_label }}">{{ edit_form.birth_date.label }}</label>
+            {{ edit_form.birth_date }} 
+            {% for error in edit_form.birth_date.errors %}
+            <p class="text-danger">{{error}}</p>
+            {% endfor %}
+        </div> -->
+
+
+        <div class="form-group form_name">
+            <label for="">تاریخ تولد</label>
+            <div class="birth_day_content">
+                {{ edit_form.ROZ }} 
+                {{ edit_form.MAH }} 
+                {{ edit_form.SAL }} 
+            </div>
+        </div>
+
+        <div class="form-group form_name {% if edit_form.password_now.errors %} errror {% endif %}">
+            <label for="{{ edit_form.password_now.id_for_label }}">{{ edit_form.password_now.label }}</label>
+            {{ edit_form.password_now }}
+            <div class="show">نمایش</div>
+            {% for error in edit_form.password_now.errors %}
+            <p class="text-danger">{{error}}</p>
+            {% endfor %}
+        </div>
+
+         <div class="form-group form_name {% if edit_form.password_new.errors %} errror {% endif %}">
+            <label for="{{ edit_form.password_new.id_for_label }}">{{ edit_form.password_new.label }}</label>
+            {{ edit_form.password_new }}
+            <div class="show">نمایش</div>
+            {% for error in edit_form.password_new.errors %}
+            <p class="text-danger">{{error}}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group form_name {% if edit_form.password_accept.errors %} errror {% endif %}">
+            <label for="{{ edit_form.password_accept.password_new }}">{{ edit_form.password_accept.label }}</label>
+            {{ edit_form.password_accept }}
+            <div class="show">نمایش</div>
+            {% for error in edit_form.password_accept.errors %}
+            <p class="text-danger">{{error}}</p>
+            {% endfor %}
+        </div>
+
+        <div class="send-group ">
+            <input type="submit" value="ارسـال">
+        </div>
+
+        <!-- <div class=" send-group">
+            <input type="submit" name="submit" class="btn btn-primary pull-right" value="ارسـال">
+        </div> -->
+    </form>
+
+    <script src="{% static 'js/password.js' %}"></script>
+
+{% endblock %}

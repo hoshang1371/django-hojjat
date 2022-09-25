@@ -1,0 +1,111 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+
+<div class="bg-img">
+    <div class="content">
+        <h5>ثبت نام</h5>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class=" form-display ">
+
+                <div class="field space">
+                    <div class="user-icon"><span class="fas fa-at "></span></div>
+                    {{ register_form.email }}
+                </div>
+
+                <div class="field space">
+                    <div class="user-icon"><span class="fa fa-user "></span></div>
+                    {{ register_form.user_name }}
+                </div>
+
+                <div class="field space">
+                    <!-- <label for='{{register_form.re_password.id_for_label}}'>{{ register_form.re_password.label }}</label> -->
+                    <div class="pass-icon"><span class="fa fa-unlock "></span></div>
+                    {{ register_form.re_password }}
+                    <div class="show">نمایش</div>
+                </div>
+
+                <div class="field space">
+                    <!-- <label for='{{register_form.password.id_for_label}}'>{{ register_form.password.label }}</label> -->
+                    <div class="pass-icon"><span class="fa fa-lock "></span></div>
+                    {{ register_form.password }}
+                    <div class="show">نمایش</div>
+                </div>
+
+                {% comment %} {% endcomment %}
+                {{ register_form.captcha }}
+
+                <div class="" style="width: 100%;">
+                    {% for error in register_form.user_name.errors %}
+                    <p style="color:red; ">{{error}}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="" style="width: 100%;">
+                    {% for error in register_form.email.errors %}
+                    <p style="color:red; ">{{error}}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="" style="width: 100%;">
+                    {% for error in register_form.re_password.errors %}
+                    <p style="color:red; ">{{error}}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="" style="width: 100%;">
+                    {% for error in register_form.password.errors %}
+                    <p style="color:red; ">{{error}}</p>
+                    {% endfor %}
+                </div>
+                <!-- </div> -->
+            </div>
+            <div class="field pass field-sabt">
+                <input type="submit" value="ثبت نام" tabindex="6">
+            </div>
+        </form>
+
+        <!-- <form action="#">
+            <div class=" form-display ">
+                <div class="field space">
+                    <div class="user-icon"><span class="fa fa-user "></span></div>
+                    <input class="rtl" type="text" required placeholder="نام کوچک">
+                </div>
+                <div class="field space">
+                    <div class="user-icon"><span class="fa fa-user "></span></div>
+                    <input class="rtl" type="text" required placeholder="نام خانوادگی">
+                </div>
+                <div class="field space">
+                    <div class="user-icon"><span class="fa fa-user "></span></div>
+                    <input class="rtl" type="text" required placeholder="ادرس ایمیل">
+                </div>
+
+
+
+                <div class="field space">
+                    <div class="pass-icon"><span class="fa fa-lock "></span></div>
+                    <input type="password" class="password rtl " required placeholder="گذرواژه">
+                    <div class="show">نمایش</div>
+                </div>
+
+                <div class="field field-right space">
+                    <div class="pass-icon"><span class="fa fa-lock "></span></div>
+                    <input type="password" class="password-confirm rtl " required placeholder="تایید گذرواژه">
+                    <div class="show-confirm">نمایش</div>
+                </div>
+            </div>
+
+            <div class="field pass field-sabt">
+                <input type="submit" value="ثبت نام">
+            </div>
+
+        </form> -->
+    </div>
+</div>
+<script src="{% static 'js/password.js' %}"></script>
+
+{% endblock %}

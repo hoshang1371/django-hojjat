@@ -1,0 +1,27 @@
+
+.input-group-prepend{
+    position: relative;
+    height: 60px;
+    width: 400px;
+    margin: 20px;
+    display: flex;
+    /* background: rgba(255, 255, 255, 0.94); */
+}
+
+/* .input-group-prepend img{
+    width: 50%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+} */
+
+.input-group-prepend img{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    /* margin-left: 50%; */
+    /* transform: translateX(-50%); */
+    left: 10%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}

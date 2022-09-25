@@ -1,0 +1,27 @@
+{% load i18n %}
+{% spaceless %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/cpacha_feild.css' %}">
+
+<div class="input-group-prepend">
+  {% if audio %}
+      <a title="{% trans "Play CAPTCHA as audio file" %}" href="{{ audio }}">
+  {% endif %}
+  <img src="{{ image }}" alt="captcha" class="captcha" />
+</div>
+
+
+  <div class="field space">
+    <!-- <i class="fas fa-pen"></i> -->
+      <div class="user-icon"><span class="fas fa-pen "></span></div>
+      {% spaceless %}
+        {% for widget in widget.subwidgets %}
+        {% comment %}{% include widget.template_name %}{% endcomment %}
+          <input type="{{ widget.type }}" name="{{ widget.name }}" {% if widget.name == 'captcha_1' %} placeholder = "متن را وارد کنید" class="rtl" tabindex="5" {% endif %} {% if widget.value != None %} value="{{ widget.value|stringformat:'s' }}"{% endif %}{% include "django/forms/widgets/attrs.html" %}>
+        {% endfor %}
+      {% endspaceless %}
+
+    <!-- </div> -->
+  </div>
+{% endspaceless %}

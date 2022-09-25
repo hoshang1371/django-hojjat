@@ -1,0 +1,43 @@
+{% load static %}
+{% load render_partial %}
+
+<!DOCTYPE html>
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Final//EN"> -->
+<html  lang="en">
+
+{% render_partial 'about_page_header' %}
+
+<link rel="stylesheet" href="{% static 'css/banner.css' %}">
+<link rel="stylesheet" href="{% static 'css/product-gride.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+
+
+<body>
+
+  <header>
+    
+    {% include 'shared/headerbrand.html' %}
+    {% comment %} {% endcomment %} 
+    {% include 'shared/nav.html' %}
+    
+    
+  </header>
+  {% comment %}       {% endcomment %}
+
+  {% block content %}
+  {% endblock %}
+
+  {% include 'shared/footer.html' %}
+
+
+
+  {% include 'shared/_FooterRefrences.html' %}
+  
+  <!-- <div class="messeges">
+    <h3>این محصول در سبد خرید موجود است</h3>
+  </div> -->
+
+</body>
+
+</html>
