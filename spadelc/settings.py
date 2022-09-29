@@ -26,12 +26,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-d6u-y*_emvopwe+qqg!y^le8k*0=facyw9t4hev_ed1u80j!d9'
 SECRET_KEY = config('SECRET_KEY')
-
+#http://localhost:8000/
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    #'10.0.2.2',
+    '192.168.1.51',
+    'localhost',
+    #'10.0.3.2',
+    '127.0.0.1',
+]
 
 # Application definition
 
@@ -58,6 +63,7 @@ INSTALLED_APPS = [
     'spad_eshop_contact',
     'spad_eshop_settings',
     'spad_eshop_CustomersComments',
+    'restFlutterAppStaff',
     'captcha',
     #'django_password_validators',
     #'django_password_validators.password_history',

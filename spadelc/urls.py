@@ -32,6 +32,9 @@ urlpatterns = [
     path('',include('spad_eshop_products.urls')),
     path('admin/', admin.site.urls),
     path('', include('spad_eshop_order.urls')),
+
+    path('',include('restFlutterAppStaff.urls')),
+    
     path('products_order_partial',products_order_partial, name='products_order_partial'),
     path('products_number_all_order_partial',products_number_all_order_partial, 
         name='products_number_all_order_partial'),
