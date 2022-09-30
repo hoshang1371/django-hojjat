@@ -33,7 +33,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('spad_eshop_order.urls')),
 
-    path('',include('restFlutterAppStaff.urls')),
+    path('api/',include('restFlutterAppStaff.urls')),
     
     path('products_order_partial',products_order_partial, name='products_order_partial'),
     path('products_number_all_order_partial',products_number_all_order_partial, 
@@ -54,6 +54,9 @@ urlpatterns = [
     path('ajax/crud/create/OneProduct',  CreateOneOrder.as_view(), name='crud_ajax_create_one'),
 
     path('', include('social_django.urls', namespace='social')),
+
+    #! drf
+    path('api-auth/', include('rest_framework.urls'))
 
 ]
 

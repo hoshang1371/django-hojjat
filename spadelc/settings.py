@@ -19,24 +19,27 @@ from decouple import config
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-d6u-y*_emvopwe+qqg!y^le8k*0=facyw9t4hev_ed1u80j!d9'
 SECRET_KEY = config('SECRET_KEY')
-#http://localhost:8000/
+# http://localhost:8000/
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+# python manage.py runserver 192.168.1.51:8000
 ALLOWED_HOSTS = [
-    #'10.0.2.2',
+    # '10.0.2.2',
     '192.168.1.51',
     'localhost',
-    #'10.0.3.2',
+    # '10.0.3.2',
     '127.0.0.1',
+    "chrome-extension://eejfoncpjfgmeleakejdcanedmefagga",
 ]
+
+
+CSRF_TRUSTED_ORIGINS = ['chrome-extension://eejfoncpjfgmeleakejdcanedmefagga']
 
 # Application definition
 
@@ -65,10 +68,12 @@ INSTALLED_APPS = [
     'spad_eshop_CustomersComments',
     'restFlutterAppStaff',
     'captcha',
-    #'django_password_validators',
-    #'django_password_validators.password_history',
-    #'jalali_date',
-    #'django_jalali',
+
+    'rest_framework',
+    # 'django_password_validators',
+    # 'django_password_validators.password_history',
+    # 'jalali_date',
+    # 'django_jalali',
 ]
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 MIDDLEWARE = [
@@ -172,7 +177,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static_cdn", "media_root")
 AUTH_USER_MODEL = 'spad_account.User'
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#Jalali_date
+# Jalali_date
 
 
 # default settings
@@ -218,8 +223,7 @@ EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_USE_TLS = True
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD =  config('EMAIL_HOST_PASSWORD')
-
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 AUTHENTICATION_BACKENDS = (
@@ -235,3 +239,19 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'restFlutterAppStaff.permissions.IsStaffOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        #'rest_framework.authentication.SessionAuthentication',
+        #'rest_framework.authentication.TokenAuthentication',
+        #jwt
+        #knox
+        #oauth
+    ]
+}
