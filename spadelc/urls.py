@@ -56,7 +56,7 @@ urlpatterns = [
     path('', include('social_django.urls', namespace='social')),
 
     #! drf
-    path('api-auth/', include('rest_framework.urls'))
+    #path('api-auth/', include('rest_framework.urls'))
 
 ]
 

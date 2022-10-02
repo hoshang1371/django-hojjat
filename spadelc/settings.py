@@ -70,6 +70,17 @@ INSTALLED_APPS = [
     'captcha',
 
     'rest_framework',
+
+    'rest_framework.authtoken',
+
+    # 'dj_rest_auth',
+    # 'django.contrib.sites',
+
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'dj_rest_auth.registration',
+
     # 'django_password_validators',
     # 'django_password_validators.password_history',
     # 'jalali_date',
@@ -247,11 +258,14 @@ REST_FRAMEWORK = {
         'restFlutterAppStaff.permissions.IsStaffOrReadOnly',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
+        #'rest_framework.authentication.BasicAuthentication',
         #'rest_framework.authentication.SessionAuthentication',
-        #'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
         #jwt
         #knox
         #oauth
     ]
 }
+
+SITE_ID = 1
+
