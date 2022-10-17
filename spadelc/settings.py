@@ -32,6 +32,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     # '10.0.2.2',
     '192.168.1.51',
+    #'192.168.1.11',
     'localhost',
     # '10.0.3.2',
     '127.0.0.1',
@@ -72,7 +73,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'rest_framework.authtoken',
-
+    'sorl.thumbnail',
     # 'dj_rest_auth',
     # 'django.contrib.sites',
 
@@ -177,6 +178,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn", "static_root")
+
 
 MEDIA_URL = '/media/'
 

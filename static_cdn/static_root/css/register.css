@@ -171,7 +171,11 @@
 .space {
     margin-top: 16px;
 }
-
+.GooglePass{
+    position: relative;
+    right: -50%; 
+    transform: translateX(-50%);
+}
 .pass {
     text-align: right;
     margin: 10px 0;

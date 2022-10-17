@@ -3,6 +3,18 @@ from spad_eshop_products.models import Product
 # from django.contrib.auth.models import User
 from spad_account.models import User
 
+from django.contrib.auth import authenticate
+from django.utils.translation import gettext_lazy as _
+from django.db.models import Q
+
+from rest_framework.authtoken.models import Token
+
+# from rest_framework.authtoken.models import Token
+
+#Token.objects.filter(pk="0703e9e4e6a24cfce15b26a7fa0544de3c8101ea").exists()  
+
+
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
@@ -18,10 +30,15 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = "__all__"
 
+class CheckTokenSerializer(serializers.Serializer):
+    token = serializers.EmailField(label=_("token"))
 
-from django.contrib.auth import authenticate
-from django.utils.translation import gettext_lazy as _
-from django.db.models import Q
+    def validate(self, attrs):
+        token = attrs.get('token')
+        checked = Token.objects.filter(pk=token).exists()
+        attrs['checked'] = checked
+        return attrs
+
 
 class MyAuthTokenSerializer(serializers.Serializer):
     email = serializers.EmailField(label=_("Email"))
@@ -37,11 +54,7 @@ class MyAuthTokenSerializer(serializers.Serializer):
 
         if email and password:
             #user2 = User.objects.get(email=email)
-            user2 = User.objects.get(Q(username__iexact=email) | Q(email__iexact=email) & Q(is_active=True))
-
-            print("*************************")
-            print(user2)
-            print("*************************")
+            user2 = User.objects.get(Q(username__iexact=email) | Q(email__iexact=email) & Q(is_active=True) & Q(is_staff=True))
             #user = authenticate(request=self.context.get('request'),email=email, password=password)
             user = authenticate(username=user2.username, password=password)
 
@@ -55,15 +68,14 @@ class MyAuthTokenSerializer(serializers.Serializer):
         else:
             msg = _('Must include "username" and "password".')
             raise serializers.ValidationError(msg, code='authorization')
-
+            
         attrs['user'] = user
         return attrs
 
 
-'''
- & Q(is_active=True))
-user_request = get_object_or_404(User,email=email_or_username,)
-user = UserModel._default_manager.get(Q(username__exact="hoshang.1371@yahoo.com") | (Q(email__iexact="hoshang.1371@yahoo.com")))
-user = UserModel.objects.get(Q(username__iexact=username) | Q(email__iexact=username))
 
-'''
+
+class SearchProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'

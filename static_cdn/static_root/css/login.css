@@ -28,7 +28,7 @@
 }   
 .content{
     position: absolute;
-    margin-top: 300px;
+    margin-top: 350px;
     /* top: 50%; */
     left: 50%;
     transform: translate(-50%, -50%);
