@@ -116,7 +116,7 @@ def CheckToken(request):
 
 class SearchProductAPIView(generics.ListCreateAPIView):
     #search_fields = ['title','description','smallDescription']
-    search_fields = ['title']
+    search_fields = ['title','code','place']
     filter_backends = (filters.SearchFilter,)
     queryset = Product.objects.all()
     serializer_class = SearchProductSerializer
