@@ -2,8 +2,8 @@ from django.urls import path, include
 
 from .views import SearchProductAPIView, apage,\
                    ProductList, ProductDetail,\
-                   UsertList, UserDetail, \
-                   obtain_auth_token,CheckToken
+                   obtain_auth_token,CheckToken, product_order_staff
+                   #UsertList, UserDetail, \
                 #  ,  RevokeToken
 # from rest_framework.authtoken.views import obtain_auth_token
 
@@ -13,8 +13,8 @@ urlpatterns = [
     path('core', apage),
     path("",ProductList.as_view(), name="list"),
     path("<int:pk>",ProductDetail.as_view(), name="detail"),
-    path("user/",UsertList.as_view(), name="user-list"),
-    path("user/<int:pk>",UserDetail.as_view(), name="user-detail"),
+    # path("user/",UsertList.as_view(), name="user-list"),
+    # path("user/<int:pk>",UserDetail.as_view(), name="user-detail"),
 
     #! Token authentication
     # path('token_auth/', obtain_auth_token),
@@ -25,7 +25,9 @@ urlpatterns = [
     #! check Token
     path('Check_token/', CheckToken),
     #!search url
-    path('questions/', SearchProductAPIView.as_view())
+    path('questions/', SearchProductAPIView.as_view()),
+    #!product order staff url
+    path('product_order_staff/', product_order_staff.as_view())
 
     #!dj_rest_auth
     # path('rest_auth/', include('dj_rest_auth.urls')),

@@ -6,10 +6,11 @@ from rest_framework.authtoken import views as auth_views
 from django.shortcuts import render
 from django.http.response import HttpResponse, JsonResponse
 from spad_account.models import User
+from spad_eshop_order.models import Order, OrderDetail
 from spad_eshop_products.models import Product
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from .serializer import ProductSerializer, SearchProductSerializer, UserSerializer, MyAuthTokenSerializer
+from .serializer import OrderProductSerializer, ProductSerializer, SearchProductSerializer, UserSerializer, MyAuthTokenSerializer
 from .permissions import IsSuperUser
 # from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
@@ -19,11 +20,15 @@ from rest_framework import filters
 
 #! product
 
+# @api_view(['GET'])
+
 
 class ProductList(ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     # authentication_classes = (SessionAuthentication, )
+
+# @api_view(['GET'])
 
 
 class ProductDetail(RetrieveUpdateDestroyAPIView):
@@ -32,22 +37,17 @@ class ProductDetail(RetrieveUpdateDestroyAPIView):
 #! user
 
 
-class UsertList(ListAPIView):
-    # queryset  = User.objects.all()
-    def get_queryset(self):
-        # print("_____________________")
-        # print(self.request.user)
-        # print(self.request.auth)
-        # print("_____________________")
-        return User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (IsSuperUser,)
+# class UsertList(ListAPIView):
+#     def get_queryset(self):
+#         return User.objects.all()
+#     serializer_class = UserSerializer
+#     permission_classes = (IsSuperUser,)
 
 
-class UserDetail(RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (IsSuperUser,)
+# class UserDetail(RetrieveAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#     permission_classes = (IsSuperUser,)
 
 
 # class RevokeToken(APIView):
@@ -112,17 +112,80 @@ def CheckToken(request):
     return Response({"message": "Hello, world!"})
 
 #! search
-#http://192.168.1.51:8000/api/questions/?search=
+# http://192.168.1.51:8000/api/questions/?search=
+# @api_view(['GET'])
+
 
 class SearchProductAPIView(generics.ListCreateAPIView):
     #search_fields = ['title','description','smallDescription']
-    search_fields = ['title','code','place']
+    search_fields = ['title', 'code', 'place']
     filter_backends = (filters.SearchFilter,)
     queryset = Product.objects.all()
     serializer_class = SearchProductSerializer
 
 
+#! product order staff
 
+
+class product_order_staff(ListCreateAPIView):
+    # queryset = Order.objects.all()
+    #queryset = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
+    #queryset = OrderDetail.objects.all()
+    serializer_class = OrderProductSerializer
+    # filter_fields = ('owner_id', 'is_paid')
+
+    def post(self, request, *args, **kwargs):
+        order = Order.objects.filter(owner_id=self.request.user.id, is_paid=False).first()
+        if order is None:
+            order = Order.objects.create(owner_id=self.request.user.id, is_paid=False)
+        product_id = int(request.data.get('product'))
+        count = int(request.data.get('count'))
+        if count < 0:
+            count =1
+        product = Product.objects.get_by_id(product_id=product_id)
+        x= order.orderdetail_set.filter(product_id=product.id)
+        if x:
+            print("exist")
+            print(x.values()[0]['count'])
+            x.update(count=count+x.values()[0]['count'])
+        else:
+            print("NO exist")
+            order.orderdetail_set.create(product_id=product.id, price=product.price ,count=count)
+           #TODO
+        return Response(request.data)
+
+    def get_queryset(self):
+        #ownerId = self.kwargs['owner']
+        queryset = Order.objects.all()
+        print("++++++++++++++++++++")
+        print(self.request.user)
+        print(self.request.user.id)
+
+        order = Order.objects.filter(
+            owner_id=self.request.user.id, is_paid=False).first()
+        if order is None:
+            order = Order.objects.create(
+                owner_id=self.request.user.id, is_paid=False)
+
+        x = order.orderdetail_set.all()
+        print(x)
+        return queryset
+
+# @api_view(['POST'])
+# def product_order_staff(request):
+
+#     print(type(request.data))
+#     if request.method == 'POST':
+#         print(type(request.data))
+        # order = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
+        # if order is None:
+        #     order = Order.objects.create(owner_id=request.user.id, is_paid=False)
+
+        # serializer = SnippetSerializer(data=request.data)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 #!test

@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from spad_eshop_order.models import Order, OrderDetail
 from spad_eshop_products.models import Product
 # from django.contrib.auth.models import User
 from spad_account.models import User
@@ -79,3 +80,11 @@ class SearchProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+
+#! Order
+class OrderProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        #model = Order
+        model = OrderDetail
+        #fields = '__all__'
+        fields = {'product','count'}
