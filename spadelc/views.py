@@ -96,6 +96,8 @@ class CreateOneOrder(View):
         product_id = request.GET.get('id', None)
 
         order = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
+        if order is None:
+            order = Order.objects.create(owner_id=self.request.user.id, is_paid=False)
         
         product = Product.objects.get_by_id(
             product_id=product_id

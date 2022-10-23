@@ -14,6 +14,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from decouple import config
+
+# import locale
+
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,8 +37,8 @@ DEBUG = True
 # python manage.py runserver 192.168.1.51:8000
 ALLOWED_HOSTS = [
     # '10.0.2.2',
-    '192.168.1.51',
-    #'192.168.1.15',
+    #'192.168.1.51',
+    '192.168.1.15',
     'localhost',
     # '10.0.3.2',
     '127.0.0.1',
@@ -156,8 +162,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'fa-ir'
 
-TIME_ZONE = 'UTC'
-
+#TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
+#locale.setlocale(locale.LC_ALL, "fa_IR.UTF-8")
 USE_I18N = True
 
 USE_L10N = True

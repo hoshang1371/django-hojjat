@@ -125,6 +125,8 @@ class SearchProductAPIView(generics.ListCreateAPIView):
 
 
 #! product order staff
+import json
+from django.http import JsonResponse
 
 
 class product_order_staff(ListCreateAPIView):
@@ -132,7 +134,37 @@ class product_order_staff(ListCreateAPIView):
     #queryset = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
     #queryset = OrderDetail.objects.all()
     serializer_class = OrderProductSerializer
+    permission_classes =(IsAdminUser,)
     # filter_fields = ('owner_id', 'is_paid')
+
+    def get(self, request, *args, **kwargs):
+        order = Order.objects.filter(owner_id=self.request.user.id).all()
+
+        response =[]
+        for val in order.values():
+            v  = {
+            "owner": val['owner_id'],
+            "is_paid": val['is_paid'],
+            "payment_date": str(val['payment_date']),
+            "j_payment_date": str(val['j_payment_date'])
+            }
+            response.append(v)
+        # response = {
+        #   "owner": order.values()[0]['owner_id'],
+        #   "is_paid": order.values()[0]['is_paid'],
+        #   "payment_date": str(order.values()[0]['payment_date']),
+        #   "j_payment_date": str(order.values()[0]['j_payment_date'])
+        # }
+        # print(response)
+        # print(json.dumps(response))
+        # print(type(response))
+        # return Response(json.dumps(response))
+        return JsonResponse(response, safe=False)
+        # return JsonResponse(json.dumps(response), safe=False)
+
+        # return JsonResponse(response)
+        # return Response(response)
+        # return Response({"message": "Hello, world!"})
 
     def post(self, request, *args, **kwargs):
         order = Order.objects.filter(owner_id=self.request.user.id, is_paid=False).first()
@@ -154,22 +186,22 @@ class product_order_staff(ListCreateAPIView):
            #TODO
         return Response(request.data)
 
-    def get_queryset(self):
-        #ownerId = self.kwargs['owner']
-        queryset = Order.objects.all()
-        print("++++++++++++++++++++")
-        print(self.request.user)
-        print(self.request.user.id)
+    # def get_queryset(self):
+    #     #ownerId = self.kwargs['owner']
+    #     queryset = Order.objects.all()
+    #     print("++++++++++++++++++++")
+    #     print(self.request.user)
+    #     print(self.request.user.id)
 
-        order = Order.objects.filter(
-            owner_id=self.request.user.id, is_paid=False).first()
-        if order is None:
-            order = Order.objects.create(
-                owner_id=self.request.user.id, is_paid=False)
+    #     order = Order.objects.filter(
+    #         owner_id=self.request.user.id, is_paid=False).first()
+    #     if order is None:
+    #         order = Order.objects.create(
+    #             owner_id=self.request.user.id, is_paid=False)
 
-        x = order.orderdetail_set.all()
-        print(x)
-        return queryset
+    #     x = order.orderdetail_set.all()
+    #     print(x)
+    #     return queryset
 
 # @api_view(['POST'])
 # def product_order_staff(request):
