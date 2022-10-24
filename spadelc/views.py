@@ -1,3 +1,4 @@
+from cgi import print_environ
 from django.shortcuts import render, redirect
 from spad_eshop_slider.models import Slider
 from spad_eshop_order.models import OrderDetail,Order
@@ -49,7 +50,9 @@ def about_page_header(request):
     return render(request, 'shared/_HeaderRefrences.html',contex)
 
 def products_number_all_order_partial(request):
-    order_count_partials = OrderDetail.objects.all()
+    order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+    order_count_partials = order.orderdetail_set.all()
+    #order_count_partials = OrderDetail.objects.all()
     Total_count_for_all_product =0
     for order_count_partial in order_count_partials:
         Total_count_for_all_product = Total_count_for_all_product + order_count_partial.count
@@ -74,7 +77,9 @@ def products_category(request):
     return render(request ,'shared/products_category.html',contex)
 
 def products_order_partial(request):
-    order_partials = OrderDetail.objects.all()
+    order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+    order_partials = order.orderdetail_set.all()
+    #order_partials = OrderDetail.objects.all()
     Total_price_for_all_product =0
 
     for order_partial in order_partials:
@@ -99,22 +104,31 @@ class CreateOneOrder(View):
         if order is None:
             order = Order.objects.create(owner_id=self.request.user.id, is_paid=False)
         
-        product = Product.objects.get_by_id(
-            product_id=product_id
-            )
+        # product = Product.objects.get_by_id(
+        #     product_id=product_id
+        #     )
 
-
-        order_partial = OrderDetail.objects.filter(product_id=product.id).first()
-        if order_partial is None:
+        product = Product.objects.get_by_id(product_id=product_id)
+        order_partial= order.orderdetail_set.filter(product_id=product.id)
+        print("olk")
+        print(order_partial)
+        # order_partial = OrderDetail.objects.filter(product_id=product.id).first()
+        #order_partial = order.orderdetail_set.filter(product_id=product.id).first()
+        #if order_partial[0] is None:
+        if not order_partial:
+            
             order.orderdetail_set.create(
                 product_id=product.id, 
                 price=product.price ,
                 count=1
                 ) 
-            order_partial = OrderDetail.objects.get(product_id=product.id)
-            Total__each_product = int(order_partial.count) * int(order_partial.price)
+            #order_partial = OrderDetail.objects.get(product_id=product.id)
+            order_partial_set = order.orderdetail_set.get(product_id=product.id)
+            print(order_partial_set)
+            Total__each_product = int(order_partial_set.count) * int(order_partial_set.price)
 
-            order_count_partials = OrderDetail.objects.all()
+            order_count_partials = order.orderdetail_set.all()
+            print(order_count_partials)
             Total_count_for_all_product =0
             Total_count_for_product =0
             for order_count_partial in order_count_partials:
@@ -122,10 +136,10 @@ class CreateOneOrder(View):
                 Total_count_for_product =Total_count_for_product+1
 
             #print(Total_count_for_product)
-            user = {'productId':order_partial.id,
-                    'productImage':order_partial.product.image.url,
-                    'productName':order_partial.product.title,
-                    'productCount':order_partial.count,
+            user = {'productId':order_partial_set.id,
+                    'productImage':order_partial_set.product.image.url,
+                    'productName':order_partial_set.product.title,
+                    'productCount':order_partial_set.count,
                     'product_All_price':Total__each_product,
                     'Total_count_for_all_product':Total_count_for_all_product,
                     'Total_count_for_product' : Total_count_for_product,
@@ -148,7 +162,11 @@ class UpdateCrudUser(View):
         id1 = request.GET.get('id', None)
         count1 = request.GET.get('count', None)
         #order_partials = OrderDetail.objects.all()
-        obj = OrderDetail.objects.get(id=id1)
+
+        order = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
+
+        obj = order.orderdetail_set.get(id=id1)
+        # obj = OrderDetail.objects.get(id=id1)
         obj.count = count1
         
         
@@ -156,7 +174,8 @@ class UpdateCrudUser(View):
 
         Total__each_product = int(obj.count) * int(obj.price)
 
-        order_count_partials = OrderDetail.objects.all()
+        #order_count_partials = OrderDetail.objects.all()
+        order_count_partials = order.orderdetail_set.all()
         Total_count_for_all_product =0
         for order_count_partial in order_count_partials:
             Total_count_for_all_product = Total_count_for_all_product + order_count_partial.count
@@ -179,8 +198,9 @@ class DeleteCrudUser(View):
     def  get(self, request):
         id1 = request.GET.get('id', None)
         OrderDetail.objects.get(id=id1).delete()
-
-        order_count_partials = OrderDetail.objects.all()
+        order = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
+        # order_count_partials = OrderDetail.objects.all()
+        order_count_partials = order.orderdetail_set.all()
 
         Total_count_for_all_product =0
         Total_price_for_all_product =0

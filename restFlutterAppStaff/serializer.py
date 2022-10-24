@@ -88,3 +88,11 @@ class OrderProductSerializer(serializers.ModelSerializer):
         model = OrderDetail
         #fields = '__all__'
         fields = {'product','count'}
+
+
+# class OrderdetailsSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         #model = Order
+#         model = Product
+#         #model = OrderDetail
+#         fields = '__all__'

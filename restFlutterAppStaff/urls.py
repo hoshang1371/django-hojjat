@@ -2,7 +2,7 @@ from django.urls import path, include
 
 from .views import SearchProductAPIView, apage,\
                    ProductList, ProductDetail,\
-                   obtain_auth_token,CheckToken, product_order_staff
+                   obtain_auth_token,CheckToken, product_order_ditails_staff, product_order_staff
                    #UsertList, UserDetail, \
                 #  ,  RevokeToken
 # from rest_framework.authtoken.views import obtain_auth_token
@@ -27,7 +27,9 @@ urlpatterns = [
     #!search url
     path('questions/', SearchProductAPIView.as_view()),
     #!product order staff url
-    path('product_order_staff/', product_order_staff.as_view())
+    path('product_order_staff/', product_order_staff.as_view()),
+    #!product order ditails staff url
+    path('product_order_ditails_staff/<order_id>/', product_order_ditails_staff.as_view())
 
     #!dj_rest_auth
     # path('rest_auth/', include('dj_rest_auth.urls')),

@@ -17,6 +17,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework import filters
+from django.http import JsonResponse
 
 #! product
 
@@ -125,8 +126,6 @@ class SearchProductAPIView(generics.ListCreateAPIView):
 
 
 #! product order staff
-import json
-from django.http import JsonResponse
 
 
 class product_order_staff(ListCreateAPIView):
@@ -139,26 +138,16 @@ class product_order_staff(ListCreateAPIView):
 
     def get(self, request, *args, **kwargs):
         order = Order.objects.filter(owner_id=self.request.user.id).all()
-
         response =[]
         for val in order.values():
             v  = {
+            "id": val['id'],
             "owner": val['owner_id'],
             "is_paid": val['is_paid'],
             "payment_date": str(val['payment_date']),
             "j_payment_date": str(val['j_payment_date'])
             }
             response.append(v)
-        # response = {
-        #   "owner": order.values()[0]['owner_id'],
-        #   "is_paid": order.values()[0]['is_paid'],
-        #   "payment_date": str(order.values()[0]['payment_date']),
-        #   "j_payment_date": str(order.values()[0]['j_payment_date'])
-        # }
-        # print(response)
-        # print(json.dumps(response))
-        # print(type(response))
-        # return Response(json.dumps(response))
         return JsonResponse(response, safe=False)
         # return JsonResponse(json.dumps(response), safe=False)
 
@@ -186,22 +175,45 @@ class product_order_staff(ListCreateAPIView):
            #TODO
         return Response(request.data)
 
-    # def get_queryset(self):
-    #     #ownerId = self.kwargs['owner']
-    #     queryset = Order.objects.all()
-    #     print("++++++++++++++++++++")
-    #     print(self.request.user)
-    #     print(self.request.user.id)
+#! product list order staff
+# import json
+# from django.core.serializers.json import DjangoJSONEncoder
 
-    #     order = Order.objects.filter(
-    #         owner_id=self.request.user.id, is_paid=False).first()
-    #     if order is None:
-    #         order = Order.objects.create(
-    #             owner_id=self.request.user.id, is_paid=False)
+class product_order_ditails_staff(APIView):
+    # queryset = OrderDetail.objects.all()
+    #queryset = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
+    #queryset = OrderDetail.objects.all()
+    #lookup_url_kwarg = 'order_id'
+    #serializer_class = OrderdetailsSerializer
+    permission_classes =(IsAdminUser,)
 
-    #     x = order.orderdetail_set.all()
-    #     print(x)
-    #     return queryset
+    def get(self, request, *args, **kwargs):
+        #order = Order.objects.filter(owner_id=self.request.user.id, is_paid=False).first()
+        order_id = self.kwargs.get('order_id')
+        orderDetails = OrderDetail.objects.filter(order= order_id)
+        response =[]
+        for orderDerail in orderDetails:
+            product = Product.objects.filter(title=orderDerail.product)
+            v  = {
+            "id": product.values()[0]['id'],
+            "title": product.values()[0]['title'],
+            "code": product.values()[0]['code'],
+            "place": product.values()[0]['place'],
+            "number": product.values()[0]['number'],
+            "brand": product.values()[0]['brand'],
+            "description": product.values()[0]['description'],
+            "smallDescription": product.values()[0]['smallDescription'],
+            "price": str(product.values()[0]['price']),
+            "priceOff": str(product.values()[0]['priceOff']),
+            "image": product.values()[0]['image'],
+            "image_tumpnail": product.values()[0]['image_tumpnail'],
+            "active": str(product.values()[0]['active']).lower(),
+            "visit_count": str(product.values()[0]['visit_count']),
+            "vige": str(product.values()[0]['vige']).lower(),
+
+            }
+            response.append(v)
+        return JsonResponse(response, safe=False, json_dumps_params={'ensure_ascii': False})
 
 # @api_view(['POST'])
 # def product_order_staff(request):
