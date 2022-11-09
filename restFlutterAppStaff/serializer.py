@@ -75,8 +75,14 @@ class MyAuthTokenSerializer(serializers.Serializer):
 
 
 
-
+#! search product
 class SearchProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+#! add product
+class AddProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
@@ -84,11 +90,28 @@ class SearchProductSerializer(serializers.ModelSerializer):
 #! Order
 class OrderProductSerializer(serializers.ModelSerializer):
     class Meta:
-        #model = Order
         model = OrderDetail
-        #fields = '__all__'
         fields = {'product','count'}
 
+#! product order detail delete
+class OrderProductDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderDetail
+        fields = '__all__'
+        
+#! product order  delete
+class OrderDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+#! is paid order update
+class OrderProductUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+        # fields = {'is_paid',}
 
 # class OrderdetailsSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -96,3 +119,6 @@ class OrderProductSerializer(serializers.ModelSerializer):
 #         model = Product
 #         #model = OrderDetail
 #         fields = '__all__'
+
+
+

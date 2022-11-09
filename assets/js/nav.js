@@ -6,16 +6,19 @@ const subdaste2 = document.querySelector(".daste-2");
 const mobileClose = document.querySelectorAll(".mobile-menu-close");
 const basket = document.querySelector(".clickBasket");
 const cartDOM = document.querySelector('.cart__items');
-const MobileClosecartDOM = document.querySelector('.mobile-cart-close');
 // let cartDOM_before = document.getComputedStyle(cartDOM, '::before')
 
-// console.log(body);
+// console.log(user_is_authenticated);
 
-MobileClosecartDOM.addEventListener('click', function(){
-    if (cartDOM.classList.contains("active")) {
-        cartDOM.classList.remove("active");
-    }
+if (user_is_authenticated == true) {
+    const MobileClosecartDOM = document.querySelector('.mobile-cart-close');
+    MobileClosecartDOM.addEventListener('click', function () {
+        if (cartDOM.classList.contains("active")) {
+            cartDOM.classList.remove("active");
+        }
     })
+}
+
 
 var w = window.innerWidth;
 // widthOfcard();
@@ -41,12 +44,12 @@ var w = window.innerWidth;
 
 if ('scrollRestoration' in window.history) {
     window.history.scrollRestoration = 'manual'
-  }
+}
 
-window.addEventListener('resize', function(){
+window.addEventListener('resize', function () {
     w = window.innerWidth;
-    if( w > 959){
-        for(let i=0; i< submenu.length;i++){
+    if (w > 959) {
+        for (let i = 0; i < submenu.length; i++) {
             if (submenu[i].classList.contains("active")) {
                 submenu[i].classList.remove("active");
             }
@@ -56,10 +59,12 @@ window.addEventListener('resize', function(){
 })
 
 
-window.addEventListener('scroll', function(){
+window.addEventListener('scroll', function () {
     // const nav = document.querySelector('nav ul');
-    menu.classList.toggle('sticky', window.scrollY>0);
-    cartDOM.classList.toggle('sticky', window.scrollY>0);
+    menu.classList.toggle('sticky', window.scrollY > 0);
+    if (user_is_authenticated == true) {
+        cartDOM.classList.toggle('sticky', window.scrollY > 0);
+    }
 })
 
 /* Toggle mobile menu */
@@ -68,13 +73,13 @@ function toggleMenu() {
         menu.classList.remove("active");
         // adds the menu (hamburger) icon
         toggle.querySelector("a").innerHTML = "<i class='fas fa-bars'></i>";
-        
+
         // navbar_item.style.background = "none"
     } else {
         menu.classList.add("active");
         // menu.className = "active";
         // navbar_item.style.background = "rgba(0,0,0,.6)"
-            // adds the close (x) icon
+        // adds the close (x) icon
         toggle.querySelector("a").innerHTML = "<i class='fas fa-times'></i>";
     }
 }
@@ -84,13 +89,13 @@ function togglesubmenu1() {
         submenu[0].classList.remove("active");
         // adds the menu (hamburger) icon
         //toggle.querySelector("a").innerHTML = "<i class='fas fa-bars'></i>";
-        
+
         // navbar_item.style.background = "none"
     } else {
         submenu[0].classList.add("active");
         // menu.className = "active";
         // navbar_item.style.background = "rgba(0,0,0,.6)"
-            // adds the close (x) icon
+        // adds the close (x) icon
         //toggle.querySelector("a").innerHTML = "<i class='fas fa-times'></i>";
     }
 }
@@ -123,6 +128,6 @@ toggle.addEventListener("click", toggleMenu, false);
 
 subdaste2.addEventListener("click", togglesubmenu2, false);
 
-for(let x=0;x<mobileClose.length;x++)
-mobileClose[x].addEventListener("click", mobile_Close_subdaste, false);
+for (let x = 0; x < mobileClose.length; x++)
+    mobileClose[x].addEventListener("click", mobile_Close_subdaste, false);
 

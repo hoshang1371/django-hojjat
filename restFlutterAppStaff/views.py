@@ -1,3 +1,10 @@
+from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
+from rest_framework import status
+from django.core.files.base import ContentFile
+import base64
+from django.db.models import Q
+from datetime import datetime, timedelta
+import os
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from rest_framework.schemas import ManualSchema
@@ -5,13 +12,16 @@ from rest_framework.compat import coreapi, coreschema
 from rest_framework.authtoken import views as auth_views
 from django.shortcuts import render
 from django.http.response import HttpResponse, JsonResponse
+from extentions.images import to_internal_value
 from spad_account.models import User
 from spad_eshop_order.models import Order, OrderDetail
 from spad_eshop_products.models import Product
-from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import (
+    ListAPIView, ListCreateAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView,
+    DestroyAPIView, UpdateAPIView)
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from .serializer import OrderProductSerializer, ProductSerializer, SearchProductSerializer, UserSerializer, MyAuthTokenSerializer
-from .permissions import IsSuperUser
+from .serializer import AddProductSerializer, OrderDeleteSerializer, OrderProductDeleteSerializer, OrderProductSerializer, OrderProductUpdateSerializer, ProductSerializer, SearchProductSerializer, UserSerializer, MyAuthTokenSerializer
+from .permissions import IsStaffOrReadOnly, IsSuperUser
 # from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -42,13 +52,13 @@ class ProductDetail(RetrieveUpdateDestroyAPIView):
 #     def get_queryset(self):
 #         return User.objects.all()
 #     serializer_class = UserSerializer
-#     permission_classes = (IsSuperUser,)
+#     permission_classes = (IsStaffOrReadOnly,)
 
 
 # class UserDetail(RetrieveAPIView):
 #     queryset = User.objects.all()
 #     serializer_class = UserSerializer
-#     permission_classes = (IsSuperUser,)
+#     permission_classes = (IsStaffOrReadOnly,)
 
 
 # class RevokeToken(APIView):
@@ -107,7 +117,16 @@ def CheckToken(request):
         # print(type(request.data))
         # print(request.data["token"])
         if Token.objects.filter(pk=request.data["token"]).exists():
-            return Response(request.data)
+            user = Token.objects.get(pk=request.data["token"]).user
+            print(user.id)
+            # return Response(request.data)
+            return Response(
+                {
+                    'token': request.data["token"],
+                    # 'token': token.key,
+                    'username': user.username,
+                    'userid': user.id
+                })
         else:
             return Response({"token": "token is distroy"})
     return Response({"message": "Hello, world!"})
@@ -125,27 +144,83 @@ class SearchProductAPIView(generics.ListCreateAPIView):
     serializer_class = SearchProductSerializer
 
 
+# import uuid
+# import imghdr
+
+
+class AddProductAPIView(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = AddProductSerializer
+    permission_classes = (IsAdminUser,)
+
+    def post(self, request, *args, **kwargs):
+
+        # datadict = request.data.get('image')
+        # data = datadict['contents']
+
+        # if 'data:' in data and ';base64,' in data:
+        #     header, data = data.split(';base64,')
+        #     header = header.split('/')
+        # try:
+        #     decoded_file = base64.b64decode(data)
+        # except TypeError:
+        #     self.fail('invalid_image')
+        # # print(decoded_file)
+
+        # complete_file_name = "%s.%s" % (datadict['filename'], header[1], )
+        # img = ContentFile(decoded_file, name=complete_file_name)
+        img = to_internal_value(self,request)
+        
+        product = Product(
+            title=request.data.get('title'),
+            code=request.data.get('code'),
+            description=request.data.get('description'),
+            smallDescription=request.data.get('smallDescription'),
+            price=request.data.get('price'), 
+            image=img
+            )
+
+        # product.image = img
+        product.save()
+        return Response({"message": "Hello, world!"})
+        # return super().post(request, *args, **kwargs)
+    # parser_classes = [MultiPartParser, FormParser]
+    # def post(self, request, *args, **kwargs):
+    #     print(request.data)
+    #     serializer = AddProductSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data ,status=status.HTTP_200_OK)
+    #     else:
+    #         return Response(serializer.data ,status=status.HTTP_400_BAD_REQUEST)
+
+
 #! product order staff
+# Sample.objects.filter(date__range=[startdate, enddate]) payment_date
 
 
 class product_order_staff(ListCreateAPIView):
-    # queryset = Order.objects.all()
-    #queryset = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
-    #queryset = OrderDetail.objects.all()
     serializer_class = OrderProductSerializer
-    permission_classes =(IsAdminUser,)
-    # filter_fields = ('owner_id', 'is_paid')
+    permission_classes = (IsAdminUser,)
 
     def get(self, request, *args, **kwargs):
-        order = Order.objects.filter(owner_id=self.request.user.id).all()
-        response =[]
+        startdate = datetime.today()
+        enddate = startdate - timedelta(days=6)
+        print(startdate)
+        print(enddate)
+        # order = Order.objects.filter(owner_id=self.request.user.id)
+        # order1 = Order.objects.filter(payment_date__range=["2022-10-23", "2022-10-29"])
+        # print(order1)
+        order = Order.objects.filter(Q(owner_id=self.request.user.id) & Q(
+            payment_date__range=[enddate, startdate])).all()
+        response = []
         for val in order.values():
-            v  = {
-            "id": val['id'],
-            "owner": val['owner_id'],
-            "is_paid": val['is_paid'],
-            "payment_date": str(val['payment_date']),
-            "j_payment_date": str(val['j_payment_date'])
+            v = {
+                "id": val['id'],
+                "owner": val['owner_id'],
+                "is_paid": val['is_paid'],
+                "payment_date": str(val['payment_date']),
+                "j_payment_date": str(val['j_payment_date'])
             }
             response.append(v)
         return JsonResponse(response, safe=False)
@@ -156,65 +231,67 @@ class product_order_staff(ListCreateAPIView):
         # return Response({"message": "Hello, world!"})
 
     def post(self, request, *args, **kwargs):
-        order = Order.objects.filter(owner_id=self.request.user.id, is_paid=False).first()
+        order = Order.objects.filter(
+            owner_id=self.request.user.id, is_paid=False).first()
         if order is None:
-            order = Order.objects.create(owner_id=self.request.user.id, is_paid=False)
+            order = Order.objects.create(
+                owner_id=self.request.user.id, is_paid=False)
         product_id = int(request.data.get('product'))
         count = int(request.data.get('count'))
         if count < 0:
-            count =1
+            count = 1
         product = Product.objects.get_by_id(product_id=product_id)
-        x= order.orderdetail_set.filter(product_id=product.id)
+        x = order.orderdetail_set.filter(product_id=product.id)
         if x:
             print("exist")
             print(x.values()[0]['count'])
-            x.update(count=count+x.values()[0]['count'])
+            # x.update(count=count+x.values()[0]['count'])
+            x.update(count=count)
         else:
             print("NO exist")
-            order.orderdetail_set.create(product_id=product.id, price=product.price ,count=count)
-           #TODO
+            order.orderdetail_set.create(
+                product_id=product.id, price=product.price, count=count)
+           # TODO
         return Response(request.data)
 
 #! product list order staff
-# import json
-# from django.core.serializers.json import DjangoJSONEncoder
+
 
 class product_order_ditails_staff(APIView):
-    # queryset = OrderDetail.objects.all()
-    #queryset = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
-    #queryset = OrderDetail.objects.all()
-    #lookup_url_kwarg = 'order_id'
-    #serializer_class = OrderdetailsSerializer
-    permission_classes =(IsAdminUser,)
+    permission_classes = (IsAdminUser,)
 
     def get(self, request, *args, **kwargs):
-        #order = Order.objects.filter(owner_id=self.request.user.id, is_paid=False).first()
         order_id = self.kwargs.get('order_id')
-        orderDetails = OrderDetail.objects.filter(order= order_id)
-        response =[]
-        for orderDerail in orderDetails:
-            product = Product.objects.filter(title=orderDerail.product)
-            v  = {
-            "id": product.values()[0]['id'],
-            "title": product.values()[0]['title'],
-            "code": product.values()[0]['code'],
-            "place": product.values()[0]['place'],
-            "number": product.values()[0]['number'],
-            "brand": product.values()[0]['brand'],
-            "description": product.values()[0]['description'],
-            "smallDescription": product.values()[0]['smallDescription'],
-            "price": str(product.values()[0]['price']),
-            "priceOff": str(product.values()[0]['priceOff']),
-            "image": product.values()[0]['image'],
-            "image_tumpnail": product.values()[0]['image_tumpnail'],
-            "active": str(product.values()[0]['active']).lower(),
-            "visit_count": str(product.values()[0]['visit_count']),
-            "vige": str(product.values()[0]['vige']).lower(),
+        orderDetails = OrderDetail.objects.filter(order=order_id)
+        response = []
+        total_price = 0
+        for orderDetail in orderDetails:
+            product = Product.objects.filter(title=orderDetail.product)
+            print(orderDetail.price * orderDetail.count)
+            total_price = total_price + (orderDetail.price * orderDetail.count)
+            v = {
+                "id_order": orderDetail.id,
+                "orderDetail_count_price": orderDetail.price * orderDetail.count,
+                "id": product[0].id,
+                "code": product[0].code,
+                "title": product[0].title,
+                "place": product[0].place,
+                "count": orderDetail.count,
+                "brand": product[0].brand,
+                "description": product[0].description,
+                "smallDescription": product[0].smallDescription,
+                "price": product[0].price,
+                "priceOff": product[0].priceOff,
+                "image": product[0].image.url,
+                "image_tumpnail": product[0].image_tumpnail.url,
+                "active": str(product[0].active).lower(),
+                "visit_count": product[0].visit_count,
+                "vige": str(product[0].vige).lower(),
 
             }
             response.append(v)
+        print("total_price", total_price)
         return JsonResponse(response, safe=False, json_dumps_params={'ensure_ascii': False})
-
 # @api_view(['POST'])
 # def product_order_staff(request):
 
@@ -230,7 +307,35 @@ class product_order_ditails_staff(APIView):
         #     serializer.save()
         #     return Response(serializer.data, status=status.HTTP_201_CREATED)
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#! delete product order detail
 
+
+class product_order_delete_staff(DestroyAPIView):
+    queryset = OrderDetail.objects.all()
+    #queryset = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
+    #queryset = OrderDetail.objects.all()
+    serializer_class = OrderProductDeleteSerializer
+    permission_classes = (IsAdminUser,)
+
+#! delete product order detail
+
+
+class order_delete_staff(DestroyAPIView):
+    queryset = Order.objects.all()
+    #queryset = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
+    #queryset = OrderDetail.objects.all()
+    serializer_class = OrderDeleteSerializer
+    permission_classes = (IsAdminUser,)
+
+#! update is paid order
+
+
+class isPaid_order_update_staff(UpdateAPIView):
+    queryset = Order.objects.all()
+    #queryset = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
+    serializer_class = OrderProductUpdateSerializer
+    lookup_field = 'id'
+    permission_classes = (IsAdminUser,)
 
 #!test
 

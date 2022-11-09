@@ -81,7 +81,7 @@ class Product(models.Model):
     categories = models.ManyToManyField(ProductCategory, blank =True, verbose_name='دسته بندی ها')
     visit_count = models.IntegerField(default=0, verbose_name='تعداد بازدید ها')
     vige = models.BooleanField(default=False, verbose_name='ویژه / غیرویژه')
-
+#"image": "G:'\kartmelli.jpg"
     objects = ProductsManager()
 
     class Meta:
@@ -96,7 +96,7 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         super(Product, self).save(*args, **kwargs)
-        print(f"image : {self.image}")
+        # print(f"image : {self.image}")
         make_thumbnail(self.image_tumpnail, self.image, (50, 50), 'thumb')
         super(Product, self).save(*args, **kwargs)
 

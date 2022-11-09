@@ -73,7 +73,7 @@
     right: 20px;
     top: 20%;
 }
-.rdio_button ul {
+.rdio_button div {
     position: absolute;
     left: 20px;
     top: 20%;
@@ -83,27 +83,27 @@
     font-family: 'samim';
 }
 
-.rdio_button ul li:first-child{
+ .rdio_button div div:first-child{
     position: absolute;
     margin-left: 20px;
     width: 50%;
     top: 20%;
-    /* display: flex; */
     left: 0px;
 }
 
-.rdio_button ul li:first-child label{
+.rdio_button div div:first-child label{
     width: 100%;
 }
 
-.rdio_button ul li:last-child{
+.rdio_button div div:last-child{
     position: absolute;
     margin-left: 20px;
     width: 50%;
     top: 20%;
+    right: 0;
 }
 
-.rdio_button ul li:last-child label{
+.rdio_button div div:last-child label{
     width: 100%;
 }
 

@@ -2,6 +2,7 @@ from django.core.files.base import ContentFile
 import os.path
 from PIL import Image
 from io import BytesIO
+import base64
 
 
 def make_thumbnail(dst_image_field, src_image_field, size, name_suffix, sep='_'):
@@ -43,3 +44,20 @@ def make_thumbnail(dst_image_field, src_image_field, size, name_suffix, sep='_')
     # set save=False, otherwise it will run in an infinite loop
     dst_image_field.save(dst_fname, ContentFile(dst_bytes.read()), save=False)
     dst_bytes.close()
+
+
+def to_internal_value(self,request):
+        datadict = request.data.get('image')
+        data = datadict['contents']
+        
+        if 'data:' in data and ';base64,' in data:
+            header, data = data.split(';base64,')
+            header = header.split('/')
+        try:
+            decoded_file = base64.b64decode(data)
+        except TypeError:
+            self.fail('invalid_image')
+        # print(decoded_file)
+
+        complete_file_name = "%s.%s" % (datadict['filename'], header[1], )
+        return ContentFile(decoded_file, name=complete_file_name)

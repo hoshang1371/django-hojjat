@@ -1,7 +1,16 @@
 {% load static %}
 {% load render_partial %}
 
-
+{% if request.user.is_authenticated %}
+    <script type='text/javascript' > 
+        var user_is_authenticated = true;
+    </script>
+{% else %}
+<script type='text/javascript' > 
+    var user_is_authenticated = false;
+</script>
+{% endif %}
+  
 <nav>
     <ul class="menu">
         <li class=" logo search-icon">
@@ -40,6 +49,10 @@
 </nav>
 
 <div class="cart">
-    {% render_partial 'products_order_partial' %}
+    {% comment %}{% endcomment %}
+    {% if request.user.is_authenticated %}
+        {% render_partial 'products_order_partial' %}
+    {% endif %}
+    
 
 </div>

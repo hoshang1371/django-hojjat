@@ -20,7 +20,7 @@ def products(request):
 
 class ProductList(ListView):
     template_name = 'products/products_list.html'
-    paginate_by = 4
+    paginate_by = 8
 
     def get_queryset(self):
         return Product.objects.get_active_products()
