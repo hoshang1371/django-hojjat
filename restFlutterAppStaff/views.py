@@ -1,3 +1,5 @@
+import json
+from django.core import serializers
 from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 from rest_framework import status
 from django.core.files.base import ContentFile
@@ -20,6 +22,8 @@ from rest_framework.generics import (
     ListAPIView, ListCreateAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView,
     DestroyAPIView, UpdateAPIView)
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+
+from spad_eshop_products_category.models import ProductCategory, ProductCategoryCat
 from .serializer import AddProductSerializer, OrderDeleteSerializer, OrderProductDeleteSerializer, OrderProductSerializer, OrderProductUpdateSerializer, ProductSerializer, SearchProductSerializer, UserSerializer, MyAuthTokenSerializer
 from .permissions import IsStaffOrReadOnly, IsSuperUser
 # from rest_framework.authentication import SessionAuthentication
@@ -144,55 +148,48 @@ class SearchProductAPIView(generics.ListCreateAPIView):
     serializer_class = SearchProductSerializer
 
 
-# import uuid
-# import imghdr
-
-
 class AddProductAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = AddProductSerializer
     permission_classes = (IsAdminUser,)
 
     def post(self, request, *args, **kwargs):
+        img = to_internal_value(self, request)
 
-        # datadict = request.data.get('image')
-        # data = datadict['contents']
-
-        # if 'data:' in data and ';base64,' in data:
-        #     header, data = data.split(';base64,')
-        #     header = header.split('/')
-        # try:
-        #     decoded_file = base64.b64decode(data)
-        # except TypeError:
-        #     self.fail('invalid_image')
-        # # print(decoded_file)
-
-        # complete_file_name = "%s.%s" % (datadict['filename'], header[1], )
-        # img = ContentFile(decoded_file, name=complete_file_name)
-        img = to_internal_value(self,request)
-        
         product = Product(
             title=request.data.get('title'),
             code=request.data.get('code'),
             description=request.data.get('description'),
             smallDescription=request.data.get('smallDescription'),
-            price=request.data.get('price'), 
+            price=request.data.get('price'),
             image=img
-            )
+        )
 
         # product.image = img
+
         product.save()
+        # serialized_obj = serializers.serialize('json', [ product, ])
+        serialized_obj = serializers.serialize('json', [product, ])
+        struct = json.loads(serialized_obj)
+        # serialized_obj = json.dumps(struct[0])
+        cat = ProductCategory.objects.all()
+        data = list(cat.values())
+
+        newdata = {}
+        for entry in data:
+            # remove and return the name field to use as a key
+            name = entry.pop('name')
+            newdata[name] = entry
+        # qs_json = serializers.serialize('json', cat)
+        # print(type(data))
+        # struct_cat = json.loads(serialized_cat)
+        # todo
+        serialized_obj = json.dumps(
+            {"product": struct[0], "category": newdata}, ensure_ascii=False)
+        # serialized_obj = json.dumps(struct[0])
+        # print(cat)
         return Response({"message": "Hello, world!"})
         # return super().post(request, *args, **kwargs)
-    # parser_classes = [MultiPartParser, FormParser]
-    # def post(self, request, *args, **kwargs):
-    #     print(request.data)
-    #     serializer = AddProductSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data ,status=status.HTTP_200_OK)
-    #     else:
-    #         return Response(serializer.data ,status=status.HTTP_400_BAD_REQUEST)
 
 
 #! product order staff

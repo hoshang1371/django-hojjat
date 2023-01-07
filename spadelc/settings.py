@@ -37,7 +37,7 @@ DEBUG = True
 # python manage.py runserver 192.168.1.51:8000
 ALLOWED_HOSTS = [
     # '10.0.2.2',
-    '192.168.1.51',
+    '192.168.1.52',
     #'192.168.1.15',
     'localhost',
     # '10.0.3.2',

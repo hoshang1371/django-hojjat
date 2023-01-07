@@ -21,7 +21,7 @@ def make_thumbnail(dst_image_field, src_image_field, size, name_suffix, sep='_')
     dst_ext = dst_ext.lower()
     dst_fname = dst_path + sep + name_suffix + dst_ext
 
-    print(f"dst_fname: {dst_fname}")
+    # print(f"dst_fname: {dst_fname}")
 
     # check extension
     if dst_ext in ['.jpg', '.jpeg']:
@@ -33,8 +33,8 @@ def make_thumbnail(dst_image_field, src_image_field, size, name_suffix, sep='_')
     else:
         raise RuntimeError('unrecognized file type of "%s"' % dst_ext)
 
-    print(f"dst_ext:{dst_ext}")
-    print(f"filetype:{filetype}")
+    # print(f"dst_ext:{dst_ext}")
+    # print(f"filetype:{filetype}")
 
     # Save thumbnail to in-memory file as StringIO
     dst_bytes = BytesIO()
