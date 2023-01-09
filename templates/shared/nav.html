@@ -17,10 +17,11 @@
             <a class="fas fa-search search"></a>
         </li>
         <li class=" logo_h cart__count">
-            {% comment %}{% endcomment %}  
+            {% comment %}
             {% if request.user.is_authenticated %}
-                {% render_partial 'products_number_all_order_partial' %}
-            {% endif %}
+            {% render_partial 'products_number_all_order_partial' %}
+        {% endif %}{% endcomment %}  
+
              
         </li>
 
@@ -49,10 +50,11 @@
 </nav>
 
 <div class="cart">
-    {% comment %}{% endcomment %}
+    {% comment %}
     {% if request.user.is_authenticated %}
-        {% render_partial 'products_order_partial' %}
-    {% endif %}
+    {% render_partial 'products_order_partial' %}
+{% endif %}{% endcomment %}
+
     
 
 </div>

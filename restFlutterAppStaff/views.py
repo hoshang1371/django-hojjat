@@ -159,9 +159,15 @@ class AddProductAPIView(generics.ListCreateAPIView):
         product = Product(
             title=request.data.get('title'),
             code=request.data.get('code'),
+            place=request.data.get('place'),
+            number=request.data.get('number'),
+            brand=request.data.get('brand'),
             description=request.data.get('description'),
             smallDescription=request.data.get('smallDescription'),
             price=request.data.get('price'),
+            priceOff=request.data.get('priceOff'),
+            active=request.data.get('active'),
+            vige=request.data.get('vige'),
             image=img
         )
 
@@ -188,7 +194,7 @@ class AddProductAPIView(generics.ListCreateAPIView):
             {"product": struct[0], "category": newdata}, ensure_ascii=False)
         # serialized_obj = json.dumps(struct[0])
         # print(cat)
-        return Response({"message": "Hello, world!"})
+        return Response({"message": "product is added"})
         # return super().post(request, *args, **kwargs)
 
 
