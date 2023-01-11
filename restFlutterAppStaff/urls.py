@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from .views import AddProductAPIView, SearchProductAPIView, apage,\
+from .views import AddProductAPIView, SearchProductAPIView, SearchProductWithOnlyPlaceAPIView, apage,\
                    ProductList, ProductDetail, isPaid_order_update_staff,\
                    obtain_auth_token,CheckToken, order_delete_staff, product_order_delete_staff, product_order_ditails_staff, product_order_staff
                    #UsertList, UserDetail, \
@@ -26,6 +26,8 @@ urlpatterns = [
     path('Check_token/', CheckToken),
     #!search url
     path('questions/', SearchProductAPIView.as_view()),
+    #!search with only place url
+    path('questionsForPlace/', SearchProductWithOnlyPlaceAPIView.as_view()),
     #!add product url
     path('addProduct/', AddProductAPIView.as_view()),
     #!product order staff url

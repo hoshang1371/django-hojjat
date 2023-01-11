@@ -148,6 +148,13 @@ class SearchProductAPIView(generics.ListCreateAPIView):
     serializer_class = SearchProductSerializer
 
 
+class SearchProductWithOnlyPlaceAPIView(generics.ListCreateAPIView):
+    #search_fields = ['title','description','smallDescription']
+    search_fields = ['place']
+    filter_backends = (filters.SearchFilter,)
+    queryset = Product.objects.all()
+    serializer_class = SearchProductSerializer
+
 class AddProductAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = AddProductSerializer
