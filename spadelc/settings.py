@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'spad_eshop_settings',
     'spad_eshop_CustomersComments',
     'restFlutterAppStaff',
+    'spad_buy_product',
     'captcha',
 
     'rest_framework',

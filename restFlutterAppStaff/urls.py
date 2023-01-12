@@ -40,10 +40,7 @@ urlpatterns = [
     path('order_delete_staff/<int:pk>/delete', order_delete_staff.as_view()),
     #! order staff url is paid
     path('isPaid_order_update_staff/update/<int:id>/', isPaid_order_update_staff.as_view()),
-
     #!dj_rest_auth
     # path('rest_auth/', include('dj_rest_auth.urls')),
     # path('dj_rest_auth/registration/', include('dj_rest_auth.registration.urls'))
-
-
 ]

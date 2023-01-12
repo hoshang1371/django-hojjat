@@ -23,7 +23,7 @@
         <h4 class="total__cost ToPersian fontSize_20 fontSamim">{{Total_price_for_all_product}}</h4>
         <div class=" fontSize_20 fontSamim" style="font-weight: bold;">تومان</div>
         <button class="btn check_out_btn btn__remove fontSamim fontSize_24">حذف همه</button>
-        <button class="btn kharidUp fontSize_24">خرید</button>
+        <button onclick="location.href='/list_for_buy'" type="button" class="btn kharidUp fontSize_24">خرید</button>
     </div>    
 </div>
 
@@ -40,6 +40,7 @@
 
     var totalAllhh =0;
     //var carName = "Volvo";
+
 check_out_btn.addEventListener('click', function(){
     if(confirm('آیا از حذف محصولات در سبد خرید مطمئنید؟')){
         clearCatItems();

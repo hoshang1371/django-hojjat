@@ -34,6 +34,7 @@ urlpatterns = [
     path('', include('spad_eshop_order.urls')),
 
     path('api/',include('restFlutterAppStaff.urls')),
+    path('buy/',include('spad_buy_product.urls')),
     
     path('products_order_partial',products_order_partial, name='products_order_partial'),
     path('products_number_all_order_partial',products_number_all_order_partial, 
