@@ -131,14 +131,17 @@
     </section>
     <section class="Comments">
         {% for customercomment in customercomments %}
-            <div>
-                <div class="userNameCustomer">{{ customercomment.full_name }}</div>
-                <div class="commentCustomer"> {{ customercomment.text }} </div>
-                <div class="khat"></div>
-                {% if customercomment.ansewerText is not None%}
-                    <div class="ansewerCommentCustomer"> پاسخ:   {{ customercomment.ansewerText }}  </div>
-                {% endif %}
-            </div>
+            {% if customercomment.is_ok is True %}
+                <div>
+                    <div class="userNameCustomer">{{ customercomment.full_name }}</div>
+                    <div class="commentCustomer"> {{ customercomment.text }} </div>
+                    <div class="khat"></div>
+                    {% if customercomment.ansewerText is not None%}
+                        <div class="ansewerCommentCustomer"> پاسخ:   {{ customercomment.ansewerText }}  </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+
         {% endfor %}
         <!-- <div>
             <div class="userNameCustomer">hhh</div>None

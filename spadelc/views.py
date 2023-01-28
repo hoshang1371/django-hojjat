@@ -79,6 +79,7 @@ def products_category(request):
 def products_order_partial(request):
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
     order_partials = order.orderdetail_set.all()
+    print(order_partials)
     #order_partials = OrderDetail.objects.all()
     Total_price_for_all_product =0
 

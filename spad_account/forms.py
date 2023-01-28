@@ -254,12 +254,13 @@ class UserSetPasswordForm(SetPasswordForm):
 
     new_password1 = forms.CharField(label='', widget=forms.PasswordInput(attrs={
         'placeholder': ' پسوورد خود را وارد کنید',
-        "class":"rtl",
+        "class":"rtl password",
         "tabindex":"2"
         }))
 
     new_password2 = forms.CharField(label='', widget=forms.PasswordInput(attrs={
         'placeholder': ' تکرار پسوورد خود راوارد کنید ',
-        "class":"rtl",
+        "class":"rtl password",
         "tabindex":"2"
         }))
+

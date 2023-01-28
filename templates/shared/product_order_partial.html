@@ -53,6 +53,10 @@ check_out_btn.addEventListener('click', function(){
             success: function (data) {
                 if (data.deleted) {
                     document.querySelector(".total__counter a").style.display ="none";
+                    const cartDOMItemsRemove = document.querySelectorAll('.cart__item');
+                    cartDOMItemsRemove.forEach(inItem => {
+                        inItem.remove();
+                    });
                 }
             }
         });
