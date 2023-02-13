@@ -18,23 +18,28 @@ MobileClosecartDOM.addEventListener('click', function(){
     })
 
 var w = window.innerWidth;
+
+
+
 // widthOfcard();
 // function widthOfcard() {
+//     console.log("widthOfcard()")
 //     if( (w <= 760) && (w > 640)){
 //         cartDOM.style.width = "auto";
 //         cartDOM.style.background = "red";
+//         console.log(red)
 //     }
 //     else if(w < 700)
 //     {
 //         cartDOM.style.width = 500+"px";
 //         cartDOM.style.background = "yellow";
-//          console.log("yellow");
+//         console.log("yellow");
 //     }
 //     else if(w > 760)
 //     {
 //         cartDOM.style.width = 700+"px";
 //         cartDOM.style.background = "blue";
-//         // console.log("blue");
+//         console.log("blue");
 //     }
 
 // } 

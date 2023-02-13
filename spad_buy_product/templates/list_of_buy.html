@@ -1,6 +1,67 @@
 {% extends 'shared/_MainLayout.html' %} 
 {% load static %}
-{% block content %}
 
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/list_of_buy.css' %}">
+
+<div class="backGround_of_list_buy">
+    <div>
+
+        <div class="list_for_buy">
+
+            <div><p>سبد خرید</p></div>
+            <div class="khat"></div>
+            <div class="contents_list_of_buy">
+                {% for order_partial_buy in order_partials_buy %}
+                <div class="content_list_of_buy">
+                    <div>
+                        <img src="{{order_partial_buy.product.image.url}}" id="product__" alt="">
+                        <div>
+                            <h4 class="fontSamim ToPersian">{{order_partial_buy.product.title}}</h4>
+                            <h3>کد: <span class="ToPersian">{{order_partial_buy.product.code}}</span></h3>
+                            <h3>قیمت: <span class="ToPersian">{{order_partial_buy.product.price}}</span><span>&nbsp;تومان</span></h3>
+                        </div>
+                        <div>
+                            <a class="btn__small__list_of_buy" action="decrease">&minus;</a>
+                            <h4 class="ToPersian fontSamim fontSize_16">{{order_partial_buy.count}}</h4>
+                            <a class="btn__small__list_of_buy" action="increase">&plus;</a>
+                            <h4 class="ToPersian fontSamim fontSize_16">{% widthratio order_partial_buy.count 1 order_partial_buy.price %} <span> &nbsp; تومان</span></h4>
+                            <a class=" btn__small__list_of_buy btn__remove_buy " action="remove">&times;</a>    
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+
+
+            </div>
+        </div>
+
+        <div>
+            <section class="title_of_buy">
+                <div><p><span>۱۰</span> کالا در سبد خرید شما </p></div>
+                <div class="khat"></div>
+                <div class="total_of_product">
+                    <div>جمع محصولات</div>
+                    <div><p><span>۱۰,۰۰۰,۰۰۰</span> ریال</p></div>
+                </div>
+                <div class="send_product">
+                    <div>ارسال</div>
+                    <div><p><span>۲۲۵,۰۰۰</span> ریال</p></div>
+                </div>
+                <div class="total_of_Price">
+                    <div>مجموع</div>
+                    <div><p><span>۲۲۵,۰۰۰</span> ریال</p></div>
+                </div>
+                <div class="continue_and_buy">
+                    <a href="#">ادامه و پرداخت</a>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</div>
+
+<script src="{% static 'js/list_of_buy.js' %}"></script>
 {% endblock %}
  

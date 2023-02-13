@@ -23,7 +23,7 @@
         <h4 class="total__cost ToPersian fontSize_20 fontSamim">{{Total_price_for_all_product}}</h4>
         <div class=" fontSize_20 fontSamim" style="font-weight: bold;">تومان</div>
         <button class="btn check_out_btn btn__remove fontSamim fontSize_24">حذف همه</button>
-        <button onclick="location.href='/list_for_buy'" type="button" class="btn kharidUp fontSize_24">خرید</button>
+        <button onclick="location.href='/buy/list_for_buy'" type="button" class="btn kharidUp fontSize_24">خرید</button>
     </div>    
 </div>
 
@@ -217,19 +217,28 @@ function clearCatItems(){
     })
 }
 $(document).ready(function() {
-    //console.log(Url)
+    w = window.innerWidth;
     document.querySelector(".total__counter a").innerText =(cont_of_all_product).toPersinaDigit();
     if(cont_of_all_product == "0"){
         document.querySelector(".total__counter").style.display = "none";
     }
-    if(parseInt(cont_of_all_product) > 3){ 
-        document.querySelector(".cart__items").style.height= "70vh";
-        //document.querySelector(".cart__items").style.overflowY= "scroll";
+    console.log(w)
+    if(w>959)
+    {
+        if(parseInt(cont_of_all_product) > 3){ 
+            console.log(w)
+            document.querySelector(".cart__items").style.height= "70vh";
+        }
+        else if(parseInt(cont_of_all_product) <= 3){
+            console.log(w)
+            document.querySelector(".cart__items").style.height= "auto";
+        }
     }
-    if(parseInt(cont_of_all_product) < 3){ 
-        document.querySelector(".cart__items").style.height= "auto";
-        //document.querySelector(".cart__items").style.overflowY= "scroll";
+    if(parseInt(cont_of_all_product) > 7)
+    {
+        document.querySelector(".cart__items").style.overflowY= "scroll";
     }
+
 });
 
 </script>

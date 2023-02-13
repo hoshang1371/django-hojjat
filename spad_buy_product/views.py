@@ -25,4 +25,20 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/login')
 def List_user_open_order(request):
-    return render(request,'list_of_buy.html',)
+    order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+    order_partials_buy = order.orderdetail_set.all()
+    print(order_partials_buy)
+    #order_partials = OrderDetail.objects.all()
+    Total_price_for_all_product_buy =0
+
+    for order_partial in order_partials_buy:
+        Total_price_for_each_product_buy = order_partial.count * order_partial.price
+        Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+
+    contex = {
+        'order_partials_buy': order_partials_buy,
+        'Total_price_for_all_product_buy' : Total_price_for_all_product_buy,
+    }
+    return render(request ,'list_of_buy.html',contex)
+    
+    # return render(request,'list_of_buy.html',)
