@@ -6,65 +6,71 @@ const subdaste2 = document.querySelector(".daste-2");
 const mobileClose = document.querySelectorAll(".mobile-menu-close");
 const basket = document.querySelector(".clickBasket");
 const cartDOM = document.querySelector('.cart__items');
-const MobileClosecartDOM = document.querySelector('.mobile-cart-close');
 // let cartDOM_before = document.getComputedStyle(cartDOM, '::before')
 
-// console.log(body);
+// console.log("user_is_authenticated");
 
-MobileClosecartDOM.addEventListener('click', function(){
-    if (cartDOM.classList.contains("active")) {
-        cartDOM.classList.remove("active");
-    }
+if (user_is_authenticated == true) {
+    const MobileClosecartDOM = document.querySelector('.mobile-cart-close');
+    MobileClosecartDOM.addEventListener('click', function () {
+        if (cartDOM.classList.contains("active")) {
+            cartDOM.classList.remove("active");
+        }
     })
-
-var w = window.innerWidth;
-
+}
 
 
+// var w = window.innerWidth;
 // widthOfcard();
 // function widthOfcard() {
-//     console.log("widthOfcard()")
 //     if( (w <= 760) && (w > 640)){
 //         cartDOM.style.width = "auto";
 //         cartDOM.style.background = "red";
-//         console.log(red)
 //     }
 //     else if(w < 700)
 //     {
 //         cartDOM.style.width = 500+"px";
 //         cartDOM.style.background = "yellow";
-//         console.log("yellow");
+//          console.log("yellow");
 //     }
 //     else if(w > 760)
 //     {
 //         cartDOM.style.width = 700+"px";
 //         cartDOM.style.background = "blue";
-//         console.log("blue");
+//         // console.log("blue");
 //     }
 
 // } 
 
 if ('scrollRestoration' in window.history) {
     window.history.scrollRestoration = 'manual'
-  }
+}
 
-window.addEventListener('resize', function(){
+window.addEventListener('resize', function () {
     w = window.innerWidth;
-    if( w > 959){
-        for(let i=0; i< submenu.length;i++){
+    // console.log(w)
+    if (w > 959) {
+        for (let i = 0; i < submenu.length; i++) {
             if (submenu[i].classList.contains("active")) {
                 submenu[i].classList.remove("active");
             }
         }
+
     }
+    else if(w < 699)
+        document.querySelector(".cart__items").style.height= "100%";
+    else if(w > 700)
+        document.querySelector(".cart__items").style.height= "70vh";
     // widthOfcard();
 })
 
 
-window.addEventListener('scroll', function(){
+window.addEventListener('scroll', function () {
     // const nav = document.querySelector('nav ul');
-    menu.classList.toggle('sticky', window.scrollY>0);
-    cartDOM.classList.toggle('sticky', window.scrollY>0);
+    menu.classList.toggle('sticky', window.scrollY > 0);
+    if (user_is_authenticated == true) {
+        cartDOM.classList.toggle('sticky', window.scrollY > 0);
+    }
 })
 
 /* Toggle mobile menu */
@@ -73,13 +79,13 @@ function toggleMenu() {
         menu.classList.remove("active");
         // adds the menu (hamburger) icon
         toggle.querySelector("a").innerHTML = "<i class='fas fa-bars'></i>";
-        
+
         // navbar_item.style.background = "none"
     } else {
         menu.classList.add("active");
         // menu.className = "active";
         // navbar_item.style.background = "rgba(0,0,0,.6)"
-            // adds the close (x) icon
+        // adds the close (x) icon
         toggle.querySelector("a").innerHTML = "<i class='fas fa-times'></i>";
     }
 }
@@ -89,26 +95,29 @@ function togglesubmenu1() {
         submenu[0].classList.remove("active");
         // adds the menu (hamburger) icon
         //toggle.querySelector("a").innerHTML = "<i class='fas fa-bars'></i>";
-        
+
         // navbar_item.style.background = "none"
     } else {
         submenu[0].classList.add("active");
         // menu.className = "active";
         // navbar_item.style.background = "rgba(0,0,0,.6)"
-            // adds the close (x) icon
+        // adds the close (x) icon
         //toggle.querySelector("a").innerHTML = "<i class='fas fa-times'></i>";
     }
 }
 
 function togglesubmenu2() {
-    submenu[1].classList.add("active");
+    submenu[0].classList.add("active");
+    // submenu[1].classList.add("active");
 }
 
 function mobile_Close_subdaste() {
+    // console.log("submenu[0]=",submenu[0])
+    // console.log("submenu[1]=",submenu[1])
     if (submenu[0].classList.contains("active")) {
         submenu[0].classList.remove("active");
     }
-    if (submenu[1].classList.contains("active")) {
+    else if (submenu[1].classList.contains("active")) {
         submenu[1].classList.remove("active");
     }
 }
@@ -128,6 +137,6 @@ toggle.addEventListener("click", toggleMenu, false);
 
 subdaste2.addEventListener("click", togglesubmenu2, false);
 
-for(let x=0;x<mobileClose.length;x++)
-mobileClose[x].addEventListener("click", mobile_Close_subdaste, false);
+for (let x = 0; x < mobileClose.length; x++)
+    mobileClose[x].addEventListener("click", mobile_Close_subdaste, false);
 

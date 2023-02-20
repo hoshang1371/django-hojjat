@@ -81,6 +81,9 @@ INSTALLED_APPS = [
 
     'rest_framework.authtoken',
     'sorl.thumbnail',
+
+    'post_information',
+    'mathfilters',
     # 'dj_rest_auth',
     # 'django.contrib.sites',
 
@@ -266,6 +269,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
         'restFlutterAppStaff.permissions.IsStaffOrReadOnly',
+        
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         #'rest_framework.authentication.BasicAuthentication',

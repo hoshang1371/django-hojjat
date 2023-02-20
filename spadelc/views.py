@@ -51,6 +51,10 @@ def about_page_header(request):
 
 def products_number_all_order_partial(request):
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+
+    if order is None:
+        order = Order.objects.create(owner_id=request.user.id, is_paid=False)   
+         
     order_count_partials = order.orderdetail_set.all()
     #order_count_partials = OrderDetail.objects.all()
     Total_count_for_all_product =0
@@ -78,9 +82,13 @@ def products_category(request):
 
 def products_order_partial(request):
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+
+    if order is None:
+        order = Order.objects.create(owner_id=request.user.id, is_paid=False)
+
     order_partials = order.orderdetail_set.all()
-    print(order_partials)
-    #order_partials = OrderDetail.objects.all()
+    print("order_partials=",order_partials)
+    #order_partials = OrderDetail.objects.all() orderdetail_set
     Total_price_for_all_product =0
 
     for order_partial in order_partials:

@@ -164,7 +164,7 @@
         </div>
     `)
     }
-    const product_item_new = document.querySelectorAll('.product-item-new');
+    var product_item_new = document.querySelectorAll('.product-item-new');
     product_item_new.forEach(inItem => {
         inItem.querySelector(".kharid_1_add").addEventListener('click', function (e) {
             e.stopPropagation()
@@ -214,7 +214,7 @@
 </script>
 {% else %}
 <script>
-    const product_item_new = document.querySelectorAll('.product-item-hh');
+    var product_item_new = document.querySelectorAll('.product-item-hh');
     product_item_new.forEach(inItem => {
         inItem.querySelector(".kharid_1_add").addEventListener('click', function (e) {
             document.location.href = '/login';
@@ -222,4 +222,12 @@
     });
 </script>
 {%endif%}
+
+{% if messages %}
+{% for message in messages %}
+{% if message.tags %}
+<script>alert("{{ message }}")</script> {% endif %}
+{% endfor %}
+{% endif %}
+
 {% endblock %}

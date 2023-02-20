@@ -48,7 +48,7 @@ if ('scrollRestoration' in window.history) {
 
 window.addEventListener('resize', function () {
     w = window.innerWidth;
-    console.log(w)
+    // console.log(w)
     if (w > 959) {
         for (let i = 0; i < submenu.length; i++) {
             if (submenu[i].classList.contains("active")) {

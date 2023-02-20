@@ -3,7 +3,7 @@ const totalCost = document.querySelector('.total__cost');
 const cartDOMItems = document.querySelectorAll('.cart__item');
 
 var totalAllhh =0;
-var carName = "Volvo";
+// var carName = "Volvo";
 check_out_btn.addEventListener('click', function(){
 if(confirm('آیا از حذف محصولات در سبد خرید مطمئنید؟')){
     console.log("ok");

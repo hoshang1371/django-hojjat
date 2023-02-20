@@ -1,7 +1,12 @@
 {% load static %}
 
 <script src="{% static 'js/alll.min.js' %}"></script>
+
+<script src="{% static 'js/network.js' %}"></script>
+
 <script src="{% static 'js/nav.js' %}"></script>
+
+
 {% if request.user.is_authenticated %}
 <script>
     function basket_click(event) {

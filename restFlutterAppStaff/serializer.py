@@ -87,7 +87,7 @@ class AddProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
 
-#! Order
+#! Order  OrderProductSerializer
 class OrderProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderDetail

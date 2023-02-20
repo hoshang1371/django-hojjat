@@ -206,12 +206,12 @@
     color: white;
     font-size: 18px;
     letter-spacing: 1px;
-    font-size: 600;
     cursor: pointer;
     font-family: 'byekan',sans-serif;
     height: 60px;
     width: 80%;
     transition: all 0.2s ease-in-out;
+    white-space:normal; 
 }
 
 .content_left .numberOfProduct .kharid:hover{

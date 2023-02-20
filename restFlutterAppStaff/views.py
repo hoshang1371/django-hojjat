@@ -22,11 +22,16 @@ from rest_framework.generics import (
     ListAPIView, ListCreateAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView,
     DestroyAPIView, UpdateAPIView)
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
-
+# 'rest_framework.authentication.TokenAuthentication'
 from spad_eshop_products_category.models import ProductCategory, ProductCategoryCat
-from .serializer import AddProductSerializer, OrderDeleteSerializer, OrderProductDeleteSerializer, OrderProductSerializer, OrderProductUpdateSerializer, ProductSerializer, SearchProductSerializer, UserSerializer, MyAuthTokenSerializer
+from .serializer import (
+    AddProductSerializer, OrderDeleteSerializer, OrderProductDeleteSerializer,
+    OrderProductSerializer, OrderProductUpdateSerializer, ProductSerializer,
+     SearchProductSerializer, UserSerializer, MyAuthTokenSerializer
+     )
+from .serializer import OrderProductSerializer
 from .permissions import IsStaffOrReadOnly, IsSuperUser
-# from rest_framework.authentication import SessionAuthentication
+# from rest_framework.authentication import TokenAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
@@ -36,12 +41,15 @@ from django.http import JsonResponse
 #! product
 
 # @api_view(['GET'])
-
+    # if order is None:
+    #     order = Order.objects.create(owner_id=request.user.id, is_paid=False)
 
 class ProductList(ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    # permission_classes = [IsAuthenticated]
     # authentication_classes = (SessionAuthentication, )
+    # authentication_classes = (TokenAuthentication, )
 
 # @api_view(['GET'])
 
@@ -216,13 +224,16 @@ class product_order_staff(ListCreateAPIView):
     def get(self, request, *args, **kwargs):
         startdate = datetime.today()
         enddate = startdate - timedelta(days=6)
-        print(startdate)
-        print(enddate)
+        # print(startdate)
+        # print(enddate)
         # order = Order.objects.filter(owner_id=self.request.user.id)
         # order1 = Order.objects.filter(payment_date__range=["2022-10-23", "2022-10-29"])
         # print(order1)
         order = Order.objects.filter(Q(owner_id=self.request.user.id) & Q(
             payment_date__range=[enddate, startdate])).all()
+        #! ehtemalan inja irad dare va bayad do khat zir az halat kament kharej shavad
+        # if order is None:
+        #     order = Order.objects.create(owner_id=request.user.id, is_paid=False)        
         response = []
         for val in order.values():
             v = {
