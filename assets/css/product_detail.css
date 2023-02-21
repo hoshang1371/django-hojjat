@@ -550,6 +550,7 @@ input[type="submit"]:hover{
 .field_title textarea{
     height: 100%;
     width: 100%;
+    resize: none;
     background: transparent;
     border: none;
     outline: none;

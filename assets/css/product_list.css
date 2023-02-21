@@ -3,13 +3,60 @@
 
 .content{
     position: relative;
-    height: 750vh;
+    /* height: 750vh; */
     top: 106px;
     margin-bottom: 106px;
 }
 
+.content>div{
+    width: 100%;
+    height: auto;
+    display: flex;
+    margin-top: 70px;
+}
+
+/*!===============================================*/
+.khat {
+    position: initial;
+    background-color: #3a3b3885;
+    width: calc(100% - 10px);
+    content: '';
+    height: 2px;
+    transform: translateX(5px);
+}
+.left{
+    /* background-color: blue; */
+    width: 70%;
+}
+.right{
+    width: 30%;
+    height: fit-content;
+    padding: 7px;
+    border: 1px solid #3a3b385e;
+    border-radius: 20px;
+    margin: 5px;
+    box-shadow: 2px 2px 2px 1px #3a3b385e;
+}
+.right>p,
+.left>p
+{
+    text-align: center;
+    font-family: 'samim';
+    padding: 10px;
+    font-weight: bold;
+    font-size: 19px;
+    color: #3a3b38;
+}
+
+.right .panel-group .panel .panel-heading .panel-title a{
+    font-family: "mikhak";
+    color: #3a3b38;
+}
+/*!===============================================*/
+
 .category-products {
-    position: absolute;
+    /* position: absolute; */
+    align-items: center;
     top: 140px;
     width: 100%;
     display: flex;
@@ -18,7 +65,7 @@
 }
 
 .lsit-product-container {
-    position: absolute;
+    /* position: absolute; */
     top: 150px;
     width: 100%;
     padding: 0 1.5%;
@@ -102,6 +149,10 @@
     color: #3a3b38;
 }
 
+.footer {
+    margin-top: 25vh!important;
+}
+
 .ProductCategory{
     position: absolute;
     width: 20%;
@@ -125,7 +176,7 @@
 .ProductList{
     position: absolute;
     width: 80%;
-    height: 100%;
+    height: auto;
     left: 0;
 }
 
@@ -145,7 +196,7 @@
 .pagination{
     position: absolute;
     display: block;
-    top: 175vh;
+    /* top: 175vh; */
     width: 100%;
     height: 100px;
     /* background-color: red; */
@@ -194,7 +245,7 @@
     }
     .content{
         position: relative;
-        height: 400vh;
+        /* height: 400vh; */
     }
 }
 
@@ -205,8 +256,8 @@
         display: grid;
         grid-template-columns: auto auto auto auto;
     }
-
+/* 
     .content{
         height: 195vh;
-    }
+    } */
 }

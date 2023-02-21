@@ -8,118 +8,36 @@
 <link rel="stylesheet" href="{% static 'css/product_list.css' %}">
 
 <section class="content">
-    <section class="ProductCategory">
-        {% render_partial 'products_categories_partial' %}
-    </section>
+    <div>
 
-    <section class="ProductList">
-        <p> لیست محصولات </p>
-        <div class="lsit-product-container">
-            {{cate.title}}
-            {% for product in page_obj %}
-                {% include 'products/product_item_component.html' with product=product %}
-                              
-            {% endfor %}
-    <!--    <div class="product-item-new">
-            <p class="itemParagerafUp">item1</p>
-            <p class="itemParagerafDown">item1</p>
-            <img src="{% static 'images/350x180_1.png' %}" class="" alt="Banner1">
-            <br>
-            <div class="product-detail">
-                <h2>محصول دمو</h2>
-                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
-                <a href="#">خرید</a>
-                <a href="#">توضیحات</a>
+        <div class="left">
+            <p> لیست محصولات </p>
+            <div class="khat"></div>
+            <div class="lsit-product-container">
+                {% for product in page_obj %}
+                    {% include 'products/product_item_component.html' with product=product %}
+                                  
+                {% endfor %}
             </div>
         </div>
-
-         <div class="product-item-new">
-            <p class="itemParagerafUp">item1</p>
-            <p class="itemParagerafDown">item1</p>
-            <img src="{% static 'images/350x180_2.png' %}" class="" alt="Banner1">
-            <br>
-            <div class="product-detail">
-                <h2>محصول دمو</h2>
-                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
-                <a href="#">خرید</a>
-                <a href="#">توضیحات</a>
-            </div>
+        <div class="right">
+            {% render_partial 'products_categories_partial' %}
         </div>
-        <div class="product-item-new">
-            <p class="itemParagerafUp">item1</p>
-            <p class="itemParagerafDown">item1</p>
-            <img src="{% static 'images/350x180_2.png' %}" class="" alt="Banner1">
-            <br>
-            <div class="product-detail">
-                <h2>محصول دمو</h2>
-                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
-                <a href="#">خرید</a>
-                <a href="#">توضیحات</a>
+        <!-- <section class="ProductCategory">
+            {% render_partial 'products_categories_partial' %}
+        </section> -->
+        <!-- <section class="ProductList">
+            <p> لیست محصولات </p>
+            <div class="lsit-product-container">
+                {{cate.title}}
+                {% for product in page_obj %}
+                    {% include 'products/product_item_component.html' with product=product %}
+                                  
+                {% endfor %}
             </div>
-        </div>
-        <div class="product-item-new">
-            <p class="itemParagerafUp">item1</p>
-            <p class="itemParagerafDown">item1</p>
-            <img src="{% static 'images/350x180_2.png' %}" class="" alt="Banner1">
-            <br>
-            <div class="product-detail">
-                <h2>محصول دمو</h2>
-                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
-                <a href="#">خرید</a>
-                <a href="#">توضیحات</a>
-            </div>
-        </div>
-        <div class="product-item-new">
-            <p class="itemParagerafUp">item1</p>
-            <p class="itemParagerafDown">item1</p>
-            <img src="{% static 'images/350x180_1.png' %}" class="" alt="Banner1">
-            <br>
-            <div class="product-detail">
-                <h2>محصول دمو</h2>
-                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
-                <a href="#">خرید</a>
-                <a href="#">توضیحات</a>
-            </div>
-        </div>
-        <div class="product-item-new">
-            <p class="itemParagerafUp">item1</p>
-            <p class="itemParagerafDown">item1</p>
-            <img src="{% static 'images/350x180_2.png' %}" class="" alt="Banner1">
-            <br>
-            <div class="product-detail">
-                <h2>محصول دمو</h2>
-                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
-                <a href="#">خرید</a>
-                <a href="#">توضیحات</a>
-            </div>
-        </div>
-        <div class="product-item-new">
-            <p class="itemParagerafUp">item1</p>
-            <p class="itemParagerafDown">item1</p>
-            <img src="{% static 'images/350x180_2.png' %}" class="" alt="Banner1">
-            <br>
-            <div class="product-detail">
-                <h2>محصول دمو</h2>
-                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
-                <a href="#">خرید</a>
-                <a href="#">توضیحات</a>
-            </div>
-        </div>
-        <div class="product-item-new">
-            <p class="itemParagerafUp">item1</p>
-            <p class="itemParagerafDown">item1</p>
-            <img src="{% static 'images/350x180_2.png' %}" class="" alt="Banner1">
-            <br>
-            <div class="product-detail">
-                <h2>محصول دمو</h2>
-                <p><span>تومان ۱۰۰۰</span><br>۲۰۰۰ تومان</p>
-                <a href="#">خرید</a>
-                <a href="#">توضیحات</a>
-            </div>
-        </div> -->
-
+        </section> -->
     </div>
-    </section>
+
 
     <section class="pagination">
         <div>
