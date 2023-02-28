@@ -62,9 +62,14 @@
     //const cartDOM1 = document.querySelector('.cart__items');
 
     document.querySelectorAll('.product-item-new').forEach(item_new => {
-        item_new.addEventListener('click', function(){      
+        //item_new.addEventListener('click', function(e){      
+        item_new.addEventListener('mousedown', function(e){      
             //console.log(item_new.querySelector('.get_address').href)
-            location.replace(item_new.querySelector('.get_address').href);
+            console.log(e.button)
+            if(e.button == 0)
+                location.replace(item_new.querySelector('.get_address').href);
+            else if (e.button == 1)
+                window.open(item_new.querySelector('.get_address').href,"_blank");
         })
     });
 
@@ -119,6 +124,9 @@
                             }
                         })
                         alert("محصول به سبد خرید اضافه شد")
+                    }
+                    else if (data.eerorNumberOfStore) {     
+                        alert("این تعداد محصول در انبار موجود نیست")
                     }
                     else if (!data.addedOne) {     
                         alert("این محصول در سبد خرید موجود است")

@@ -121,6 +121,15 @@ class CreateOneOrder(View):
         order_partial= order.orderdetail_set.filter(product_id=product.id)
         print("olk")
         print(order_partial)
+        print("product.number= ",product.number)
+
+        if( 1 > int(product.number)):
+            data = {
+                'eerorNumberOfStore': True
+            }
+            
+            return JsonResponse(data)
+
         # order_partial = OrderDetail.objects.filter(product_id=product.id).first()
         #order_partial = order.orderdetail_set.filter(product_id=product.id).first()
         #if order_partial[0] is None:

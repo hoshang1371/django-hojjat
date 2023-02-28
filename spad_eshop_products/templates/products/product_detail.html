@@ -15,7 +15,6 @@
 <section class="content">
 
     <section class="content_right">
-        <!-- <a href="#">خانه/محصولات/ساعت/ساعت موچ</a> -->
         <!-- ToDo -->
         <div>
             <a href="">خانه</a><a href="">/محصولات</a><a href="">/{{product.categories.all|join:", " }}</a><a
@@ -38,6 +37,7 @@
             <img src="{% static 'images/may4.jpg' %}" alt="" class="indicator"> -->
         </section>
     </section>
+    <!-- todo -->
     <div class="product_view">
     </div>
     <section class="content_left">
@@ -45,30 +45,21 @@
             <h1>{{ product.title }}</h1>
             <h4>{{ product.smallDescription }}</h4>
             <h2><span class="ToPersian">{{ product.price }}</span>تومان</h2>
-            <!-- hh -->
-            <!-- <form method="post" action="/add-user-order">
-                {% csrf_token %}
-                
-                <input type="submit" value="افزودن به سبد خرید">
-            </form> -->
-            <h3 class="toph3"> تعداد موجود در انبار : <span>{% if product.number != "0" %} {{ product.number }}{% else
-                    %} در انبار موجود نمی باشد {%endif%}</span></h3>
+            <h3 class="toph3"> تعداد موجود در انبار : <span class="ToPersian">{% if product.number != "0" %} {{ product.number }}{% else%} در انبار موجود نمی باشد {%endif%}</span></h3>
 
             <h3> دسته بندی : <span> {{product.categories.all|join:", " }}</span></h3>
             {% if product.brand != None%}
             <h3> برند : <span> {{ product.brand }} </span></h3>
             {%endif%}
         </section>
-        <section class=numberOfProduct>
+        <div class=numberOfProduct>
             <form method="post" action="/add-user-order">
                 {% csrf_token %}
                 {{ new_order_form.product_id }}
 
                 <div class="number">
 
-                    <!-- <input type="text" value="۱" id="numberProduct"> -->
                     {{ new_order_form.count }}
-                    <!-- <span>۲۴</span> -->
                     <a class="up">
                         <div class='BCup'><i class="fas fa-chevron-up"></i></div>
                         <div class='BCdown'><i class="fas fa-chevron-down"></i></div>
@@ -78,7 +69,7 @@
 
                 <input class="kharid" type="submit" value="افزودن به سبد خرید">
             </form>
-        </section>
+        </div>
 
         <section class="description">
             <h5> توضیحات </h5>

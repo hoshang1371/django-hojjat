@@ -4,7 +4,6 @@
 
 var title_of_buy = document.querySelector('.title_of_buy');
 
-// myFunction();
 
 window.addEventListener('scroll', function () {
     // const nav = document.querySelector('nav ul');
@@ -122,7 +121,8 @@ function makeChanges(inItem, data) {
     var totalPrice = document.querySelector(".Total_price_for_all_product_buyData");
     var count_off_all_product = document.querySelector(".count_off_all_product");
     var Total_price_postPrice = document.querySelector(".Total_price_postPrice");
-
+    var total__counter_a= document.querySelector(".total__counter a");
+    total__counter_a.innerText = data.count_all.toString().toPersinaDigit();
     totalPrice.textContent = data.Total_price_for_all_product_buy.toString().toPersinaDigit();
     count_off_all_product.textContent = data.count_off_all_product.toString().toPersinaDigit();
     Total_price_postPrice.textContent = data.Total_price_postPrice.toString().toPersinaDigit();

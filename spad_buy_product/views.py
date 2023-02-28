@@ -92,12 +92,15 @@ class product_order_List_buy(UpdateAPIView):
         print("order_partial_buy.count 1 order_partial_buy.price",int(x.values()[0]['count'])*int(x.values()[0]['price']))
         Total_price_for_all_product_buy =0
         count_off_all_product =0
+        count_all=0
         for order_partial in order_partials_buy:
             count_off_all_product =count_off_all_product+1
+            count_all =count_all +order_partial.count
             Total_price_for_each_product_buy = order_partial.count * order_partial.price
             Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
         Total_price_postPrice = Total_price_for_all_product_buy + post_price.price
         # print("Total_price=", Total_price)
+        print('count_all=',count_all);
 
         response = {
             "id": x.values()[0]['id'],
@@ -106,6 +109,7 @@ class product_order_List_buy(UpdateAPIView):
             "Total_price_for_all_product_buy" : Total_price_for_all_product_buy,
             "count_off_all_product" : count_off_all_product,
             "Total_price_postPrice" : Total_price_postPrice,
+            "count_all" : count_all,
         }
 
 

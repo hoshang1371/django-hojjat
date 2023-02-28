@@ -40,7 +40,7 @@
 
     var totalAllhh =0;
     //var carName = "Volvo";
-
+//remove all order detail
 check_out_btn.addEventListener('click', function(){
     if(confirm('آیا از حذف محصولات در سبد خرید مطمئنید؟')){
         clearCatItems();
@@ -57,6 +57,7 @@ check_out_btn.addEventListener('click', function(){
                     cartDOMItemsRemove.forEach(inItem => {
                         inItem.remove();
                     });
+                    totalCost.innerText = "0".toPersinaDigit();
                 }
             }
         });

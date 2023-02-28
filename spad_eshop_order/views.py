@@ -28,6 +28,10 @@ def add_user_order(request):
         if count < 0:
             count = 1
         product = Product.objects.get_by_id(product_id=product_id)
+        print("product.number=" ,product.number)
+        if( count > int(product.number)):
+            messages.success(request, 'این تعداد کالا در انبار موجود نمی باشد.')
+            return redirect(f'/products/{product.id}/{product.title.replace(" ","-")}')
         # TODO if order is exsist
         x = order.orderdetail_set.filter(product_id=product.id)
         #* agar kala dar sabad kharid mojod bood

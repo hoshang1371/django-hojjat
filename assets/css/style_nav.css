@@ -719,14 +719,12 @@ a {
         /* align-items: center!important; */
     }
 
-    .has-submenu:hover .submenu {
+    .has-submenu:hover .submenu
+    {
         opacity: 1;
         visibility: visible;
         margin-top: 3px;
-    }
-
-    
-    
+    } 
     .toggle {
         display: none;
     }

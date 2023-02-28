@@ -10,6 +10,7 @@ from spad_eshop_CustomersComments.forms import CustomersCommentsForm
 from django.views.generic import ListView
 import itertools
 from spad_eshop_order.forms import UserNewOrderForm
+from spad_eshop_settings.models import SiteSetting
 
 # Create your views here.
 def products(request):
@@ -57,7 +58,7 @@ def product_detail(request, *args, **kwargs):
 
     selected_product_id = kwargs['productId']    
     new_order_form = UserNewOrderForm(request.POST or None, initial={'product_id': selected_product_id})
-    
+    site_setting = SiteSetting.objects.first()
     contact_form_comment = CustomersCommentsForm(request.POST or None)
 
 
