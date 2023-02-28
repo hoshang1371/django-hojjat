@@ -18,7 +18,7 @@ def products(request):
     #return render(request, 'products/product_detail.html', context)
     return render(request, 'products/products_list.html', context)
 
-
+# site_setting = SiteSetting.objects.first()
 class ProductList(ListView):
     template_name = 'products/products_list.html'
     paginate_by = 8
@@ -29,7 +29,8 @@ class ProductList(ListView):
     def get_context_data(self, **kwargs):
         context = super(ProductList, self).get_context_data(**kwargs)
         #context['cate'] = ProductCategory.objects.filter(title__iexact=Product.title).first()
-        #context['cates'] = ProductCategory.objects.order_by('title') 
+        #context['cates'] = ProductCategory.objects.order_by('title')
+        context['setting'] =SiteSetting.objects.first()
         return context
 
 class ProductListByCategory(ListView):
@@ -100,6 +101,7 @@ def product_detail(request, *args, **kwargs):
         'new_order_form' : new_order_form,
         'customercomments' : customercomments,
         'contact_form_comment' : contact_form_comment,
+        'setting' : site_setting,
     }
 
     # tag = Tag.objects.first()
