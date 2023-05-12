@@ -15,8 +15,9 @@ def contact_page(request):
         contact_form = CreateContactForm()
 
     setting = SiteSetting.objects.first()
-
+    username = request.user.username
     contex = {
+        'username' : username,
         'contact_form':contact_form,
         'setting': setting
     }

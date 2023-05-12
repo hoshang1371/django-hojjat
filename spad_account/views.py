@@ -11,7 +11,9 @@ from django.utils.encoding import force_bytes,force_str
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes#, force_text
+from django.utils.encoding import force_bytes
+
+from spad_eshop_settings.models import SiteSetting#, force_text
 from .token import account_activation_token
 from django.core.mail import EmailMessage
 #from django.contrib.auth.forms import PasswordChangeForm
@@ -48,8 +50,11 @@ def login_user(request):
             return redirect('/')
         else:
             login_form.add_error('user_name', 'کاربری با مشخصات وارد شده یافت نشد')
-
+    username = request.user.username
+    site_setting = SiteSetting.objects.first()
     context = {
+        'username' : username,
+        'setting': site_setting,
         'login_form': login_form
     }
     return render(request, 'account/login.html', context)
@@ -91,8 +96,11 @@ def register(request):
         return HttpResponse("لینک فعال سازی یه ایمیل شما ارسال شد <a href='/login'> ورود </a>")
         # return redirect('/login')
 
-
+    username = request.user.username
+    site_setting = SiteSetting.objects.first()
     context = {
+        'username' : username,
+        'setting': site_setting,
         'register_form': register_form,
         #'Captcha' : captcha
     }
@@ -190,8 +198,14 @@ def edit_user_profile(request):
 
 #related_object = Related(field3=value3)
 #r = Restaurant(place=p1, serves_hot_dogs=True, serves_pizza=False)
-
-    contex = {'edit_form' : edit_user_form}
+    username = request.user.username
+    site_setting = SiteSetting.objects.first()
+    
+    contex = {
+        'username' : username,
+        'setting': site_setting,
+        'edit_form' : edit_user_form
+        }
     
     return render(request,'account/edit_account.html', contex)
 

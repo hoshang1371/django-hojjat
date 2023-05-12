@@ -18,6 +18,10 @@ def home_page(request):
     latest_products = Product.objects.order_by('-id').all()[:10]
     # print(latest_products)
     vige_products = Product.objects.order_by('-vige').all()[:10]
+    
+    username = request.user.username
+    # print(username)
+
     context = {
         'data': 'new data',
         'sliders' : sliders,
@@ -25,20 +29,25 @@ def home_page(request):
         'most_visit' : most_visit_product,
         'latest_products' : latest_products,
         'vige_products' : vige_products,
+        'username' : username,
     }
     return render(request, 'home_page.html', context)
 
 def about_page(request):
     site_setting = SiteSetting.objects.first()
+    username = request.user.username
     contex = {
-        'setting': site_setting
+        'setting': site_setting,
+        'username' : username,
     }
     return render(request, 'about_page.html',contex)
 
 def about_page_footer(request):
     site_setting = SiteSetting.objects.first()
+    # username = request.user.username
     contex = {
-        'setting': site_setting
+        'setting': site_setting,
+        # 'username' : username,
     }
     return render(request, 'shared/about_page_footer.html',contex)
 
@@ -119,9 +128,9 @@ class CreateOneOrder(View):
 
         product = Product.objects.get_by_id(product_id=product_id)
         order_partial= order.orderdetail_set.filter(product_id=product.id)
-        print("olk")
-        print(order_partial)
-        print("product.number= ",product.number)
+        # print("olk")
+        # print(order_partial)
+        # print("product.number= ",product.number)
 
         if( 1 > int(product.number)):
             data = {

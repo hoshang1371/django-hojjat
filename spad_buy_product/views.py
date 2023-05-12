@@ -19,6 +19,7 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
 from django.http.response import HttpResponse, JsonResponse
 from post_information.models import PostPrice
+from spad_eshop_settings.models import SiteSetting
 # class ListOfOrder(ListView):
 #     template_name = '/list_of_buy.html'
 #     model = OrderDetail
@@ -49,8 +50,12 @@ def List_user_open_order(request):
         count_off_all_product = count_off_all_product+1
         Total_price_for_each_product_buy = order_partial.count * order_partial.price
         Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+    username = request.user.username
+    site_setting = SiteSetting.objects.first()
 
     contex = {
+        'username' : username,
+        'setting': site_setting,
         'order_partials_buy': order_partials_buy,
         'Total_price_for_all_product_buy' : Total_price_for_all_product_buy,
         'post_price': post_price.price,

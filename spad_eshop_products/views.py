@@ -30,6 +30,7 @@ class ProductList(ListView):
         context = super(ProductList, self).get_context_data(**kwargs)
         #context['cate'] = ProductCategory.objects.filter(title__iexact=Product.title).first()
         #context['cates'] = ProductCategory.objects.order_by('title')
+        context['username'] = self.request.user.username
         context['setting'] =SiteSetting.objects.first()
         return context
 
@@ -43,6 +44,15 @@ class ProductListByCategory(ListView):
         if category is None:
             raise Http404('صفحه ی مورد نظر یافت نشد')
         return Product.objects.get_products_by_category(category_name)
+
+    # def get_queryset(self):
+    #     return Product.objects.get_active_products()
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductListByCategory, self).get_context_data(**kwargs)
+        context['username'] = self.request.user.username
+        context['setting'] =SiteSetting.objects.first()
+        return context
 
 def products_categories_partial(request):
     categories = ProductCategory.objects.all()
@@ -94,7 +104,10 @@ def product_detail(request, *args, **kwargs):
 
 
     grouped_galleries = list(my_grouper(1, galleries))
+
+    username = request.user.username
     context = {
+        'username' : username,
         'product': product,
         'galleries' : grouped_galleries,
         'related_products' : grouped_related_products,

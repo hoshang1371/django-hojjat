@@ -5,6 +5,7 @@ from post_information.forms import UserPostAddressDetailForm
 from post_information.models import PostAddressDetail, PostPrice,PostAddress
 
 from spad_eshop_order.models import Order
+from spad_eshop_settings.models import SiteSetting
 
 
 @login_required(login_url='/login')
@@ -29,9 +30,12 @@ def post_order(request):
         Total_price_for_each_product_buy = order_partial.count * order_partial.price
         Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
     # print('user_post_address_detail=',user_post_address_detail['PostAddress_id'])
-
+    username = request.user.username
+    site_setting = SiteSetting.objects.first()
     contex = {
         # 'order_partials_buy': order_partials_buy,
+        'username' : username,
+        'setting': site_setting,
         'postAddressesUser' : postAddressesUser,
         'Total_price_for_all_product_buy' : Total_price_for_all_product_buy,
         'post_price': post_price.price,
@@ -54,11 +58,11 @@ def add_userPostAddressDetail(request):
             print("PostAddress_id=",PostAddress_id)
             # Todo:save to database
             post_address =PostAddress.objects.filter(owner_id=request.user.id,id=PostAddress_id)
-            print("postAddressesUser=",postAddressesUser)
-            print("post_address=",post_address)
-            print("post_address=",post_address[0].address)
-            print("post_address.id=",post_address[0].id)
-            print("order.id=",order.id)
+            # print("postAddressesUser=",postAddressesUser)
+            # print("post_address=",post_address)
+            # print("post_address=",post_address[0].address)
+            # print("post_address.id=",post_address[0].id)
+            # print("order.id=",order.id)
 
             # post_address_detail = PostAddressDetail.objects.filter(
             #     # addressSelected = 1,
@@ -87,9 +91,12 @@ def add_userPostAddressDetail(request):
 
 
             
-
+    username = request.user.username
+    site_setting = SiteSetting.objects.first()
 
     contex ={
+        'username' : username,
+        'setting': site_setting,
         'user_post_address_detail': user_post_address_detail,
         'postAddressesUser' : postAddressesUser,
         'zipee' : zip(user_post_address_detail.choices,postAddressesUser),
