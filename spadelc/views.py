@@ -87,7 +87,7 @@ def products_order_partial(request):
         order = Order.objects.create(owner_id=request.user.id, is_paid=False)
 
     order_partials = order.orderdetail_set.all()
-    print("order_partials=",order_partials)
+    # print("order_partials=",order_partials)
     #order_partials = OrderDetail.objects.all() orderdetail_set
     Total_price_for_all_product =0
 

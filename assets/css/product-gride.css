@@ -257,9 +257,10 @@
 
 .product-detail a {
     position: absolute;
-    font-size: 1.5rem;
+    font-size: 1.0rem;
     text-decoration: none;
     background-color: #dbd067;
+    font-family: 'samim';
     /* background-color: red; */
     color: #fff;
     padding: 7px 10px;

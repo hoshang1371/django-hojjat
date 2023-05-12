@@ -1,0 +1,131 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/post_order.css' %}">
+
+<div class="background_order">
+
+    <!-- <form method="post" action="/add_userPostAddressDetail"> -->
+    <form method="post" action="{% url 'add_userPostAddressDetail' %}">
+    <!-- <form method="post" action=""> -->
+        {% csrf_token %}
+        <div class="list_of_post_info">
+            <div>
+                <p>نشانی ارسال</p>
+            </div>
+            <div class="khat"></div>
+
+            
+            {% for userForm,postAddressUser in zipee %}
+
+            <div>
+                <!-- <label style="display: none;" for="{{postAddressUser.id}}">{{postAddressUser.0}}</label><br> -->
+                <!-- <input type="radio" id="{{postAddressUser.0}}" name="fav_language" value={{postAddressUser.0}}> -->
+                {{userForm.tag}}
+                <div class="post_info">
+                    <div>
+                        <div>      
+                            <p>نشانی من</p>
+                            <span>|</span>
+                            <span>{{postAddressUser.firstName}}</span>
+                            <span>{{postAddressUser.lastName}}</span> 
+                        </div>
+                        <div>
+                            <p>ویرایش</p>
+                            <span>&nbsp;|&nbsp;</span>
+                            <p>حذف</p>
+                        </div>
+                    </div>
+                    <div class="khat"></div>
+                    <div>
+                        <i class='fas fa-map-marker-alt'></i>
+                        <p>       
+                            {{postAddressUser.country}}
+                        </p>
+                        <span>،</span>
+                        <p>       
+                            {{postAddressUser.city}}
+                        </p>
+                        <span>،</span>
+                        <p class="ToPersian">       
+                            {{postAddressUser.address}}
+                        </p>
+                    </div>
+                    <div>
+                        <div>
+                            <p class="ToPersian">
+                                {{postAddressUser.post_code}}
+                            </p>
+                            <i class='fas fa-envelope'></i>
+
+                        </div>
+                        <span>|</span>
+                        <div class="ToPersian">
+                            <p>
+                                {{postAddressUser.mobile_phone_number}}
+                            </p>
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <span>|</span>
+                        <div class="ToPersian">
+                            <p>
+                                {{postAddressUser.phone_number}}
+                            </p>
+                            <i class="fas fa-phone"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div>
+                <a href="">افزودن آدرس جدید</a>
+                <!-- <a href="">ادامه</a> -->
+                <!-- {{ user_post_address_detail }} -->
+                <!-- {% for d,e in zipee %}
+                    {{d.tag }}
+                {% endfor %} -->
+                <input type="submit" value="ادامه">
+            </div>
+        </div>
+    </form>
+
+
+    <div>
+        <div class=" title_of_buy">
+            <div>
+                <p><span class="ToPersian count_off_all_product">{{count_off_all_product}}&nbsp;</span>نوع کالا در سبد
+                    خرید شما</p>
+            </div>
+            <div class="khat"></div>
+            <div class="total_of_product">
+                <div>جمع محصولات</div>
+                <div>
+                    <p><span
+                            class="ToPersian Total_price_for_all_product_buyData">{{Total_price_for_all_product_buy}}</span>
+                        ریال</p>
+                </div>
+            </div>
+            <div class="send_product">
+                <div>ارسال</div>
+                <div>
+                    <p><span class="ToPersian">{{post_price}}</span> ریال</p>
+                </div>
+            </div>
+
+            <div class="total_of_Price">
+                <div>مجموع</div>
+                <!-- <div><p><span>۲۲۵,۰۰۰</span> ریال</p></div> -->
+                <div>
+                    <p><span class="ToPersian Total_price_postPrice">{{ Total_price_for_all_product_buy|add:post_price}}</span> ریال</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}

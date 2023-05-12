@@ -1,0 +1,318 @@
+@import url('/static/css/fonts.css');
+
+.khat {
+    position: initial;
+    background-color: #3a3b3885;
+    width: calc(100% - 10px);
+    content: '';
+    height: 2px;
+    transform: translateX(5px);
+}
+
+.background_order {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    top: 11rem;
+    margin-bottom: 200px;
+    height: auto;
+    /* background-color: red; */
+
+}
+
+.background_order>form{
+    width: calc(75% - 40px);
+}
+
+
+.list_of_post_info {
+    position: relative;
+    /* width: calc(70% - 40px); */
+    /* background-color: blue; */
+    height: auto;
+    right: 0px;
+    /* padding: 20px; */
+    margin: 20px;
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+    box-shadow: 2px 2px 2px 1px #3a3b385e;
+}
+
+.list_of_post_info>div:first-child
+{
+    width: 100%;
+    padding: 10px;
+}
+.list_of_post_info>div{
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.list_of_post_info>div>input{
+    margin-right: 20px;
+}
+.list_of_post_info>div>P {
+    text-align: right;
+    font-family: 'mikhak';
+    font-size: 20px;
+}
+.background_order>div:nth-child(2){
+    width: 30%;
+    /* background-color: red; */
+}
+/*!post info*/
+.post_info{
+    width: calc(95% - 40px); /*todo :fealan in bashe baadan 100% shavad*/
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+    margin: 20px;
+    height: auto;
+}
+.post_info>div:first-child{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin: 10px;
+}
+.post_info>div:first-child>div{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.post_info>div:first-child>div:first-child>p{
+    font-family: 'samim';
+    font-size: 14px;
+    font-weight: bold;
+}
+.post_info>div:first-child>div:first-child>span{
+    font-family: 'samim';
+    font-size: 14px;
+}
+
+.post_info>div:first-child>div:last-child>p:first-child
+{
+    font-family: 'samim';
+    font-size: 14px;
+    color: #00a8ff;
+    cursor: pointer;
+}
+.post_info>div:first-child>div:last-child>p:last-child
+{
+    font-family: 'samim';
+    font-size: 14px;
+    color: red;
+    cursor: pointer;
+}
+
+
+.post_info>div:nth-child(3)
+{
+    padding: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.post_info>div:nth-child(3)>p{
+    font-family: 'samim';
+    font-size: 16px;
+}
+.post_info>div:nth-child(3)>span{
+    margin: 0px 5px;
+}
+.post_info>div:nth-child(3)>svg{
+    margin-left: 10px;
+    color: #dbd067;
+}
+.post_info>div:nth-child(4){
+    padding: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+}
+.post_info>div:nth-child(4)>div{
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+.post_info>div:nth-child(4)>div:first-child>svg{
+    color: #ffa800;
+}
+.post_info>div:nth-child(4)>div:nth-child(3)>svg{
+    color: #00a8ff;
+}
+.post_info>div:nth-child(4)>div:nth-child(5)>svg{
+    color: green;
+}
+.post_info>div:nth-child(4)>div>p{
+    padding: 10px;
+    font-family: 'samim';
+    font-size: 16px;
+}
+.post_info>div:nth-child(4)>span
+{
+    margin: 0px 10px 0px 0px;
+    font-size: 25px;
+    color: #3a3b385e;
+}
+/*! title_of_buy*/
+.title_of_buy {
+    /* width: calc(30% - 30px); */
+    position: sticky;
+    height: 210px;
+    top: 75px;
+    left: 0px;
+    margin: 20px 0px 20px 20px;
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+}
+
+.title_of_buy>div:first-child {
+    width: 100%;
+    padding: 10px;
+}
+
+.title_of_buy>div>p {
+    direction: rtl;
+    text-align: center;
+    font-family: 'mikhak';
+    font-size: 20px;
+}
+
+.title_of_buy>div>p>span {
+    text-align: center;
+    font-family: 'mikhak';
+    font-size: 20px;
+}
+
+.total_of_product,
+.send_product {
+    position: relative;
+    width: 100%;
+    height: 15%;
+}
+
+.total_of_Price {
+    width: 100%;
+    position: relative;
+    height: 15%;
+    margin-top: 10%;
+}
+
+.total_of_product div:first-child,
+.send_product div:first-child,
+.total_of_Price div:first-child {
+    width: 50%;
+    position: absolute;
+    right: 5%;
+    text-align: end;
+}
+
+.total_of_product div:last-child>p,
+.total_of_product div:last-child>p span,
+.total_of_product div,
+.send_product div:last-child>p,
+.send_product div:last-child>p span,
+.send_product div,
+.total_of_Price div:last-child>p,
+.total_of_Price div:last-child>p span,
+.total_of_Price div {
+    font-family: 'mikhak';
+    font-size: 20px;
+}
+
+.total_of_product div:last-child,
+.send_product div:last-child,
+.total_of_Price div:last-child {
+    width: 50%;
+    position: absolute;
+    left: 5%;
+    direction: rtl;
+    text-align: end;
+}
+
+
+
+.total_of_Price div:last-child>p,
+.total_of_Price div:last-child>p span {
+    font-family: 'mikhak';
+    font-size: 20px;
+    color: red;
+}
+
+.list_of_post_info>div:last-child{
+    display: flex;
+    justify-content: space-between;
+}
+
+.list_of_post_info>div:last-child a{
+    /* color: black; */
+    margin: 10px 20px;
+    font-family: 'samim';
+    border: 1px solid #f0db1d;
+    padding: 7px 10px
+}
+
+.list_of_post_info>div:last-child a:first-child{
+    color: #8a6b35;
+    transition: all 0.2s ease-in-out;
+    white-space: normal;
+    text-align: center;
+}
+
+
+.list_of_post_info>div:last-child input
+{
+    direction: rtl;
+    margin: 10px 20px;
+
+    background: #dbd067;
+    border: 1px solid #f0db1d;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-family: 'byekan', sans-serif;
+    width: 150px;
+    transition: all 0.2s ease-in-out;
+    white-space: normal;
+}
+
+.list_of_post_info>div:last-child input:hover,
+.list_of_post_info>div:last-child a:first-child:hover
+{
+    background: #83a83e;
+}
+
+@media all and (max-width: 960px) {
+    .background_order {
+        flex-direction: column-reverse;
+    }
+
+    .background_order>div:nth-child(2) {
+        width: calc(100% - 20px);
+    }
+
+    .total_of_Price {
+        margin-top: 5%;
+    }
+    .background_order>form{
+        width: auto;
+    }
+
+    .post_info>div:nth-child(4) {
+        flex-direction: column;
+    }
+
+    .post_info>div:nth-child(4)>span {
+        display: none;
+    }
+
+    /* .post_info>div:nth-child(3) {
+        flex-wrap: wrap;
+    } */
+}

@@ -11,8 +11,8 @@ from django_jalali.db import models as jmodels
 class Order(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     is_paid = models.BooleanField(verbose_name='پرداخت شده /نشده')
-    payment_date = models.DateTimeField(default=now, blank = True, null = True, verbose_name='تاریخ پرداخت')#
-    j_payment_date = jmodels.jDateTimeField(default=now,blank = True, null = True, verbose_name='تاریخ پرداخت شمسی')
+    payment_date = models.DateTimeField(default=now, blank = True, null = True, verbose_name='تاریخ ایجاد سبد')#
+    j_payment_date = jmodels.jDateTimeField(default=now,blank = True, null = True, verbose_name='تاریخ ایجاد سبد شمسی')
 
 
     class Meta:

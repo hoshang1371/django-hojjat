@@ -1,0 +1,39 @@
+nahveye ersal
+
+
+<br>
+{% for postAddressUser in postAddressesUser %}
+{{postAddressUser.id}}
+<br>
+{% endfor %}
+<br>
+
+<form action="#">
+    {% csrf_token %}
+    {% for d in user_post_address_detail.PostAddress_id %}
+        {{d.tag }}
+        <!-- <label style="display: none;" for="{{postAddressUser.id}}">{{d.id}}
+            <input type="radio" id="{{d.id}}" name="fav_language" value={{d.0}}>
+        </label><br> -->
+    {% endfor %}
+    <input type="submit" value="ادامه">
+</form>
+<br>
+
+<!-- <form action="/">
+    {% for x,y in user_post_address_detail.fields.gender %}
+
+    {% endfor %}
+    <input type="submit" value="ادامه">
+</form> -->
+<br>
+
+<form action="#">
+    {% for a,b in zipee %}
+        {{a.0}}
+        <br>
+        {{b.id}}
+        <br>
+    {% endfor %}
+    <input type="submit" value="ادامه">
+</form>
