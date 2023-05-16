@@ -374,6 +374,7 @@
     .backGround_of_list_buy>div .title_of_buy {
         position: relative;
         width: 100%;
+        height: 420px;
     }
 
     .backGround_of_list_buy>div .list_for_buy {

@@ -1,0 +1,113 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/add_post_address.css' %}">
+<link rel="stylesheet" href="{% static 'css/post_order.css' %}">
+
+<div class="background_add_post">
+    <form method="post" action="">
+        {% csrf_token %}
+        <div>
+            <div>
+                <p>نشانی ارسال</p>
+            </div>
+            <div class="khat"></div>
+        </div>
+
+        <div class="field">
+            <div class=""><span class="	fas fa-user-alt"></span></div>
+            {{ add_address.first_name_for_post }}
+        </div>
+
+        <div class="field">
+            <div class=""><span class="fas fa-user-check"></span></div>
+            {{ add_address.last_name_for_post }}
+        </div>
+
+        <div class="field">
+            <div class=""><h2>کشور</h2><span class="fas fa-flag "></span></div>
+            {{ add_address.Country_for_post }}
+        </div>
+
+        <div class="field">
+            <div class=""><span class="fas fa-city "></span></div>
+            {{ add_address.City_for_post }}
+        </div>
+
+        <div class="field">
+            <div class=""><span class="	fas fa-address-card "></span></div>
+            {{ add_address.Address_for_post }}
+        </div>
+
+        <div class="field">
+            <div class=""><span class="fas fa-phone "></span></div>
+            {{ add_address.phone_number_for_post }}
+        </div>
+
+        {% for error in add_address.phone_number_for_post.errors %}
+        <p style="color:red; ">{{error}}</p>
+        {% endfor %}
+
+        <div class="field">
+            <div class=""><span class="fas fa-mobile-alt"></span></div>
+            {{ add_address.mobile_phone_number_for_post }}
+        </div>
+
+        {% for error in add_address.mobile_phone_number_for_post.errors %}
+        <p style="color:red; ">{{error}}</p>
+        {% endfor %}
+
+        <div class="field">
+            <div class=""><span class="fa fa-map-pin"></span></div>
+            {{ add_address.post_code_for_post }}
+        </div>
+
+        <div class="field-sabt">
+            <input type="submit" value="ادامه">
+        </div>
+
+        <div class="field_cancel">
+            <a href="{% url 'post_order' %}"><span class="fas fa-window-close fa-2x"></span><h1 href="">انصراف</h1></a>
+        </div>
+
+    </form>
+
+    <div>
+        <div class=" title_of_buy">
+            <div>
+                <p><span class="ToPersian count_off_all_product">{{count_off_all_product}}&nbsp;</span>نوع کالا در سبد
+                    خرید شما</p>
+            </div>
+            <div class="khat"></div>
+            <div class="total_of_product">
+                <div>جمع محصولات</div>
+                <div>
+                    <p><span
+                            class="ToPersian Total_price_for_all_product_buyData">{{Total_price_for_all_product_buy}}</span>
+                        ریال</p>
+                </div>
+            </div>
+            <div class="send_product">
+                <div>ارسال</div>
+                <div>
+                    <p><span class="ToPersian">{{post_price}}</span> ریال</p>
+                </div>
+            </div>
+
+            <div class="total_of_Price">
+                <div>مجموع</div>
+                <!-- <div><p><span>۲۲۵,۰۰۰</span> ریال</p></div> -->
+                <div>
+                    <p><span class="ToPersian Total_price_postPrice">{{ Total_price_for_all_product_buy|add:post_price}}</span> ریال</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

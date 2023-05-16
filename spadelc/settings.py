@@ -96,6 +96,9 @@ INSTALLED_APPS = [
     # 'django_password_validators.password_history',
     # 'jalali_date',
     # 'django_jalali',
+
+    # 'phone_field'
+
 ]
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 MIDDLEWARE = [
