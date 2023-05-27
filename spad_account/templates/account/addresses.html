@@ -1,0 +1,132 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/UnpaidOrder.css' %}">
+<link rel="stylesheet" href="{% static 'css/post_order.css' %}">
+<!-- <section class="content-user-account">
+    <section class="user-panel">
+        <a href="#">پنل کاربری</a>
+    </section>
+    
+    <section class="edite-profile">
+        <a href="user/edit">ویرایش اطلاعات</a>
+    </section>
+    
+    <section class="exit">
+        <a href="#">خروج</a>
+    </section>
+</section> -->
+
+<div class="user_content">
+    <div>
+        <div class="right_listOfFeatures">
+            <div class="right_headerList">
+
+                <img src="{% static 'images/avatar.jpg' %}" alt="Avatar">
+                <div>
+                    <p> حجت شهپر </p>
+                    <h4>hoshang.1371@yahoo.com</h4>
+                </div>
+            </div>
+            <div class="khat"></div>
+
+            <div class="right_panelGruop">
+                <div>
+                    <div>
+                        <i class="fas fa-edit"></i>
+                        <a href="user/edit">ویرایش اطلاعات</a>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <i class="fa fa-ban" aria-hidden="true"></i>
+                        <a href="{% url 'user' %}"> سفارشات پرداخت نشده </a>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <i class="fa fa-history" aria-hidden="true"></i>
+                        <a href="{% url 'historyOrder' %}"> تاریخچه سفارشات </a>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="{% url 'addresses' %}"> آدرس‌ها </a>
+                    </div>
+                </div>
+                <div>
+
+                    <a href="{% url 'log-out' %}"> خروج از حساب </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="Left_UnpaidOrders">
+        <p> آدرس‌ها </p>
+        <div class="khat"></div>
+
+
+        {% for postAddressUser in postAddressesUser %}
+        <div class="post_info">
+            <div>
+                <div>
+                    <p>نشانی من</p>
+                    <span>|</span>
+                    <span>{{postAddressUser.firstName}}</span>
+                    <span>{{postAddressUser.lastName}}</span>
+                </div>
+                <div>
+                    <p>ویرایش</p>
+                    <span>&nbsp;|&nbsp;</span>
+                    <p>حذف</p>
+                </div>
+            </div>
+            <div class="khat"></div>
+            <div>
+                <i class='fas fa-map-marker-alt'></i>
+                <p>
+                    {{postAddressUser.country}}
+                </p>
+                <span>،</span>
+                <p>
+                    {{postAddressUser.city}}
+                </p>
+                <span>،</span>
+                <p class="ToPersian">
+                    {{postAddressUser.address}}
+                </p>
+            </div>
+            <div>
+                <div>
+                    <p class="ToPersian">
+                        {{postAddressUser.post_code}}
+                    </p>
+                    <i class='fas fa-envelope'></i>
+
+                </div>
+                <span>|</span>
+                <div class="ToPersian">
+                    <p>
+                        {{postAddressUser.mobile_phone_number}}
+                    </p>
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <span>|</span>
+                <div class="ToPersian">
+                    <p>
+                        {{postAddressUser.phone_number}}
+                    </p>
+                    <i class="fas fa-phone"></i>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+</div>
+
+
+{% endblock %}

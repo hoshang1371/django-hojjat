@@ -7,13 +7,17 @@ from spad_account.models import User
 from django.utils.timezone import now
 
 from django_jalali.db import models as jmodels
+from django.core.validators import RegexValidator
+
+code_regex = RegexValidator(regex=r'^\d{25}$')
 
 class Order(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     is_paid = models.BooleanField(verbose_name='پرداخت شده /نشده')
     payment_date = models.DateTimeField(default=now, blank = True, null = True, verbose_name='تاریخ ایجاد سبد')#
     j_payment_date = jmodels.jDateTimeField(default=now,blank = True, null = True, verbose_name='تاریخ ایجاد سبد شمسی')
-
+    is_send = models.BooleanField(default=False,verbose_name='ارسال شده/نشده')
+    codeFolowed = models.CharField(validators=[code_regex],max_length=25 ,null=True, blank=True,verbose_name='کد رهگیری')
 
     class Meta:
         verbose_name = 'سبد خرید'

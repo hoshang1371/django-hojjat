@@ -262,6 +262,17 @@ class product_order_staff(ListCreateAPIView):
         if count < 0:
             count = 1
         product = Product.objects.get_by_id(product_id=product_id)
+        print(type(count))
+        print(type(int(product.number)))
+        if count > int(product.number):
+            print("in tedad dar anbar mojod nist")
+            return JsonResponse({
+                    "massege": "no this count exist",
+                    })
+        else:
+            print("mojod dar anbar ast")
+        print("tedad",product.number)
+        #TODO : chek kardadn tedad
         x = order.orderdetail_set.filter(product_id=product.id)
         if x:
             print("exist")
@@ -357,6 +368,31 @@ class isPaid_order_update_staff(UpdateAPIView):
     serializer_class = OrderProductUpdateSerializer
     lookup_field = 'id'
     permission_classes = (IsAdminUser,)
+
+
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        order = Order.objects.filter(
+            owner_id=self.request.user.id, is_paid=False).first()
+        
+        orderDetails = order.orderdetail_set.filter(order=order)
+        for orderDetail in orderDetails:
+            # print(orderDetail.count)
+            # print(orderDetail.product.number)
+            # print(orderDetail.product)
+            # ToDo: شاید باید بررسی بشه که تعداد داخل انبار از تعداد سفارش ها کمتر نباشد
+            orderDetail.product.number = int(orderDetail.product.number)-orderDetail.count
+            # print(orderDetail.product.number)
+            orderDetail.product.save()
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 #!test
 

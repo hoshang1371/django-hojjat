@@ -34,10 +34,10 @@ SECRET_KEY = config('SECRET_KEY')
 # http://localhost:8000/
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# python manage.py runserver 192.168.1.53:8000
+# python manage.py runserver 192.168.1.51:8000
 ALLOWED_HOSTS = [
     # '10.0.2.2',
-    '192.168.1.53',
+    '192.168.1.51',
     # '192.168.1.15',
     'localhost',
     # '10.0.3.2',
@@ -95,7 +95,7 @@ INSTALLED_APPS = [
     # 'django_password_validators',
     # 'django_password_validators.password_history',
     # 'jalali_date',
-    # 'django_jalali',
+    'django_jalali',
 
     # 'phone_field'
 

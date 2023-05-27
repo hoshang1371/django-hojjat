@@ -11,7 +11,7 @@
     <!-- <form method="post" action="/add_userPostAddressDetail"> -->
     <form method="post" action="{% url 'add_userPostAddressDetail' %}">
     <!-- <form method="post" action=""> -->
-        {% csrf_token %}
+        {% csrf_token %} 
         <div class="list_of_post_info">
             <div>
                 <p>نشانی ارسال</p>
@@ -35,6 +35,7 @@
                         </div>
                         <div>
                             <p>ویرایش</p>
+                            <!-- <a href="#">ویرایش</a> -->
                             <span>&nbsp;|&nbsp;</span>
                             <p>حذف</p>
                         </div>

@@ -12,8 +12,12 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
+from post_information.models import PostAddress
 
 from spad_eshop_settings.models import SiteSetting#, force_text
+
+from spad_eshop_order.models import Order
+
 from .token import account_activation_token
 from django.core.mail import EmailMessage
 #from django.contrib.auth.forms import PasswordChangeForm
@@ -30,6 +34,7 @@ from .models import UserData
 
 from jalali_date import datetime2jalali, date2jalali
 
+from django.db.models import Q
 # Create your views here.
 def login_user(request):
     # if request.user.is_authenticated:
@@ -111,8 +116,29 @@ def log_out(request):
     return redirect('/login')
 
 @login_required(login_url='/login')
-def user_account_main_page(request):
-    return render(request, 'account/user_account_main.html',{})
+def UnpaidOrder(request):
+    orders = Order.objects.filter(owner_id= request.user.id  ,is_paid=False)
+    context ={
+        'orders':orders
+    }
+    return render(request, 'account/UnpaidOrder.html',context)
+
+@login_required(login_url='/login')
+def historyOrder(request):
+    orders = Order.objects.filter(owner_id= request.user.id).all()
+    context ={
+        'orders':orders
+    }
+    return render(request, 'account/HistoryOrder.html',context)
+
+@login_required(login_url='/login')
+def addresses(request):
+    postAddressesUser = PostAddress.objects.filter(owner_id=request.user.id)
+    print(postAddressesUser)
+    context ={
+        'postAddressesUser' : postAddressesUser
+    }
+    return render(request, 'account/addresses.html',context)
 
 @login_required(login_url='/login')
 def edit_user_profile(request):

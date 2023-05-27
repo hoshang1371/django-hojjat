@@ -2,7 +2,7 @@ from django.urls import path
 #from django.urls.conf import include reverse_lazy
 from django.contrib.auth import views
 
-from .views import (login_user, register, log_out, user_account_main_page,
+from .views import (UnpaidOrder, addresses, historyOrder, login_user, register, log_out,
                     edit_user_profile, activate)
 
 from .forms import UserPasswordResetForm, UserSetPasswordForm
@@ -15,7 +15,9 @@ urlpatterns = [
     #re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',activate, name='activate'),
     path('activate/<slug:uidb64>/<slug:token>/',activate, name='activate'),
     path('log-out', log_out,name='log-out'),
-    path('user', user_account_main_page,name='user'),
+    path('user', UnpaidOrder,name='user'),
+    path('historyOrder', historyOrder,name='historyOrder'),
+    path('addresses', addresses,name='addresses'),
     path('user/edit', edit_user_profile),
 ]
 
