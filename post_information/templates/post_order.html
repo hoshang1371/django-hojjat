@@ -26,6 +26,8 @@
                 <!-- <input type="radio" id="{{postAddressUser.0}}" name="fav_language" value={{postAddressUser.0}}> -->
                 {{userForm.tag}}
                 <div class="post_info">
+                    <input type="hidden" value="{{postAddressUser.id}}">
+
                     <div>
                         <div>      
                             <p>نشانی من</p>
@@ -128,5 +130,7 @@
 
 
 </div>
+
+<script src="{% static 'js/address.js' %}"></script>
 
 {% endblock %}

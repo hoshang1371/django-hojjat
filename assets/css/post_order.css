@@ -70,36 +70,36 @@
     margin: 20px;
     height: auto;
 }
-.post_info>div:first-child{
+.post_info>div:nth-child(2){
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
     margin: 10px;
 }
-.post_info>div:first-child>div{
+.post_info>div:nth-child(2)>div{
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
 }
 
-.post_info>div:first-child>div:first-child>p{
+.post_info>div:nth-child(2)>div:first-child>p{
     font-family: 'samim';
     font-size: 14px;
     font-weight: bold;
 }
-.post_info>div:first-child>div:first-child>span{
+.post_info>div:nth-child(2)>div:first-child>span{
     font-family: 'samim';
     font-size: 14px;
 }
 
-.post_info>div:first-child>div:last-child>p:first-child
+.post_info>div:nth-child(2)>div:last-child>p:first-child
 {
     font-family: 'samim';
     font-size: 14px;
     color: #00a8ff;
     cursor: pointer;
 }
-.post_info>div:first-child>div:last-child>p:last-child
+.post_info>div:nth-child(2)>div:last-child>p:last-child
 {
     font-family: 'samim';
     font-size: 14px;
@@ -108,7 +108,7 @@
 }
 
 
-.post_info>div:nth-child(3)
+.post_info>div:nth-child(4)
 {
     padding: 10px;
     display: flex;
@@ -116,44 +116,44 @@
     align-items: center;
     flex-wrap: wrap;
 }
-.post_info>div:nth-child(3)>p{
+.post_info>div:nth-child(4)>p{
     font-family: 'samim';
     font-size: 16px;
 }
-.post_info>div:nth-child(3)>span{
+.post_info>div:nth-child(4)>span{
     margin: 0px 5px;
 }
-.post_info>div:nth-child(3)>svg{
+.post_info>div:nth-child(4)>svg{
     margin-left: 10px;
     color: #dbd067;
 }
-.post_info>div:nth-child(4){
+.post_info>div:nth-child(5){
     padding: 10px;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     justify-content: space-around;
 }
-.post_info>div:nth-child(4)>div{
+.post_info>div:nth-child(5)>div{
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
 }
-.post_info>div:nth-child(4)>div:first-child>svg{
+.post_info>div:nth-child(5)>div:first-child>svg{
     color: #ffa800;
 }
-.post_info>div:nth-child(4)>div:nth-child(3)>svg{
+.post_info>div:nth-child(5)>div:nth-child(3)>svg{
     color: #00a8ff;
 }
-.post_info>div:nth-child(4)>div:nth-child(5)>svg{
+.post_info>div:nth-child(5)>div:nth-child(5)>svg{
     color: green;
 }
-.post_info>div:nth-child(4)>div>p{
+.post_info>div:nth-child(5)>div>p{
     padding: 10px;
     font-family: 'samim';
     font-size: 16px;
 }
-.post_info>div:nth-child(4)>span
+.post_info>div:nth-child(5)>span
 {
     margin: 0px 10px 0px 0px;
     font-size: 25px;

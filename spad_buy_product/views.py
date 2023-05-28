@@ -129,8 +129,6 @@ class product_order_List_buy(UpdateAPIView):
 
 
 #! delete product order detail
-
-
 class Order_product_delete_list_of_buy(DestroyAPIView):
     queryset = OrderDetail.objects.all()
     #queryset = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()

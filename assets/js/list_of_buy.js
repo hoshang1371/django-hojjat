@@ -36,7 +36,7 @@ function getCookie(name) {
 }
 const csrftoken = getCookie('csrftoken');
 
-// console.log(csrftoken);
+console.log(csrftoken);
 //!===================================================
 
 String.prototype.toPersinaDigit = function () {
@@ -95,7 +95,7 @@ content_list_of_buy.forEach(inItem => {
     //TODo
     let input_item = inItem.querySelector('.input_off_number_product_item')
     input_item.addEventListener("keypress", function () {
-        console.log("kosKesh");
+        // console.log("kosKesh");
         var [id, count] = getElementOfIdAndCount(inItem);
         var data_toSend = {
             id: id,

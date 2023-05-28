@@ -2,7 +2,7 @@ from django.urls import path
 #from django.urls.conf import include reverse_lazy
 from django.contrib.auth import views
 
-from .views import (UnpaidOrder, addresses, historyOrder, login_user, register, log_out,
+from .views import (PostAddress_delete_list_of_buy, UnpaidOrder, addresses, historyOrder, login_user, register, log_out,
                     edit_user_profile, activate)
 
 from .forms import UserPasswordResetForm, UserSetPasswordForm
@@ -19,6 +19,9 @@ urlpatterns = [
     path('historyOrder', historyOrder,name='historyOrder'),
     path('addresses', addresses,name='addresses'),
     path('user/edit', edit_user_profile),
+
+    path('PostAddress_delete_list_of_buy/<int:pk>', PostAddress_delete_list_of_buy.as_view()),
+
 ]
 
 urlpatterns += [

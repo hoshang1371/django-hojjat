@@ -13,6 +13,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from post_information.models import PostAddress
+from spad_account.serializer import PostAddressDeleteListOfBuySerializer
 
 from spad_eshop_settings.models import SiteSetting#, force_text
 
@@ -34,8 +35,11 @@ from .models import UserData
 
 from jalali_date import datetime2jalali, date2jalali
 
-from django.db.models import Q
-# Create your views here.
+from rest_framework.generics import DestroyAPIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication
+
+
 def login_user(request):
     # if request.user.is_authenticated:
     #     return redirect('/')
@@ -139,6 +143,15 @@ def addresses(request):
         'postAddressesUser' : postAddressesUser
     }
     return render(request, 'account/addresses.html',context)
+
+#! delete PostAddress detail
+class PostAddress_delete_list_of_buy(DestroyAPIView):
+    queryset = PostAddress.objects.all()
+    #queryset = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
+    #queryset = OrderDetail.objects.all()
+    serializer_class = PostAddressDeleteListOfBuySerializer
+    permission_classes = [IsAuthenticated]
+    authentication_classes = (SessionAuthentication, )
 
 @login_required(login_url='/login')
 def edit_user_profile(request):

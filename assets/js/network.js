@@ -1,9 +1,10 @@
 
 
-const url ="http://192.168.1.52:8000"
+const url ="http://192.168.1.51:8000"
 // const url ="http://127.0.0.1:8000"
 const url_put_item_list_of_buy = url+"/buy/update_for_buy/"
 const delete_put_item_list_of_buy = url+"/buy/Order_product_delete_list_of_buy/"
+const delete_listOfPostAddress_list = url+"/PostAddress_delete_list_of_buy/"
 
 // alert(url_put_item_list_of_buy);  http://192.168.1.52:8000/buy/Order_product_delete_list_of_buy/
 
@@ -18,7 +19,7 @@ async function  put_item_list_of_buy(data,token)
         body: JSON.stringify(data)
       });
       const resData = await response.json();
-    //   console.log(resData);
+      console.log(token);
       return resData;
 }
 
@@ -34,5 +35,19 @@ async function delete_item_list_of_buy(id,token) {
         });
         // const resData = 'resource deleted...';
         const resData = await response;
+
         return resData;
+}
+
+async function delete_listOfPostAddress(id,token) {
+  const response = await fetch((delete_listOfPostAddress_list+id), {
+      method: 'DELETE',
+      headers: {
+          'Content-type': 'application/json',
+          'X-CSRFToken': token,
+      }
+  });
+  // const resData = 'resource deleted...';
+  const resData = await response;
+  return resData;
 }
