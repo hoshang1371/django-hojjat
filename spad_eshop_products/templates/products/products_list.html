@@ -60,10 +60,6 @@
 {% if request.user.is_authenticated %}
 <script>
     //const cartDOM1 = document.querySelector('.cart__items');
-
-
-    
-
     function addItemToTheDom(product) {
         document.querySelector('.mobile-cart-head').insertAdjacentHTML("afterend",`
         <div class="cart__item">
@@ -159,9 +155,9 @@
 </script>
 {% else %}
 <script>
-    var product_item_new = document.querySelectorAll('.product-item-hh');
+    var product_item_new = document.querySelectorAll('.product-item-new');
     product_item_new.forEach(inItem => {
-        inItem.querySelector(".kharid_1_add").addEventListener('click', function (e) {
+        inItem.querySelector(".kharid_1_add").addEventListener('mousedown', function (e) {     
             document.location.href = '/login';
         });
     });

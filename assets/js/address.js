@@ -31,7 +31,22 @@ let post_info_Item = document.querySelectorAll(".post_info");
 
 post_info_Item.forEach(inItem => {
     let remove_item = inItem.querySelector('div:nth-child(2)>div:last-child>p:last-child');
-    // console.log(remove_item);
+    let edit_item = inItem.querySelector('div:nth-child(2)>div:last-child>p:first-child');
+
+    edit_item.addEventListener('click',function (){
+        var id=getElementOfId(inItem)
+        console.log(id);
+        console.log(path);
+        console.log(window.location.href);
+        if(window.location.href.includes('post_info')){
+            window.location.href =('edit_post_add_address/'+id);
+        }
+        else{
+            window.location.href =('post_info/edit_post_add_address/'+id);
+        }
+
+    });
+
     remove_item.addEventListener('click',function (){
         console.log('kirkhar');
         

@@ -55,7 +55,7 @@
     transform: translateX(5px);
 }
 
-.user_content {
+.user_content{
     width: 100%;
     position: relative;
     top: 170px;
@@ -261,4 +261,19 @@ th a {
     margin: 20px;
     border-radius: 20px;
     border: 1px solid #3a3b385e;
+}
+
+@media all and (max-width: 960px) {
+    .user_content{
+        flex-direction: column;
+    }
+    .user_content>div:first-child{
+        width: 100%!important;
+    }
+    .right_listOfFeatures{
+        width: calc(100% - 40px);
+    }
+    .user_content .Left_UnpaidOrders{
+        width: calc(100% - 40px)!important;
+    }
 }
