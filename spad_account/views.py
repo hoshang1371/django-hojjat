@@ -12,12 +12,12 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
-from post_information.models import PostAddress
+from post_information.models import PostAddress, PostAddressDetail, PostPrice
 from spad_account.serializer import PostAddressDeleteListOfBuySerializer
 
 from spad_eshop_settings.models import SiteSetting#, force_text
 
-from spad_eshop_order.models import Order
+from spad_eshop_order.models import Order, OrderDetail
 
 from .token import account_activation_token
 from django.core.mail import EmailMessage
@@ -122,27 +122,71 @@ def log_out(request):
 @login_required(login_url='/login')
 def UnpaidOrder(request):
     orders = Order.objects.filter(owner_id= request.user.id  ,is_paid=False)
+    user = User.objects.filter(id=request.user.id)
+
     context ={
-        'orders':orders
+        'orders' : orders,
+        'user' : user[0]
     }
     return render(request, 'account/UnpaidOrder.html',context)
 
 @login_required(login_url='/login')
 def historyOrder(request):
     orders = Order.objects.filter(owner_id= request.user.id).all()
+    user = User.objects.filter(id=request.user.id)
+
     context ={
-        'orders':orders
+        'orders':orders,
+        'user' : user[0]
     }
     return render(request, 'account/HistoryOrder.html',context)
 
 @login_required(login_url='/login')
 def addresses(request):
     postAddressesUser = PostAddress.objects.filter(owner_id=request.user.id)
-    print(postAddressesUser)
+    user = User.objects.filter(id=request.user.id)
+
     context ={
-        'postAddressesUser' : postAddressesUser
+        'postAddressesUser' : postAddressesUser,
+        'user' : user[0]
     }
     return render(request, 'account/addresses.html',context)
+
+@login_required(login_url='/login')
+def editOrder(request,pk):
+    order = Order.objects.filter(owner_id= request.user.id,id=pk)
+    user = User.objects.filter(id=request.user.id)
+    order_details = OrderDetail.objects.get_queryset().filter(order__id=pk,order__owner_id=request.user.id)
+    total_price = 0
+    for orderDetail in order_details:
+        total_price = total_price + (orderDetail.price * orderDetail.count)
+
+    post_price = PostPrice.objects.filter().first()
+
+    post_address_detail = PostAddressDetail.objects.filter(
+                                OrderDetailSelected =order[0],
+                                ).first()
+    
+    # postAddressesUser = PostAddress.objects.filter(owner_id=request.user.id)
+
+    # print('order',order)
+    print('post_address_detail=', post_address_detail)
+    print('post_address_detail=', post_address_detail.carrierDetails)
+    print('post_address_detail=', type(post_address_detail.carrierDetails))
+    # print('post_address_detail=', post_address_detail.addressSelected.post_code)
+    
+    # print(order_details[0].product.title)
+    # print(order_details[0].product.number)
+    # print(order[0])
+    context ={
+        'order': order[0],
+        'user' : user[0],
+        'order_details' : order_details,
+        'total_price_ofProduct' : total_price,
+        'post_price' : post_price.price,
+        'post_address_detail' : post_address_detail,
+    }
+    return render(request, 'account/details_order.html',context)
 
 #! delete PostAddress detail
 class PostAddress_delete_list_of_buy(DestroyAPIView):

@@ -27,9 +27,8 @@
 
                 <img src="{% static 'images/avatar.jpg' %}" alt="Avatar">
                 <div>
-                    <p> حجت شهپر </p>
-                    <h4>hoshang.1371@yahoo.com</h4>
-                </div>
+                    <p> {{user.first_name}} {{user.last_name}} </p>
+                    <h4>{{user.email}}</h4>                </div>
             </div>
             <div class="khat"></div>
 
@@ -81,7 +80,7 @@
 
                 {% for order in orders %}
                 <tr>
-                    <td class="ToPersian idOrder"><a href="" class="ToPersian idOrder">{{order.id}}</a></td>
+                    <td class="idOrder"><a href="{% url 'editOrder' order.id %}" class="ToPersian idOrder">{{order.id}}</a></td>
                     <td class="ToPersian">{{order.j_payment_date.date|jformat:"%Y/%m/%d"  }}</td>
                     
                     {% if order.is_send is True %}

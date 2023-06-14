@@ -1,0 +1,144 @@
+.upDetails {
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+    padding: 5px;
+    margin: 5px;
+}
+
+
+.upDetails>div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* border-radius: 20px;
+    border: 1px solid #3a3b385e; */
+    /* margin: 5px;
+    padding: 5px; */
+    width: calc(100% - 5px);
+}
+
+.upDetails>div>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-family: 'samim';
+    flex-direction: row-reverse;
+    font-weight: bold;
+    /* width: calc(100%/3); */
+}
+
+.upDetails>div>div>p {
+    font-size: 13px !important;
+    font-weight: normal;
+}
+
+
+
+.upDetails>div>div:not(:nth-child(2))>p {
+    margin-right: 30px;
+}
+
+.upDetails>div>div:last-child>p {
+    background-color: #dbd067;
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+}
+
+.upDetails>div>div:last-child>p::before {
+    content: '';
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    margin-right: 10px;
+}
+
+@keyframes tableOpacity {
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
+
+.table {
+    width: calc(100% - 5px);
+    height: auto;
+    margin-top: 20px;
+    display: none !important;
+}
+
+.show {
+    display: block !important;
+    animation-name: tableOpacity;
+    animation-duration: 1s;
+}
+
+.notShow {
+    display: none !important;
+}
+
+.table table tr td p {
+    padding: 0px !important;
+    font-size: 15px !important;
+    font-weight: normal !important;
+}
+
+
+.bill table tr th:first-child {
+    width: 60%;
+}
+
+/* .bill table tr:nth-last-child(-n+3) td:nth-child(2){
+    background-color: red;
+    width: 40%;
+} */
+
+/* .bill table tr td:first-child{
+    background-color: red;
+} */
+
+.bill table tr td:first-child div:first-child {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: row-reverse;
+}
+
+.bill table tr td:first-child div:nth-child(2) p,
+.bill table tr td:first-child div:first-child p{
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.bill table tr td:first-child div:nth-child(2) {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    font-size: 15px;
+    font-family: 'samim';
+    font-weight: normal;
+}
+/* .bill table tr:nth-last-child(-n+3) td:nth-child(2) */
+/* .bill table tr:not(nth-last-child(-n+3)) td:nth-child(2){
+    background-color: red;
+} */
+.bill table tr th:nth-child(3),
+.bill table tr th:nth-child(2),
+.bill table tr:not(:nth-last-child(-n+3)) td:nth-child(3),
+.bill table tr:not(:nth-last-child(-n+3)) td:nth-child(2){
+    /* background-color: red; */
+    border-right: none;
+}
+
+
+.post_info {
+    width: calc(100% - 40px)!important;
+}

@@ -40,7 +40,7 @@ def List_user_open_order(request):
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
     order_partials_buy = order.orderdetail_set.all()
     post_price = PostPrice.objects.filter().first()
-    print("post_price=",post_price.price)
+    # print("post_price=",post_price.price)
     # print(order_partials_buy)
     #order_partials = OrderDetail.objects.all()
     Total_price_for_all_product_buy =0

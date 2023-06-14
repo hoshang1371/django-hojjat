@@ -26,8 +26,8 @@
 
                 <img src="{% static 'images/avatar.jpg' %}" alt="Avatar">
                 <div>
-                    <p> حجت شهپر </p>
-                    <h4>hoshang.1371@yahoo.com</h4>
+                    <p> {{user.first_name}} {{user.last_name}} </p>
+                    <h4>{{user.email}}</h4>
                 </div>
             </div>
             <div class="khat"></div>

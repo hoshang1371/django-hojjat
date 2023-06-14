@@ -3,6 +3,8 @@ from spad_account.models import User
 from django.core.validators import RegexValidator
 
 from spad_eshop_order.models import Order, OrderDetail
+from django_jalali.db import models as jmodels
+from django.utils.timezone import now
 
 class PostPrice(models.Model):
     title = models.CharField(max_length=150, verbose_name='هزینه ارسال ')
@@ -13,10 +15,16 @@ class PostPrice(models.Model):
         verbose_name_plural = 'هزینه ارسال'
 
     # def __str__(self):
-    #     return self.title
+    #     return self.title  Carrier details
 
 Country_CHOICES = (
     ('iran','ایران'),
+)
+
+Carrier_CHOICES = (
+    ('1','پست'),
+    ('2','تیپاکس'),
+    ('3','باربری'),
 )
 
 class PostAddress(models.Model):
@@ -40,9 +48,18 @@ class PostAddress(models.Model):
     
 class PostAddressDetail(models.Model):
     # addressSelected = models.OneToOneField(PostAddress, on_delete=models.CASCADE, verbose_name=' آدرس انتخابی ')
+    carrierDetails = models.CharField(max_length=20, choices=Carrier_CHOICES, default=1, verbose_name='روش ارسال')
     addressSelected = models.ForeignKey(PostAddress, on_delete=models.CASCADE, verbose_name=' آدرس انتخابی ')
     OrderDetailSelected = models.OneToOneField(Order, on_delete=models.CASCADE, verbose_name=' سبد خرید انتخابی انتخابی ')
     isResive = models.BooleanField(default=False)
+
+    carried = jmodels.jDateTimeField(blank = True, null = True, verbose_name='تاریخ حمل شده')
+    sentToShippingUnit = jmodels.jDateTimeField(blank = True, null = True, verbose_name='تاریخ ارسال شده به واحد حمل')
+    collected = jmodels.jDateTimeField(blank = True, null = True, verbose_name='تاریخ جمع آوری شده')
+    collecting = jmodels.jDateTimeField(blank = True, null = True, verbose_name='تاریخ در حال جمع اوری')
+    Ongoing = jmodels.jDateTimeField(blank = True, null = True, verbose_name='تاریخ در دست اقدام')
+    processing = jmodels.jDateTimeField(blank = True, null = True, verbose_name='تاریخ در حال پردازش')
+    confirmedPayment = jmodels.jDateTimeField(blank = True, null = True, verbose_name='تاریخ پرداخت تایید شده')
 
     class Meta:
         verbose_name = 'اطلاعات آدرس انتخابی'
