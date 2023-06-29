@@ -38,6 +38,7 @@ class PostAddress(models.Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True, verbose_name='تلفن ثابت')
     mobile_phone_number = models.CharField(validators=[phone_regex], max_length=17, verbose_name= 'تلفن همراه')
     post_code = models.CharField(max_length=20,verbose_name='کد پستی')
+    isCorrect_mobile_phone_number = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'اطلاعات پست'

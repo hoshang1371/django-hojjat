@@ -15,8 +15,6 @@ function getCookie(name) {
     return cookieValue;
 }
 const csrftoken = getCookie('csrftoken');
-
-
 //!===================================================
 
 function getElementOfId(inItem) {
@@ -32,7 +30,8 @@ let post_info_Item = document.querySelectorAll(".post_info");
 post_info_Item.forEach(inItem => {
     let remove_item = inItem.querySelector('div:nth-child(2)>div:last-child>p:last-child');
     let edit_item = inItem.querySelector('div:nth-child(2)>div:last-child>p:first-child');
-
+    // var pass_f = inItem.previousElementSibling;
+    // console.log('pass_f',pass_f)
     edit_item.addEventListener('click',function (){
         var id=getElementOfId(inItem)
         console.log(id);
@@ -57,10 +56,15 @@ post_info_Item.forEach(inItem => {
             console.log("it's ok");
             console.log(data.status);
             if (data.status == 204) {
+                var pass_f = inItem.previousElementSibling;
+                // console.log('pass_f',pass_f)
                 inItem.remove();
+                pass_f.remove();
             }
+            
         });
         // console.log(count);
 
-    });
+    }
+    );
 });

@@ -60,13 +60,26 @@
         <p style="color:red; ">{{error}}</p>
         {% endfor %}
 
+        <div class="varifyMobile">
+            <div class="field">
+                <div class=""><span class="fas fa-check"></span></div>
+                {{ add_address.check_mobile_phone_number_for_post }}
+            </div>
+            <p class="countdownTimerDisplayNone"></p>
+            <p class="varifyMobileHover" >ارسال کد تایید</p>
+        </div>
+
+        {% for error in add_address.check_mobile_phone_number_for_post.errors %}
+        <p style="color:red; ">{{error}}</p>
+        {% endfor %}
+
         <div class="field">
             <div class=""><span class="fa fa-map-pin"></span></div>
             {{ add_address.post_code_for_post }}
         </div>
 
         <div class="field-sabt">
-            <input type="submit" value="ادامه">
+            <input class="continue" type="submit" value="ادامه" disabled >
         </div>
 
         <div class="field_cancel">
@@ -108,6 +121,15 @@
     </div>
 
 </div>
+
+<script src="{% static 'js/add_post_address.js' %}"></script>
+
+{% if messages %}
+{% for message in messages %}
+{% if message.tags %}
+<script>alert("{{ message }}")</script> {% endif %}
+{% endfor %}
+{% endif %}
 
 
 {% endblock %}

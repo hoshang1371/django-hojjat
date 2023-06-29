@@ -291,7 +291,6 @@ class product_order_staff(ListCreateAPIView):
 
 class product_order_ditails_staff(APIView):
     permission_classes = (IsAdminUser,)
-
     def get(self, request, *args, **kwargs):
         order_id = self.kwargs.get('order_id')
         orderDetails = OrderDetail.objects.filter(order=order_id)

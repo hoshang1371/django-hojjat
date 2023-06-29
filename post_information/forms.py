@@ -103,11 +103,22 @@ class AddAddress(forms.Form):
         widget=forms.TextInput(
         attrs={
             'placeholder':'لطفاً تلفن همراه خود را وارد نمایید ',
-            'class' : 'form-control rtl'
+            'class' : 'form-control rtl mobNumber'
             },
             ),
         validators=[mobile_phone_validator],
         label=' تلفن همراه   '
+    )
+
+    check_mobile_phone_number_for_post = forms.CharField(
+        widget=forms.TextInput(
+        attrs={
+            'placeholder':' کد تایید را وارد کنید ',
+            'class' : 'form-control rtl',
+            'type':'number',
+            },
+            ),
+        label=' کد تایید موبایل '
     )
     
     post_code_for_post = forms.CharField( 
