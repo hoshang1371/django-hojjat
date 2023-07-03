@@ -1,39 +1,107 @@
-nahveye ersal
+{% extends 'shared/_MainLayout.html' %}
 
 
-<br>
-{% for postAddressUser in postAddressesUser %}
-{{postAddressUser.id}}
-<br>
-{% endfor %}
-<br>
+{% load static %}
+{% load mathfilters %}
 
-<form action="#">
-    {% csrf_token %}
-    {% for d in user_post_address_detail.PostAddress_id %}
-        {{d.tag }}
-        <!-- <label style="display: none;" for="{{postAddressUser.id}}">{{d.id}}
-            <input type="radio" id="{{d.id}}" name="fav_language" value={{d.0}}>
-        </label><br> -->
-    {% endfor %}
-    <input type="submit" value="ادامه">
-</form>
-<br>
+{% block content %}
 
-<!-- <form action="/">
-    {% for x,y in user_post_address_detail.fields.gender %}
+<link rel="stylesheet" href="{% static 'css/add_userAdressDetail.css' %}">
+<link rel="stylesheet" href="{% static 'css/post_order.css' %}">
 
-    {% endfor %}
-    <input type="submit" value="ادامه">
-</form> -->
-<br>
 
-<form action="#">
-    {% for a,b in zipee %}
-        {{a.0}}
-        <br>
-        {{b.id}}
-        <br>
-    {% endfor %}
-    <input type="submit" value="ادامه">
-</form>
+<div class="content_add_userAdressDetail">
+    <form method="post" action="{% url 'paymentMethod' %}">
+        {% csrf_token %}
+        <div class="right">
+            <div>
+                <p>روش ارسال</p>
+            </div>
+            <div class="khat"></div>
+
+            {% for carriersChoice in carriersChoices %}
+            <div class="item_for_carriers">
+                {{carriersChoice.tag}}
+                <div>
+
+                    {% if 'پست' in carriersChoice.data.label %}
+                    <img src="{% static 'images/post.jpg' %}" alt="">
+                    {% elif 'تیپاکس' in carriersChoice.data.label %}
+                    <img src="{% static 'images/tipax.png' %}" alt="">
+                    {% elif 'باربری' in carriersChoice.data.label %}
+                    <img src="{% static 'images/bar_bari.jpg' %}" alt="">
+                    {% endif %}
+                    <p>
+                        {{ carriersChoice.data.label }}
+                    </p>
+                    {% if 'پست' in carriersChoice.data.label %}
+                    <h1>
+                        ارسال به اداره پست در اولین روز کاری بعد از سفارش
+                    </h1>
+                    <p>
+                        <span class="ToPersian">
+                            28000 تومان
+                        </span>
+                    </p>
+                    {% elif 'تیپاکس' in carriersChoice.data.label %}
+                    <h1>
+                        ارسال در همان روز
+                    </h1>
+                    <p>
+                        --
+                    </p>
+                    {% elif 'باربری' in carriersChoice.data.label %}
+                    <h1>
+                        ارسال در همان روز
+                    </h1>
+                    <p>
+                        --
+                    </p>
+                    {% endif %}
+                </div>
+
+            </div>
+            <br>
+            {% endfor %}
+
+            <div>
+                <input type="submit" value="ادامه">
+            </div>
+        </div>
+    </form>
+
+
+    <div class="left">
+        <div class=" title_of_buy">
+            <div>
+                <p><span class="ToPersian count_off_all_product">{{count_off_all_product}}&nbsp;</span>نوع کالا در سبد
+                    خرید شما</p>
+            </div>
+            <div class="khat"></div>
+            <div class="total_of_product">
+                <div>جمع محصولات</div>
+                <div>
+                    <p><span
+                            class="ToPersian Total_price_for_all_product_buyData">{{Total_price_for_all_product_buy}}</span>
+                        ریال</p>
+                </div>
+            </div>
+            <div class="send_product">
+                <div>ارسال</div>
+                <div>
+                    <p><span class="ToPersian">{{post_price}}</span> ریال</p>
+                </div>
+            </div>
+
+            <div class="total_of_Price">
+                <div>مجموع</div>
+                <!-- <div><p><span>۲۲۵,۰۰۰</span> ریال</p></div> -->
+                <div>
+                    <p><span class="ToPersian Total_price_postPrice">{{Total_price_for_all_product_buy|add:post_price}}</span> ریال</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

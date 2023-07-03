@@ -230,7 +230,7 @@
 }
 
 /*!===========================================*/
-.content_list_of_buy>div>img {
+.content_list_of_buy>div>a>img {
     width: 100px;
     height: 92%;
     margin: 4px;
@@ -394,7 +394,7 @@
         width: auto !important;
     }
 
-    .content_list_of_buy>div>img {
+    .content_list_of_buy>div>a>img {
         width: 60%;
         height: 170px;
         margin-left: 20%;

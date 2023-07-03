@@ -413,7 +413,7 @@ a {
 .cart__item>*{
     margin: 10px;
 }
-.cart__item > img{
+.cart__item >a> img{
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -719,14 +719,12 @@ a {
         /* align-items: center!important; */
     }
 
-    .has-submenu:hover .submenu {
+    .has-submenu:hover .submenu
+    {
         opacity: 1;
         visibility: visible;
         margin-top: 3px;
-    }
-
-    
-    
+    } 
     .toggle {
         display: none;
     }

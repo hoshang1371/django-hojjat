@@ -1,6 +1,9 @@
 
 
-const url ="http://192.168.1.51:8000"
+// const url ="http://192.168.1.51:8000"
+const url =window.location.origin
+
+console.log('window.location',window.location.origin)
 // const url ="http://127.0.0.1:8000"
 const url_put_item_list_of_buy = url+"/buy/update_for_buy/"
 const delete_put_item_list_of_buy = url+"/buy/Order_product_delete_list_of_buy/"

@@ -46,8 +46,10 @@ if ('scrollRestoration' in window.history) {
     window.history.scrollRestoration = 'manual'
 }
 
+// w = window.innerWidth;
+
 window.addEventListener('resize', function () {
-    w = window.innerWidth;
+    let w = window.innerWidth;
     // console.log(w)
     if (w > 959) {
         for (let i = 0; i < submenu.length; i++) {
@@ -107,7 +109,19 @@ function togglesubmenu1() {
 }
 
 function togglesubmenu2() {
-    submenu[0].classList.add("active");
+    let w = window.innerWidth;
+    // let y = document.querySelector('.'+submenu[0].classList[0])
+    // console.log(y.style)
+    // console.log(w);
+    // console.log(submenu[0].classList);
+    console.log(submenu[0].classList.item(0));
+    // console.log(submenu[0].style);
+    if(w <952)
+    {
+        submenu[0].classList.add("active");
+    }
+
+
     // submenu[1].classList.add("active");
 }
 
@@ -134,7 +148,7 @@ function mobile_Close_subdaste() {
 toggle.addEventListener("click", toggleMenu, false);
 
 //subdaste1.addEventListener("click", togglesubmenu1, false);
-
+//todo
 subdaste2.addEventListener("click", togglesubmenu2, false);
 
 for (let x = 0; x < mobileClose.length; x++)

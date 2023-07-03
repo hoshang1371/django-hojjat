@@ -162,7 +162,7 @@ class CreateOneOrder(View):
                 Total_count_for_all_product = Total_count_for_all_product + order_count_partial.count
                 Total_count_for_product =Total_count_for_product+1
 
-            #print(Total_count_for_product)
+            # print(order_partial_set.product.image.url)
             user = {'productId':order_partial_set.id,
                     'productImage':order_partial_set.product.image.url,
                     'productName':order_partial_set.product.title,
@@ -170,6 +170,7 @@ class CreateOneOrder(View):
                     'product_All_price':Total__each_product,
                     'Total_count_for_all_product':Total_count_for_all_product,
                     'Total_count_for_product' : Total_count_for_product,
+                    'get_absolute_url' : order_partial_set.product.get_absolute_url()
                 }
             data = {
                 'user': user,
@@ -193,10 +194,20 @@ class UpdateCrudUser(View):
         order = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
 
         obj = order.orderdetail_set.get(id=id1)
+        # obj = order.orderdetail_set.product
         # obj = OrderDetail.objects.get(id=id1)
+        print('obj.product')
+        print(obj.product.number)
+        print('count1')
+        print(count1)
+        if int(count1) > int(obj.product.number):
+            print('kosnanat')
+            data = {
+            'user': "not exist"
+            }
+            return JsonResponse(data)
+        
         obj.count = count1
-        
-        
         obj.save()
 
         Total__each_product = int(obj.count) * int(obj.price)

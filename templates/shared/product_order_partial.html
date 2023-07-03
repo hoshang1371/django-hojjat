@@ -8,7 +8,9 @@
     {% for order_partial in order_partials %}
     <div class="cart__item">
         <input type="hidden" id="product__id" value="{{order_partial.id}}">
-        <img src="{{order_partial.product.image.url}}" id="product__" alt="">
+        <a href="{{order_partial.product.get_absolute_url}}">
+            <img src="{{order_partial.product.image.url}}" id="product__" alt="">
+        </a>
         <h4 class="product__name fontSamim fontSize_16">{{order_partial.product.title}}</h4>
         <a class="btn__small" action="decrease">&minus;</a>
         <h4 class="product__quantity ToPersian fontSamim fontSize_16">{{order_partial.count}}</h4>
@@ -173,7 +175,10 @@ function saveToStorage(bufferId, bufferCountA, inItem) {
         },
         dataType: 'json',
         success: function (data) {
-            if (data.user) {
+            if(data.user == 'not exist'){
+                alert('این تعداد کالا موجود نیست.')
+            }
+            else if (data.user) {
                 inItem.querySelector('.product__quantity').innerText = (bufferCountA.toString()).toPersinaDigit();
                 inItem.querySelector('.product_price').innerText = ((data.user.price).toString()).toPersinaDigit();
                 document.querySelector(".total__counter a").innerText =(data.user.Total_count_for_all_product.toString()).toPersinaDigit();

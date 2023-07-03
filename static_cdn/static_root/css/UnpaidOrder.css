@@ -1,0 +1,279 @@
+/* .content-user-account{
+    position: relative;
+    top: 200px;
+    width: 100%;
+    height: 60vh;
+
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+    margin-bottom: 200px;
+
+}
+
+
+
+.user-panel ,
+.edite-profile ,
+.exit {
+    text-align: center;
+    font-size: 30px;
+    background-color: #3e60a8;
+    padding: 30px 0px 30px 0px;
+    color: antiquewhite;
+    font-family: 'samim';
+    margin-bottom: 5px;
+}
+
+.user-panel:hover ,
+.edite-profile:hover ,
+.exit:hover {
+    background-color: #dbd067;
+}
+
+.user-panel:hover a ,
+.edite-profile:hover a ,
+.exit:hover a {
+    color: #3e60a8;
+}
+
+.user-panel a,
+.edite-profile a,
+.exit a{
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #ccc;
+} */
+
+.khat {
+    position: initial;
+    background-color: #3a3b3885;
+    width: calc(100% - 10px);
+    content: '';
+    height: 2px;
+    transform: translateX(5px);
+}
+
+.user_content{
+    width: 100%;
+    position: relative;
+    top: 170px;
+    display: flex;
+    flex-direction: row-reverse;
+    /*! hazv shavad*/
+    /* height: 1000px; */
+    margin-bottom: 250px;
+}
+
+.user_content>div:first-child {
+    width: calc(30%);
+}
+
+.right_listOfFeatures {
+    /*! hazv shavad*/
+    height: auto;
+    width: 90%;
+    margin: 20px;
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+    box-shadow: 2px 2px 2px 1px #3a3b385e;
+    position: sticky;
+    top: 75px;
+}
+
+/*table*/
+table {
+    font-family: arial, sans-serif;
+    width: calc(100% - 20px);
+    margin: 10px;
+    border-spacing: 0;
+    border-collapse: separate;
+    border-radius: 10px;
+    border: 1px solid black;
+    overflow: hidden;
+    direction: rtl;
+
+    font-family: 'samim';
+}
+
+table th:not(:last-child),
+table td:not(:last-child) {
+    border-right: 1px solid black;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+
+    font-family: 'samim';
+    /* display: flex; */
+}
+
+td a,
+th a {
+    font-family: 'samim';
+}
+
+/* td {
+    direction: rtl;
+    
+} */
+
+.idOrder {
+    color: red;
+}
+
+.sended p{
+    background-color: green;
+}
+
+.notSended p{
+    background-color: red;
+}
+
+.statusOrder p {
+    /* background-color: green; */
+    border-radius: 10px;
+    height: 35px;
+    align-items: center;
+    padding: 0px !important;
+    color: black !important;
+    font-size: 15px !important;
+    margin: 0 !important;
+    display: flex;
+    justify-content: center;
+}
+
+.right_listOfFeatures img {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border: 1px solid #3a3b385e;
+}
+
+.right_listOfFeatures .right_headerList {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.right_listOfFeatures .right_headerList>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'samim';
+}
+
+.right_listOfFeatures .right_headerList>div>h4 {
+    font-size: 10px;
+    color: #3a3b38;
+}
+
+.right_listOfFeatures p,
+.Left_UnpaidOrders p {
+    text-align: center;
+    font-family: 'samim';
+    padding: 10px;
+    font-weight: bold;
+    font-size: 19px;
+    color: #3a3b38;
+
+}
+
+.right_panelGruop {
+    align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .right_listOfFeatures .right_panelGruop>div:first-child {
+    margin-top: 20px;
+} */
+
+.right_listOfFeatures .right_panelGruop>div {
+    /* margin-bottom: 20px; */
+    width: 100%;
+    height: 60px;
+    align-items: center;
+    position: relative;
+}
+
+.right_listOfFeatures .right_panelGruop>div::before {
+    position: absolute;
+    width: 90%;
+    background-color: #3a3b3885;
+    content: "";
+    height: 1px;
+    transform: translateX(5%);
+}
+
+.right_listOfFeatures .right_panelGruop>div:first-child::before {
+    content: none;
+}
+
+.right_listOfFeatures .right_panelGruop>div>a,
+.right_listOfFeatures .right_panelGruop>div>div>a {
+    font-family: "mikhak";
+    color: #3a3b38;
+    text-align: center;
+    align-items: center;
+    /* position: absolute;
+    width: 100%;
+    top: 25%; */
+    /* margin: 20px 0px; */
+}
+
+.right_listOfFeatures .right_panelGruop>div>div {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.right_listOfFeatures .right_panelGruop>div>div>svg {
+    margin-left: 10px;
+    color: #dbd067;
+}
+
+.right_listOfFeatures .right_panelGruop>div:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.right_listOfFeatures .right_panelGruop>div:last-child>a {
+    color: red;
+    position: absolute;
+    width: 100%;
+    top: 25%;
+}
+
+
+.Left_UnpaidOrders {
+    height: 100%;
+    width: calc(70% - 20px);
+    margin: 20px;
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+}
+
+@media all and (max-width: 960px) {
+    .user_content{
+        flex-direction: column;
+    }
+    .user_content>div:first-child{
+        width: 100%!important;
+    }
+    .right_listOfFeatures{
+        width: calc(100% - 40px);
+    }
+    .user_content .Left_UnpaidOrders{
+        width: calc(100% - 40px)!important;
+    }
+}

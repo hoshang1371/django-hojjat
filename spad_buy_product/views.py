@@ -88,8 +88,23 @@ class product_order_List_buy(UpdateAPIView):
         if count < 0:
             count = 1
         # product = Product.objects.get_by_id(product_id=product_id)
+        # print('product=',product)
+        # orderDetail = order.orderdetail_set.filter(order=order)
+        # print(orderDetail.product.number)
         x = order.orderdetail_set.filter(id=product_id)
+
+        if count > int(x[0].product.number):
+            # print('kiri in ziade')
+            data = {
+                'err':'not exist',
+                'number': x[0].product.number
+            }
+            return JsonResponse(data, safe=False)
+
         if x:
+            print('x.product.number')
+            # print(type(int(x[0].product.number)))
+            # print(type(count))
             x.update(count=count)
 
 

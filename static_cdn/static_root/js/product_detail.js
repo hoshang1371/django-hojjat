@@ -30,8 +30,8 @@ String.prototype.toPersinaDigit= function(){
 
 
 
+let en_number =""
 document.addEventListener('keyup',function(k){
-    let en_number =""
     if((k.key >= "0" && k.key <= "9")||k.key== "Backspace"){
         en_number = numberProduct.value;
 

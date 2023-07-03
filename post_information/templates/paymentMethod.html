@@ -1,0 +1,64 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/post_order.css' %}">
+
+<div class="background_order">
+
+    <!-- <form method="post" action="/add_userPostAddressDetail"> -->
+    <form method="post" action="{% url 'add_userPostAddressDetail' %}">
+    <!-- <form method="post" action=""> -->
+        {% csrf_token %} 
+        <div class="list_of_post_info">
+            <div>
+                <p>پرداخت</p>
+            </div>
+            <div class="khat"></div>
+            <div>
+                <input type="submit" value="پرداخت">
+            </div>
+        </div>
+    </form>
+
+
+    <div>
+        <div class=" title_of_buy">
+            <div>
+                <p><span class="ToPersian count_off_all_product">{{count_off_all_product}}&nbsp;</span>نوع کالا در سبد
+                    خرید شما</p>
+            </div>
+            <div class="khat"></div>
+            <div class="total_of_product">
+                <div>جمع محصولات</div>
+                <div>
+                    <p><span
+                            class="ToPersian Total_price_for_all_product_buyData">{{Total_price_for_all_product_buy}}</span>
+                        ریال</p>
+                </div>
+            </div>
+            <div class="send_product">
+                <div>ارسال</div>
+                <div>
+                    <p><span class="ToPersian">{{post_price}}</span> ریال</p>
+                </div>
+            </div>
+
+            <div class="total_of_Price">
+                <div>مجموع</div>
+                <!-- <div><p><span>۲۲۵,۰۰۰</span> ریال</p></div> -->
+                <div>
+                    <p><span class="ToPersian Total_price_postPrice">{{ Total_price_for_all_product_buy|add:post_price}}</span> ریال</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="{% static 'js/address.js' %}"></script>
+
+{% endblock %}

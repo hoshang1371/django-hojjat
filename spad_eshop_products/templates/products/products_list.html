@@ -64,7 +64,9 @@
         document.querySelector('.mobile-cart-head').insertAdjacentHTML("afterend",`
         <div class="cart__item">
             <input type="hidden" id="product__id" value="${product.productId}">
-            <img src="${product.productImage}" id="product__" alt="">
+            <a href="${product.get_absolute_url}">
+                <img src="${product.productImage}" id="product__" alt="">
+            </a>
             <h4 class="product__name">${product.productName}</h4>
             <a  class="btn__small" action="decrease">&minus;</a>
             <h4 class="product__quantity ToPersian fontSamim fontSize_16">${product.productCount}</h4>

@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 
 from django.contrib.auth.decorators import login_required
 from requests import Response
-from post_information.forms import UserPostAddressDetailForm,AddAddress,Country
+from post_information.forms import UserPostAddressDetailForm,AddAddress,Country,CarrierChoices
 from post_information.models import PostAddressDetail, PostPrice,PostAddress
 
 from spad_eshop_order.models import Order
@@ -33,7 +33,7 @@ def post_order(request):
     # if request.method == 'POST':
     if user_post_address_detail.is_valid():
         product_id = user_post_address_detail.cleaned_data.get('PostAddress_id')
-        # print('product_id=',product_id)
+        print('product_id=',product_id)
     #!
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
     order_partials_buy = order.orderdetail_set.all()
@@ -304,10 +304,11 @@ def edit_post_add_address(request, pk):
 @login_required(login_url='/login')
 def add_userPostAddressDetail(request):
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
-    postAddressesUser = PostAddress.objects.filter(owner_id=request.user.id)
+    # postAddressesUser = PostAddress.objects.filter(owner_id=request.user.id)
     user_post_address_detail = UserPostAddressDetailForm(request.POST or None,request.user)#
+    carriersChoices = CarrierChoices(request.POST or None,request.user)
     print('user_post_address_detail.choices[0][0]=',user_post_address_detail.choices[0][0])
-    if request.method == 'POST':
+    if request.method == 'POST':        
         if user_post_address_detail.is_valid():
             PostAddress_id = user_post_address_detail.cleaned_data.get('PostAddress_id')
             print("PostAddress_id=",PostAddress_id)
@@ -342,19 +343,92 @@ def add_userPostAddressDetail(request):
             else:
                 post_address_detail.addressSelected = post_address[0]
                 post_address_detail.save()
-                print('post_address_detail.addressSelected=', post_address_detail.addressSelected)
+                print('post_address_detail.addressSelected=', post_address_detail.addressSelected.id)
 
 
-            
+
+
+    # order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+    order_partials_buy = order.orderdetail_set.all()
+    post_price = PostPrice.objects.filter().first()
+    #order_partials = OrderDetail.objects.all()
+    Total_price_for_all_product_buy =0
+    count_off_all_product =0
+
+    for order_partial in order_partials_buy:
+        count_off_all_product = count_off_all_product+1
+        Total_price_for_each_product_buy = order_partial.count * order_partial.price
+        Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+    # print('user_post_address_detail=',user_post_address_detail['PostAddress_id'])
     username = request.user.username
     site_setting = SiteSetting.objects.first()
 
     contex ={
         'username' : username,
         'setting': site_setting,
-        'user_post_address_detail': user_post_address_detail,
-        'postAddressesUser' : postAddressesUser,
-        'zipee' : zip(user_post_address_detail.choices,postAddressesUser),
+        # 'user_post_address_detail': user_post_address_detail,
+        # 'postAddressesUser' : postAddressesUser,
+        'carriersChoices' : carriersChoices['Carrier_field'],
+
+        'Total_price_for_all_product_buy' : Total_price_for_all_product_buy,
+        'post_price': post_price.price,
+        'count_off_all_product': count_off_all_product,
+
+        # 'zipee' : zip(user_post_address_detail.choices,postAddressesUser),
         
     }
     return render(request ,'add_userAdressDetail.html',contex)
+
+
+@login_required(login_url='/login')
+def paymentMethod(request):
+    order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+    carriersChoices = CarrierChoices(request.POST or None,request.user)
+
+
+    if request.method == 'POST':        
+        if carriersChoices.is_valid():
+            print('kiri')
+            Carrier_field = carriersChoices.cleaned_data.get('Carrier_field')
+            print(Carrier_field)
+
+            post_address_detail = PostAddressDetail.objects.filter(
+                                OrderDetailSelected =order,
+                                ).first()
+            print('post_address_detail=', post_address_detail)
+
+            post_address_detail.carrierDetails = Carrier_field
+
+            post_address_detail.save()
+
+            print('post_address_detail.carrierDetails',post_address_detail.carrierDetails)
+
+
+    order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+    order_partials_buy = order.orderdetail_set.all()
+    post_price = PostPrice.objects.filter().first()
+    #order_partials = OrderDetail.objects.all()
+    Total_price_for_all_product_buy =0
+    count_off_all_product =0
+
+    for order_partial in order_partials_buy:
+        count_off_all_product = count_off_all_product+1
+        Total_price_for_each_product_buy = order_partial.count * order_partial.price
+        Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+
+
+    username = request.user.username
+    site_setting = SiteSetting.objects.first()
+
+    contex={
+        'username' : username,
+        'setting': site_setting,
+        # 'user_post_address_detail': user_post_address_detail,
+        # 'postAddressesUser' : postAddressesUser,
+        'carriersChoices' : carriersChoices['Carrier_field'],
+
+        'Total_price_for_all_product_buy' : Total_price_for_all_product_buy,
+        'post_price': post_price.price,
+        'count_off_all_product': count_off_all_product,
+    }
+    return render(request ,'paymentMethod.html',contex)

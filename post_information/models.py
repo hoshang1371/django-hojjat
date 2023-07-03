@@ -68,3 +68,6 @@ class PostAddressDetail(models.Model):
 
     def __str__(self):
         return self.addressSelected.address
+
+
+

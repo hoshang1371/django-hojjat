@@ -23,6 +23,13 @@
     z-index: 1;
 }
 
+.startMenu .userName{
+    color: antiquewhite;
+    font-size: 10px;
+    margin-left: 10px;
+}
+
+
 .text-end p a {
     padding: 2px 20px 2px 20px;
     text-decoration: none;
@@ -44,7 +51,8 @@
 }
 
 .site-title {
-    font-size: 2rem;
+    /* font-size: 2rem; */
+    font-size: 14px;
     transform: translateX(+50%);
     -webkit-transform: translateX(+50%);
     -moz-transform: translateX(+50%);
@@ -73,4 +81,15 @@
         flex-direction: row;
         justify-content: space-between;
     }
+
+    .startMenu .userName{
+        color: antiquewhite;
+        font-size: 14px;
+        margin-left: 20px;
+    }
+
+    .site-title {
+        font-size: 2rem;
+    }
 }
+

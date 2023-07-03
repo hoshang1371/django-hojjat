@@ -17,7 +17,10 @@
                 <div class="content_list_of_buy">
                     <div>
                         <input type="hidden" value="{{order_partial_buy.id}}">
-                        <img src="{{order_partial_buy.product.image.url}}" id="product__" alt="">
+                        <a href="{{ order_partial_buy.product.get_absolute_url }}">
+                            <img src="{{order_partial_buy.product.image.url}}" id="product__" alt="">
+                        </a>
+                        <!-- <img src="{{order_partial_buy.product.image.url}}" id="product__" alt=""> -->
                         <div>
                             <h4 class="fontSamim ToPersian">{{order_partial_buy.product.title}}</h4>
                             <h3>کد: <span class="ToPersian">{{order_partial_buy.product.code}}</span></h3>

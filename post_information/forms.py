@@ -28,6 +28,7 @@ class UserPostAddressDetailForm(forms.Form):
         self.fields['PostAddress_id'].choices =self.choices
 
 Country = [('1', 'ایران')]
+
 from django.core.validators import RegexValidator
 phone_validator = RegexValidator(r"^\0?1?\d{9,15}$",".شماره تلفن با کد شهر وارد کنید")
 mobile_phone_validator = RegexValidator(r"^\0?1?\d{9,15}$",". شماره موبایل صحیح را وارد کنید ")
@@ -127,4 +128,29 @@ class AddAddress(forms.Form):
             'type':'number',
             }),
         label=' کد پستی '
+        )
+    
+
+Carrier_CHOICES = (
+    ('1','پست'),
+    ('2','تیپاکس'),
+    ('3','باربری'),
+)
+
+class CarrierChoices(forms.Form):
+    # Carrier_field = forms.ChoiceField(choices = Carrier_CHOICES)
+    Carrier_field = forms.ChoiceField(
+        widget=forms.RadioSelect,
+        choices = Carrier_CHOICES
+        )
+    
+payment_METHOD= (
+    ('1','زرین پال'),
+)
+
+class paymentMethod(forms.Form):
+    # Carrier_field = forms.ChoiceField(choices = Carrier_CHOICES)
+    paymentMethod_field = forms.ChoiceField(
+        widget=forms.RadioSelect,
+        choices = payment_METHOD
         )

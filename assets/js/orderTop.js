@@ -87,11 +87,16 @@ $.ajax({
     },
     dataType: 'json',
     success: function (data) {
-        if (data.user) {
+        if(data.user == 'not exist'){
+            alert('این تعداد کالا موجود نیست.')
+        }
+        else if (data.user) {
+            console.log('kir khaar')
             inItem.querySelector('.product__quantity').innerText = (bufferCountA.toString()).toPersinaDigit();
             inItem.querySelector('.product_price').innerText = ((data.user.price).toString()).toPersinaDigit();
             calculateAllTotal();
         }
+
     }
 });
 };

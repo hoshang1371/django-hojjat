@@ -1,0 +1,119 @@
+.content_add_userAdressDetail{
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    top: 11rem;
+    margin-bottom: 200px;
+    height: auto;
+    /* height: 100rem; */
+}
+
+.khat {
+    position: initial;
+    background-color: #3a3b3885;
+    width: calc(100% - 10px);
+    content: '';
+    height: 2px;
+    transform: translateX(5px);
+}
+
+.content_add_userAdressDetail form{
+    position: relative;
+    width: calc(70% - 40px);
+    height: auto;
+    right: 0px;
+    /* padding: 20px; */
+    margin: 20px;
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+    box-shadow: 2px 2px 2px 1px #3a3b385e;
+}
+
+.right>div:first-child{
+    width: 100%;
+    padding: 10px;
+}
+
+.right .item_for_carriers{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+}
+
+.right .item_for_carriers>div{
+    width: calc(95% - 40px);
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+    margin: 20px;
+    height: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.right .item_for_carriers>div>p{
+    font-family: 'mikhak';
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.right .item_for_carriers>div>h1{
+    font-size: 15px;
+    margin: 10px;
+    padding: 10px;
+}
+.right .item_for_carriers>div>img{
+    /* width: 50px; */
+    margin: 10px;
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+}
+
+.right>div:last-child>input:hover{
+    background: #83a83e;
+}
+
+.right>div:last-child>input{
+    direction: rtl;
+    margin: 10px 20px;
+    background: #dbd067;
+    border: 1px solid #f0db1d;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-family: 'byekan', sans-serif;
+    width: 150px;
+    height: 45px;
+    transition: all 0.2s ease-in-out;
+    white-space: normal;
+}
+.right>div:last-child{
+    width: 100%;
+}
+.right>div>p{
+    text-align: right;
+    font-family: 'mikhak';
+    font-size: 20px;
+}
+
+.left{
+    width: 30%;
+    /* height: auto; */
+}
+
+@media all and (max-width: 960px) {
+    .content_add_userAdressDetail{
+        flex-direction: column-reverse;
+    }
+    .content_add_userAdressDetail form{
+        width: calc(100% - 40px);
+    }
+    .left{
+        width: calc(100% - 20px);
+    }
+
+}
