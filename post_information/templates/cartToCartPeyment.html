@@ -1,0 +1,102 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% load mathfilters %}
+
+{% block content %}
+
+<!-- <link rel="stylesheet" href="{% static 'css/post_order.css' %}">
+<link rel="stylesheet" href="{% static 'css/paymentMethod.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/cartToCartPeyment.css' %}">
+<link rel="stylesheet" href="{% static 'css/post_order.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/UnpaidOrder.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/details_order.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'css/addresses.css' %}"> -->
+
+
+<div class="accept_order">
+    <div>
+        <i class="far fa-check-circle"></i>
+    </div>
+    <p>سفارش شما تایید و ثبت شد</p>
+    <p> ارسال شد <span>{{user.email}}</span>یک ایمیل به</p>
+</div>
+
+<div class="container_cart">
+    <div class="title_Order_bay">
+
+        <div>
+
+            <div class="total_ofPrice">
+                    <div>: جمع محصولات</div>
+                    <div><p class="ToPersian">{{ Total_price_for_all_product_buy }}</p></div>
+            </div>
+            <div class="post_price">
+                <div>: ترابری و جابجایی</div>
+                <div><p class="ToPersian">{{ post_price }}</p></div>
+            </div>
+            <div class="total">
+                <div>: مجموع</div>
+                <div><p class="ToPersian">{{ Total_price_for_all_product_buy|add:post_price}}</p></div>
+            </div>
+        </div>
+        
+        <div>
+            <div class="code_order">
+                <div>: کد سفارش</div>
+                <div><p class="ToPersian">{{order.id}}</p></div>
+            </div>
+            <div class="howToSend">
+                <div>: روش ارسال</div>
+                <div><p class="ToPersian">{{carrierDetails}}</p></div>
+            </div>
+            <div>
+                <button>مشاهده ی کالاهای خریداری شده</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bill toggle_display">
+        <p>صورت حساب</p>
+        <table>
+            <tr>
+                <!-- Table Head -->
+                <th>نام کالا</th>
+                <th>تعداد</th>
+                <th>قیمت واحد</th>
+                <th>جمع قیمت</th>
+            </tr>
+            {% for order_detail in order_details %}
+            <tr>
+                <td>
+                    <div><p>{{order_detail.product.title}}</p><img src="{{order_detail.product.image_tumpnail.url}}" alt=""></div>
+                    <div class="ToPersian"><p>کد کالا:</p>{{order_detail.product.code}}</div>
+                </td>
+                <td class="ToPersian">{{order_detail.count}}</td>
+                <td class="ToPersian">{{order_detail.product.price}}</td>
+                <td class="ToPersian">{% widthratio order_detail.count 1 order_detail.product.price %}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="2">مجموع قیمت کالا</td>
+                <td colspan="2" class="ToPersian">{{total_price_ofProduct}} تومان</td>
+            </tr>
+            <tr>
+                <td colspan="2">حمل‌و‌نقل</td>
+                <td colspan="2" class="ToPersian">{{post_price}} تومان</td>
+            </tr>
+            <tr>
+                <td colspan="2">جمع کل</td>
+                <td colspan="2" class="ToPersian">{{ post_price|add:total_price_ofProduct }} تومان</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script src="{% static 'js/address.js' %}"></script>
+<!-- <script src="{% static 'js/paymentMethod.js' %}"></script> -->
+<script src="{% static 'js/cartToCartPeyment.js' %}"></script>
+
+{% endblock %}

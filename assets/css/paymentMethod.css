@@ -1,0 +1,128 @@
+.items_for_peyment {
+    display: flex;
+    flex-direction: column !important;
+    /* justify-content: end!important; */
+}
+
+.items_for_peyment>div {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: end;
+    margin: 10px;
+}
+
+.items_for_peyment>div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.items_for_peyment>div:last-child>p>a {
+    color: #729aeb;
+    text-decoration: underline !important;
+    cursor: pointer;
+}
+
+.items_for_peyment>div>input {
+    margin-left: 10px;
+}
+
+.rules {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    width: 700px;
+    height: 200%;
+    /* overflow-y: auto; */
+    background-color: white;
+    transform: translateX(-50%);
+    z-index: 1000;
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+}
+
+/* .rules>div{
+    width: 100%;
+} */
+.rules>div:first-child {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.display_none {
+    display: none !important;
+}
+
+/* .rules>div:first-child>div{
+    background-color: red;
+} */
+.rules>div:first-child>div>svg {
+    margin: 15px;
+    color: #faa000;
+}
+
+.rules>div:last-child {
+    padding: 10px;
+    margin: 10px;
+    overflow-y: auto;
+    text-align: end;
+}
+
+.next {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    color: gray;
+    cursor: pointer;
+
+}
+
+.next[disabled]{
+    opacity: 0.7;
+}
+
+.next_cover {
+    /* opacity: 0; */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 10px 20px;
+    cursor: pointer;
+    /* z-index: -100; */
+}
+
+/*
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+*/
+
+@media all and (max-width: 960px) {
+    .rules{
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: none;
+    }
+    .rules>div:last-child{
+        padding: 0;
+        margin: 0;
+        overflow: scroll;
+        height: 100%;
+    }
+}

@@ -1,0 +1,125 @@
+
+
+.container_cart{
+    position: relative;
+    width: calc(100% - 40px);
+    margin: 20px;
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+    /* top: 11rem; */
+    margin-bottom: 200px;
+    /* hazv shavad */
+    height: auto;
+    box-shadow: 2px 2px 2px 1px #3a3b385e;
+}
+
+
+.container_cart .title_Order_bay{
+    width: calc(100% - 40px);
+    margin: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #3a3b385e;
+    /* height: 100px; */
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container_cart .title_Order_bay>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+}
+
+.container_cart .title_Order_bay>div div{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    font-family: 'samim';
+    font-size: 20px;
+}
+
+.container_cart .title_Order_bay>div div p{
+    font-family: 'samim';
+    font-size: 20px;
+}
+
+.container_cart .title_Order_bay>div button{
+    color: white;
+    margin: 10px;
+    background: #dbd067;
+    border: 1px solid #f0db1d;
+    height: 40px;
+    width: 35%;
+    text-align: center;
+    line-height: 2.5;
+    font-size: 12px;
+    font-family: 'byekan', sans-serif;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.container_cart .title_Order_bay>div button:hover{
+    background: #83a83e;
+}
+
+.accept_order{
+    position: relative;
+    background-color: #d4fe8b;
+    width: calc(100% - 40px);
+    margin: 20px;
+    border-radius: 20px;
+    border: 1px solid #83aB3e;
+    top: 11rem;
+    margin-bottom: 200px;
+    /* hazv shavad */
+    height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.accept_order p{
+    font-family: 'samim';
+    font-size: 20px;
+}
+
+.accept_order>div>svg{
+    font-size: 100px;
+    margin-bottom: 10px;
+    /* display: block; */
+}
+
+.toggle_display{
+    display: none;
+}
+.bill p{
+    text-align: center;
+    font-family: 'samim';
+    padding: 10px;
+    font-weight: bold;
+    font-size: 19px;
+    color: #3a3b38;
+}
+
+
+
+/* .container_cart .title_Order_bay>div:nth-child(1){
+    width: 50%;
+    height: 100%;
+}
+
+.container_cart .title_Order_bay>div:nth-child(2){
+    width: 50%;
+    height: 100%;
+} */

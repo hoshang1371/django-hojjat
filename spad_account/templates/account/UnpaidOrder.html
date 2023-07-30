@@ -92,9 +92,17 @@
                         <p> ارسال نشده </p>
                     </td>
                     {% endif %}
-
+                    {% if order.codeFolowed %}
                     <td class="ToPersian"><a href="" class="ToPersian idOrder">{{order.codeFolowed}}</a></td>
-                    <td class="ToPersian">-</td>
+                    {% else %}
+                    <td class="ToPersian" style="color: red;">-</td>
+                    {% endif %}
+                    <td >
+                        <div>
+                            <!-- <a href="">سفارش مجدد</a> -->
+                            <a href="{% url 'pdf_factor' order.id %}">فاکتور</a>
+                        </div>
+                    </td>
                 </tr>
                 {% endfor%}
                 <!-- <tr>

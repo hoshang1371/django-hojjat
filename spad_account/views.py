@@ -90,12 +90,14 @@ def register(request):
         print(user.pk)
         # user = User.objects.filter(username=user_name)
         current_site = get_current_site(request)
+
         mail_subject = 'فعال سازی اکانت'
         message = render_to_string('account/acc_active_email.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid':urlsafe_base64_encode(force_bytes(user.pk)),
                 'token':account_activation_token.make_token(user),
+                
             })
         to_email = register_form.cleaned_data.get('email')
         email = EmailMessage(
@@ -171,8 +173,11 @@ def editOrder(request,pk):
 
     # print('order',order)
     print('post_address_detail=', post_address_detail)
-    print('post_address_detail=', post_address_detail.carrierDetails)
-    print('post_address_detail=', type(post_address_detail.carrierDetails))
+
+    # print('post_address_detail=', post_address_detail.carrierDetails)
+
+    # print('post_address_detail=', type(post_address_detail.carrierDetails))
+
     # print('post_address_detail=', post_address_detail.addressSelected.post_code)
     
     # print(order_details[0].product.title)

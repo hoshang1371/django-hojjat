@@ -1,0 +1,15 @@
+{% load static %}
+{% load mathfilters %}
+
+
+{% autoescape off %}
+
+سلام {{ user.username }},
+
+سفارش شما ثبت شد.و بعد از بررسی برای شما ارسال میشود.
+
+جهت دانلود فاکتور کیک کنید.
+
+: http://{{ domain }}{% url 'pdf_factor' order.id %}
+{% endautoescape %}
+

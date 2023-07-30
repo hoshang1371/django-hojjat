@@ -18,7 +18,9 @@ from decouple import config
 # import locale
 
 
-
+# import django
+# from django.utils.encoding import smart_str
+# django.utils.encoding.smart_text = smart_str
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -96,7 +98,7 @@ INSTALLED_APPS = [
     # 'django_password_validators.password_history',
     # 'jalali_date',
     'django_jalali',
-
+    # 'django_inlinecss',
     # 'phone_field'
 
 ]

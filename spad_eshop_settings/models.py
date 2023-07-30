@@ -23,6 +23,7 @@ class SiteSetting(models.Model):
     about_us = models.TextField(verbose_name='درباره ی ما', null=True, blank=True)
     copy_right = models.CharField(verbose_name='متن کپی رایت', null=True, blank=True, max_length=200)
     logo_image = models.ImageField(upload_to=upload_image_path, null=True, blank=True, verbose_name='تصویر لوگو')
+    TermsAndRules_field = models.TextField(blank = True, null = True, verbose_name=' شرایط ')
 
     class Meta:
         verbose_name = 'تنظیمات سایت'

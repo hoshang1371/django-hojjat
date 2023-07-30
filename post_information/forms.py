@@ -145,12 +145,30 @@ class CarrierChoices(forms.Form):
         )
     
 payment_METHOD= (
-    ('1','زرین پال'),
+    ('1','پرداخت توسط فیش بانکی'),
+    ('2','زرین پال'),
 )
 
-class paymentMethod(forms.Form):
+class PaymentMethod(forms.Form):
     # Carrier_field = forms.ChoiceField(choices = Carrier_CHOICES)
     paymentMethod_field = forms.ChoiceField(
         widget=forms.RadioSelect,
         choices = payment_METHOD
         )
+    
+    isTermsAndRules = forms.BooleanField(
+        widget=forms.CheckboxInput(      
+            attrs={
+                'class' : 'isTermsAndRules',
+            }
+        )
+    )
+
+class PaymentCode(forms.Form):
+    payment_code = forms.CharField(
+    widget=forms.TextInput(attrs={
+            'placeholder':'  ',
+            # 'class' : 'form-control rtl',
+            }),
+    label=' نام  ',
+    )

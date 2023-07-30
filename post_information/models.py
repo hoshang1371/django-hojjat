@@ -48,8 +48,9 @@ class PostAddress(models.Model):
         return self.owner.get_full_name()
     
 class PostAddressDetail(models.Model):
-    # addressSelected = models.OneToOneField(PostAddress, on_delete=models.CASCADE, verbose_name=' آدرس انتخابی ')
+    # ToDO: شاید باید نال پذیر باشد در اردر دیتیل سبد خرید ساخته میشود بون نوع حمل
     carrierDetails = models.CharField(max_length=20, choices=Carrier_CHOICES, default=1, verbose_name='روش ارسال')
+    
     addressSelected = models.ForeignKey(PostAddress, on_delete=models.CASCADE, verbose_name=' آدرس انتخابی ')
     OrderDetailSelected = models.OneToOneField(Order, on_delete=models.CASCADE, verbose_name=' سبد خرید انتخابی انتخابی ')
     isResive = models.BooleanField(default=False)
@@ -68,6 +69,25 @@ class PostAddressDetail(models.Model):
 
     def __str__(self):
         return self.addressSelected.address
+
+
+payment_METHOD= (
+    ('1','پرداخت توسط فیش بانکی'),
+    ('2','زرین پال'),
+)
+
+
+class PaymentMethodeDetail(models.Model):
+    OrderDetailSelected = models.OneToOneField(Order, on_delete=models.CASCADE, verbose_name=' سبد خرید انتخابی انتخابی ')
+    PaymentDetails = models.CharField(max_length=20, choices=payment_METHOD, default=1, verbose_name='روش ارسال')
+    isTermsAndRules = models.BooleanField(default=False, verbose_name=' پذیرفتن شرایط ')
+    # TermsAndRules_field = models.TextField(blank = True, null = True, verbose_name=' شرایط ')
+    peymentCode = models.CharField(max_length=150, verbose_name=' کد پرداخت ',blank=True,null=True)
+
+    class Meta:
+        verbose_name = 'جزئیات پرداخت'
+        verbose_name_plural = 'جرئیات پرداخت'
+
 
 
 

@@ -5,11 +5,23 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/post_order.css' %}">
+<link rel="stylesheet" href="{% static 'css/paymentMethod.css' %}">
+<link rel="stylesheet" href="{% static 'css/add_userAdressDetail.css' %}">
 
 <div class="background_order">
 
+    <div class="rules display_none">
+        <div>
+            <div>
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div>
+            {{setting.TermsAndRules_field}}
+        </div>
+    </div>
     <!-- <form method="post" action="/add_userPostAddressDetail"> -->
-    <form method="post" action="{% url 'add_userPostAddressDetail' %}">
+    <form method="post" action="{% url 'cartToCartPeyment' %}">
     <!-- <form method="post" action=""> -->
         {% csrf_token %} 
         <div class="list_of_post_info">
@@ -17,14 +29,29 @@
                 <p>پرداخت</p>
             </div>
             <div class="khat"></div>
+            <div class="items_for_peyment">
+                {% for paymentMethod in paymentMethods %}
+                <div >
+                    {{ paymentMethod.tag }}
+                    {{ paymentMethod.data.label }}
+                </div>
+                {% endfor %}
+                <div>
+                    {{ paymentMethod_isTermsAndRules }}
+                    <p>من با <a>شرایط خدمات </a>موافقم و بی قید و شرط به آنها پایبندم</p>
+                </div>
+            </div>
             <div>
-                <input type="submit" value="پرداخت">
+                <div style="display:inline-block; position:relative;">
+                    <input class="next" type="submit" value="پرداخت" disabled>
+                    <div class="next_cover"></div>
+                </div>
             </div>
         </div>
     </form>
 
 
-    <div>
+    <div class="left">
         <div class=" title_of_buy">
             <div>
                 <p><span class="ToPersian count_off_all_product">{{count_off_all_product}}&nbsp;</span>نوع کالا در سبد
@@ -60,5 +87,6 @@
 </div>
 
 <script src="{% static 'js/address.js' %}"></script>
+<script src="{% static 'js/paymentMethod.js' %}"></script>
 
 {% endblock %}

@@ -3,10 +3,11 @@ from django.shortcuts import render,redirect
 
 from django.contrib.auth.decorators import login_required
 from requests import Response
-from post_information.forms import UserPostAddressDetailForm,AddAddress,Country,CarrierChoices
-from post_information.models import PostAddressDetail, PostPrice,PostAddress
+from post_information.forms import PaymentMethod, UserPostAddressDetailForm,AddAddress,Country,CarrierChoices
+from post_information.models import PaymentMethodeDetail, PostAddressDetail, PostPrice,PostAddress,Carrier_CHOICES
+from spad_account.models import User
 
-from spad_eshop_order.models import Order
+from spad_eshop_order.models import Order, OrderDetail
 from spad_eshop_settings.models import SiteSetting
 
 from rest_framework.views import APIView
@@ -14,13 +15,23 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
 
 from extentions.sendSmsRandom import random_with_N_digits,sendSmsForVarifyAddress,sendSms
-from extentions import globalValue
+from extentions import globalValue,pdf
+from django.http import HttpResponse
+
 # from extentions import sendSmsRandom
 import threading
 
+from django.core.mail import EmailMessage
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+
+from spad_account.token import account_activation_token
 
 # from rest_framework.response import Response as resResponse
 from django.contrib import messages
+
 # t1 = threading.Thread(target=sendSmsForVarifyAddress, args=(10,))
 stop_threads_sendSmsVarify =False
 # code=''
@@ -384,11 +395,11 @@ def add_userPostAddressDetail(request):
 def paymentMethod(request):
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
     carriersChoices = CarrierChoices(request.POST or None,request.user)
+    paymentMethod = PaymentMethod(request.POST or None,request.user)
 
 
     if request.method == 'POST':        
         if carriersChoices.is_valid():
-            print('kiri')
             Carrier_field = carriersChoices.cleaned_data.get('Carrier_field')
             print(Carrier_field)
 
@@ -405,6 +416,7 @@ def paymentMethod(request):
 
 
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+
     order_partials_buy = order.orderdetail_set.all()
     post_price = PostPrice.objects.filter().first()
     #order_partials = OrderDetail.objects.all()
@@ -425,10 +437,155 @@ def paymentMethod(request):
         'setting': site_setting,
         # 'user_post_address_detail': user_post_address_detail,
         # 'postAddressesUser' : postAddressesUser,
-        'carriersChoices' : carriersChoices['Carrier_field'],
+        'paymentMethods' : paymentMethod['paymentMethod_field'],
+        'paymentMethod_isTermsAndRules' : paymentMethod['isTermsAndRules'],
 
         'Total_price_for_all_product_buy' : Total_price_for_all_product_buy,
         'post_price': post_price.price,
         'count_off_all_product': count_off_all_product,
     }
     return render(request ,'paymentMethod.html',contex)
+
+from django.utils.html import strip_tags
+
+@login_required(login_url='/login')
+def cartToCartPeyment(request):
+
+
+
+    username = request.user.username
+    site_setting = SiteSetting.objects.first()
+    user = User.objects.filter(id=request.user.id)
+
+
+    
+
+    order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+    # order_details = OrderDetail.objects.get_queryset().filter(order=order)
+    paymentMethod = PaymentMethod(request.POST or None,request.user)
+
+    post_address_detail = PostAddressDetail.objects.filter(
+                        OrderDetailSelected =order,
+                        ).first()
+    
+    # print('order_details=',order_details)
+    
+    # print('post_address_detail.carrierDetails=',post_address_detail.carrierDetails)
+    # print('type=',type(post_address_detail.carrierDetails))
+    # print('Carrier_CHOICES=',Carrier_CHOICES[int(post_address_detail.carrierDetails)-1][1])
+    order_partials_buy = order.orderdetail_set.all()
+
+    post_price = PostPrice.objects.filter().first()
+    #order_partials = OrderDetail.objects.all()
+    Total_price_for_all_product_buy =0
+    count_off_all_product =0
+
+    if request.method == 'POST':
+        if paymentMethod.is_valid():
+            PaymentMethod_field = paymentMethod.cleaned_data.get('paymentMethod_field')
+            isTermsAndRules_field = paymentMethod.cleaned_data.get('isTermsAndRules')
+            # print('PaymentMethod_field',PaymentMethod_field)
+            # print('isTermsAndRules_field',isTermsAndRules_field)
+
+            paymentMethodeDetail = PaymentMethodeDetail.objects.filter(
+                    OrderDetailSelected =order,
+                    ).first()
+            print('paymentMethodeDetail=',paymentMethodeDetail)
+
+            if paymentMethodeDetail is None:
+                paymentMethodeDetail = PaymentMethodeDetail.objects.create(
+                    OrderDetailSelected =order,
+                    PaymentDetails=PaymentMethod_field,
+                    isTermsAndRules =isTermsAndRules_field,
+                    ) 
+                
+            else:
+                paymentMethodeDetail.PaymentDetails=PaymentMethod_field
+                paymentMethodeDetail.isTermsAndRules=isTermsAndRules_field
+                paymentMethodeDetail.save()
+
+
+
+        # #* factor baraye email
+        #     for order_partial in order_partials_buy:
+        #         count_off_all_product = count_off_all_product+1
+        #         Total_price_for_each_product_buy = order_partial.count * order_partial.price
+        #         Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+        #     contex = {
+        #         'order_details' : order_partials_buy,
+        #         'total_price_ofProduct' : Total_price_for_all_product_buy,
+        #         'post_price': post_price.price,
+        #     }   
+
+        #     pdf_ = pdf.html_to_pdf(request,'buyFactor.html',contex )
+
+        #     return HttpResponse(pdf_, content_type='application/pdf') 
+        #! 
+            current_site = get_current_site(request)
+        
+            mail_subject = ' فاکتور '
+            message = render_to_string('acc_sendOrderDitails.html', {
+                'user': request.user,
+                'domain': current_site.domain,
+                'uid':urlsafe_base64_encode(force_bytes(request.user.pk)),
+                'token':account_activation_token.make_token(request.user),
+                'order': order,
+                
+            })
+            email = EmailMessage(
+                    mail_subject, message, to=[user[0].email]
+                )
+            
+            # email.content_subtype = 'html'
+            email.send()
+
+            print('every thing ok')
+    for order_partial in order_partials_buy:
+        count_off_all_product = count_off_all_product+1
+        Total_price_for_each_product_buy = order_partial.count * order_partial.price
+        Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+    contex = {
+        'order': order,
+        'order_details' : order_partials_buy,
+        'username' : username,
+        'setting': site_setting,
+
+        'total_price_ofProduct' : Total_price_for_all_product_buy,
+        'Total_price_for_all_product_buy' : Total_price_for_all_product_buy,
+        'post_price': post_price.price,
+        'count_off_all_product': count_off_all_product,
+
+        'carrierDetails' : Carrier_CHOICES[int(post_address_detail.carrierDetails)-1][1],
+
+        'user' : user[0],
+
+    }
+    return render(request ,'cartToCartPeyment.html',contex)
+    
+
+
+@login_required(login_url='/login')
+def pdf_factor(request,pk):
+    # order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+    order = Order.objects.filter(owner_id= request.user.id,id=pk)
+    # print('order1=',order1[0])
+    print('order=',order)
+    order_partials_buy = order[0].orderdetail_set.all()
+    post_price = PostPrice.objects.filter().first()
+
+    #* factor baraye email
+    count_off_all_product =0
+    Total_price_for_all_product_buy=0
+    for order_partial in order_partials_buy:
+        count_off_all_product = count_off_all_product+1
+        Total_price_for_each_product_buy = order_partial.count * order_partial.price
+        Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+    contex = {
+        'order_details' : order_partials_buy,
+        'total_price_ofProduct' : Total_price_for_all_product_buy,
+        'post_price': post_price.price,
+    }   
+
+    pdf_ = pdf.html_to_pdf(request,'buyFactor.html',contex )
+
+    return HttpResponse(pdf_, content_type='application/pdf') 
