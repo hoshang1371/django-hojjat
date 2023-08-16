@@ -112,8 +112,24 @@
     color: #3a3b38;
 }
 
+.send_title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.send_title span a,
+.send_title span{
+    font-family: 'samim';
+    font-size: 15px;
+}
 
-
+.send_title span a{
+    color: #729aeb;
+    text-decoration: underline !important;
+    cursor: pointer;
+}
 /* .container_cart .title_Order_bay>div:nth-child(1){
     width: 50%;
     height: 100%;

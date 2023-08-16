@@ -52,7 +52,7 @@ class PostAddressDetail(models.Model):
     carrierDetails = models.CharField(max_length=20, choices=Carrier_CHOICES, default=1, verbose_name='روش ارسال')
     
     addressSelected = models.ForeignKey(PostAddress, on_delete=models.CASCADE, verbose_name=' آدرس انتخابی ')
-    OrderDetailSelected = models.OneToOneField(Order, on_delete=models.CASCADE, verbose_name=' سبد خرید انتخابی انتخابی ')
+    OrderDetailSelected = models.OneToOneField(Order, on_delete=models.CASCADE, verbose_name=' سبد خرید انتخابی  ')
     isResive = models.BooleanField(default=False)
 
     carried = jmodels.jDateTimeField(blank = True, null = True, verbose_name='تاریخ حمل شده')
@@ -76,13 +76,15 @@ payment_METHOD= (
     ('2','زرین پال'),
 )
 
+code_regex = RegexValidator(regex=r'^\d{25}$')
 
 class PaymentMethodeDetail(models.Model):
     OrderDetailSelected = models.OneToOneField(Order, on_delete=models.CASCADE, verbose_name=' سبد خرید انتخابی انتخابی ')
     PaymentDetails = models.CharField(max_length=20, choices=payment_METHOD, default=1, verbose_name='روش ارسال')
     isTermsAndRules = models.BooleanField(default=False, verbose_name=' پذیرفتن شرایط ')
     # TermsAndRules_field = models.TextField(blank = True, null = True, verbose_name=' شرایط ')
-    peymentCode = models.CharField(max_length=150, verbose_name=' کد پرداخت ',blank=True,null=True)
+    peymentCode = models.CharField(validators=[code_regex],max_length=150, verbose_name=' کد پرداخت ',blank=True,null=True)
+    # payment_tracking_number =models.CharField(validators=[code_regex],max_length=25 ,null=True, blank=True,verbose_name='شماره پیگیری')
 
     class Meta:
         verbose_name = 'جزئیات پرداخت'

@@ -8,8 +8,14 @@
 
 سفارش شما ثبت شد.و بعد از بررسی برای شما ارسال میشود.
 
-جهت دانلود فاکتور کیک کنید.
+جهت دانلود فاکتور کلیک کنید.
 
-: http://{{ domain }}{% url 'pdf_factor' order.id %}
+http://{{ domain }}{% url 'pdf_factor' order.id %}
+
+
+جهت ثبت شماره پیگیری کلیک کنید.
+
+http://{{ domain }}{% url 'RegisterPaymentInformation' order.id %}
+
 {% endautoescape %}
-
+ 

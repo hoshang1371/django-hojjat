@@ -93,6 +93,13 @@
             </tr>
         </table>
     </div>
+
+    <div class="send_title">
+        <span class="">.فراموش نکنید شماره سفارش <span class="ToPersian">{{order.id}}</span> خود را در صفحه <a href="{% url 'RegisterPaymentInformation' order.id %}">ثبت اطلاعات پرداخت</a> وارد کنید</span>
+        <span>.
+            ما این اطلاعات را به شما ایمیل کرده ایم
+        </span>
+    </div>
 </div>
 
 <script src="{% static 'js/address.js' %}"></script>

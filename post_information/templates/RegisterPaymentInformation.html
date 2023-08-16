@@ -1,0 +1,35 @@
+{% extends 'shared/_MainLayout.html' %} 
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+<!-- <div style="position: relative;  background-color: red; z-index: 1000000;" >hojjat shahpar
+</div> -->
+<section class="bg-img">
+    <div class="content">
+        <h5>ثبت اطلاعات پرداخت</h5>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="field">
+                <div class="user-icon"><span class="fas fa-cash-register"></span></div>
+                {{ register_payment_information.register_payment }}
+            </div>
+            <br>
+            {% for error in register_payment_information.register_payment.errors %}
+                <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+
+            <div class="field ">
+                <input type="submit" value="ثبت اطلاعات">
+            </div>
+            <!-- <button type="submit" class="btn btn-default">ورود</button> -->
+        </form>
+    </div>
+</section>
+
+<script src="{% static 'js/login.js' %}"></script>
+
+{% endblock %}

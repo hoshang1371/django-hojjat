@@ -1,6 +1,6 @@
 from django.urls import path
 
-from post_information.views import add_userPostAddressDetail, cartToCartPeyment, edit_post_add_address, paymentMethod, pdf_factor, post_add_address, post_order, send_code_for_varify_mobile_address
+from post_information.views import RegisterPaymentInformation, add_userPostAddressDetail, cartToCartPeyment, edit_post_add_address, paymentMethod, pdf_factor, post_add_address, post_order, send_code_for_varify_mobile_address
 
 
 urlpatterns = [
@@ -12,5 +12,6 @@ urlpatterns = [
     path('paymentMethod', paymentMethod ,name="paymentMethod"),
     path('cartToCartPeyment', cartToCartPeyment ,name="cartToCartPeyment"),
     path('pdf_factor/<int:pk>', pdf_factor ,name="pdf_factor"),
+    path('RegisterPaymentInformation/<int:pk>', RegisterPaymentInformation ,name="RegisterPaymentInformation"),
 
 ]

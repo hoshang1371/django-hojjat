@@ -172,3 +172,12 @@ class PaymentCode(forms.Form):
             }),
     label=' نام  ',
     )
+
+
+
+class RegisterPaymentInformationForm(forms.Form):
+    register_payment = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder':' شماره پیگیری ',"class":"rtl","tabindex":"1"}),
+        label=' شماره پیگیری ',
+
+    )

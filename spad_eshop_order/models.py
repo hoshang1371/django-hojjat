@@ -18,7 +18,7 @@ class Order(models.Model):
     j_payment_date = jmodels.jDateTimeField(default=now,blank = True, null = True, verbose_name='تاریخ ایجاد سبد شمسی')
     is_send = models.BooleanField(default=False,verbose_name='ارسال شده/نشده')
     codeFolowed = models.CharField(validators=[code_regex],max_length=25 ,null=True, blank=True,verbose_name='کد رهگیری')
-
+    # payment_tracking_number =models.CharField(validators=[code_regex],max_length=25 ,null=True, blank=True,verbose_name='شماره پیگیری')
     class Meta:
         verbose_name = 'سبد خرید'
         verbose_name_plural = 'سبد های خرید کاربران'

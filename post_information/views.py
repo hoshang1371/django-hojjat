@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 
 from django.contrib.auth.decorators import login_required
 from requests import Response
-from post_information.forms import PaymentMethod, UserPostAddressDetailForm,AddAddress,Country,CarrierChoices
+from post_information.forms import PaymentMethod, RegisterPaymentInformationForm, UserPostAddressDetailForm,AddAddress,Country,CarrierChoices
 from post_information.models import PaymentMethodeDetail, PostAddressDetail, PostPrice,PostAddress,Carrier_CHOICES
 from spad_account.models import User
 
@@ -461,6 +461,10 @@ def cartToCartPeyment(request):
     
 
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+    # print('kir khar')
+    # print('order=',order)
+    # if order[0] is None:
+    #  print('kir khar')
     # order_details = OrderDetail.objects.get_queryset().filter(order=order)
     paymentMethod = PaymentMethod(request.POST or None,request.user)
 
@@ -537,6 +541,7 @@ def cartToCartPeyment(request):
                 )
             
             # email.content_subtype = 'html'
+            #! فعال شود.
             email.send()
 
             print('every thing ok')
@@ -569,7 +574,11 @@ def pdf_factor(request,pk):
     # order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
     order = Order.objects.filter(owner_id= request.user.id,id=pk)
     # print('order1=',order1[0])
-    print('order=',order)
+    # print('order=',order.first())
+    # print('kir khar') 
+    if order.first() is None:
+        return redirect('/login')
+
     order_partials_buy = order[0].orderdetail_set.all()
     post_price = PostPrice.objects.filter().first()
 
@@ -589,3 +598,33 @@ def pdf_factor(request,pk):
     pdf_ = pdf.html_to_pdf(request,'buyFactor.html',contex )
 
     return HttpResponse(pdf_, content_type='application/pdf') 
+
+
+
+
+@login_required(login_url='/login')
+def RegisterPaymentInformation(request,pk):
+    username = request.user.username
+    site_setting = SiteSetting.objects.first()
+    register_payment_information = RegisterPaymentInformationForm(request.POST or None)
+
+    order = Order.objects.filter(owner_id= request.user.id,id=pk)
+    if order.first() is None:
+        return redirect('/login')
+    paymentMethodeDetail = PaymentMethodeDetail.objects.filter(
+                    OrderDetailSelected =order[0],
+            ).first()
+    print('paymentMethodeDetail=',paymentMethodeDetail)
+
+    if register_payment_information.is_valid():
+        register_payment = register_payment_information.cleaned_data.get('register_payment')
+        print(register_payment)
+        paymentMethodeDetail.peymentCode=register_payment
+        paymentMethodeDetail.save()
+        return redirect('/post_info/cartToCartPeyment')
+    contex = {
+        'username' : username,
+        'setting': site_setting,
+        'register_payment_information': register_payment_information
+    }
+    return render(request ,'RegisterPaymentInformation.html',contex)
