@@ -90,29 +90,34 @@ class EditUserForm(forms.Form):
 
     ROZ = forms.ChoiceField(choices=ROZ)
 
-    password_now = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
-        label=' گذرواژه فعلی',
-    )
 
-    password_new = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
-        label=' رمز عبور جدید ',
-    )
 
-    password_accept = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
-        label=' رمز عبور جدید ',
-    )
+    # password_now = forms.CharField(
+    #     widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
+    #     label=' گذرواژه فعلی',
+    # )
 
-    def clean_password_accept(self):
-        password_new = self.cleaned_data.get('password_new')
-        password_accept = self.cleaned_data.get('password_accept')
+    # password_new = forms.CharField(
+    #     widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
+    #     label=' رمز عبور جدید ',
+    # )
 
-        if password_new != password_accept:
-            raise forms.ValidationError('کلمه های عبور مغایرت دارند')
+    # password_accept = forms.CharField(
+    #     widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
+    #     label=' رمز عبور جدید ',
+    # )
 
-        return password_new
+    # def clean_password_accept(self):
+    #     password_new = self.cleaned_data.get('password_new')
+    #     password_accept = self.cleaned_data.get('password_accept')
+
+    #     if password_new != password_accept:
+    #         raise forms.ValidationError('کلمه های عبور مغایرت دارند')
+
+    #     return password_new
+
+
+
     # password_accept = forms.CharField(
     #     widget=forms.TextInput(attrs={'placeholder':' تاییدیه ',"class":"rtl"}),
     #     label=' تاییدیه ',
@@ -132,6 +137,45 @@ class EditUserForm(forms.Form):
     #     choices=FAVORITE_COLORS_CHOICES,
     # )
 
+class ChangePass(forms.Form):
+    password_now = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
+        label=' گذرواژه فعلی',
+    )
+
+    password_new = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder':' رمز عبور جدید',"class":"rtl password"}),
+        label=' رمز عبور جدید ',
+    )
+
+    # password_accept = forms.CharField(
+    #     widget=forms.TextInput(attrs={'placeholder':' تاییدیه ',"class":"rtl"}),
+    #     label=' تاییدیه ',
+    #     validators=[
+    #         validators.EmailValidator(' تاییدیه ')
+    #     ]
+    # )
+
+    password_accept = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder':' تکرار رمز عبور جدید',"class":"rtl password"}),
+        label=' رمز عبور جدید ',
+    )
+
+    def clean_password_accept(self):
+        password_new = self.cleaned_data.get('password_new')
+        password_accept = self.cleaned_data.get('password_accept')
+
+
+        if password_new != password_accept:
+            raise forms.ValidationError('کلمه های عبور مغایرت دارند')
+
+        elif (len(password_new) < 4):
+            raise forms.ValidationError('کلمه های عبور باید بیشتر از چهار حرف باشد  ')
+
+        return password_new
+
+
+
 
 
 class LoginForm(forms.Form):
@@ -145,14 +189,14 @@ class LoginForm(forms.Form):
         label=' کلمه ی عبور '
     )
 
+    
+
     # def clean_user_name(self):
     #     user_name = self.cleaned_data.get('username')
     #     is_exsist_user = User.objects.filter(username = user_name).exists()
         
     #     if not is_exsist_user:
-    #         raise forms.ValidationError('کاربری با مشخصات وارد شده ثبت نام نکرده است')
-
-            
+    #         raise forms.ValidationError('کاربری با مشخصات وارد شده ثبت نام نکرده است')     
     #     return user_name
 
 class CustomCaptchaTextInput(CaptchaTextInput):

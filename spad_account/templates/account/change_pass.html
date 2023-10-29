@@ -6,6 +6,8 @@
 <!-- <link rel="stylesheet" href="{% static 'css/post_order.css' %}"> -->
 <link rel="stylesheet" href="{% static 'css/addresses.css' %}">
 
+<link rel="stylesheet" href="{% static 'css/change_pass.css' %}">
+
 
 <div class="user_content">
     <div>
@@ -61,72 +63,58 @@
         </div>
     </div>
     <div class="Left_UnpaidOrders">
-        <p> آدرس‌ها </p>
+        <p> تغییر پسوورد </p>
         <div class="khat"></div>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="form-group form_name {% if change_pass.password_now.errors %} errror {% endif %}">
+                {{ change_pass.password_now }}
+                <div class="show">نمایش</div>
 
+            </div>
 
-        {% for postAddressUser in postAddressesUser %}
-        
-        <div class="post_info">
-            <input type="hidden" value="{{postAddressUser.id}}">
-            <div>
-                <div>
-                    <p>نشانی من</p>
-                    <span>|</span>
-                    <span>{{postAddressUser.firstName}}</span>
-                    <span>{{postAddressUser.lastName}}</span>
-                </div>
-                <div>
-                    <p>ویرایش</p>
-                    <span>&nbsp;|&nbsp;</span>
-                    <p>حذف</p>
-                </div>
-            </div>
-            <div class="khat"></div>
-            <div>
-                <i class='fas fa-map-marker-alt'></i>
-                <p>
-                    {{postAddressUser.country}}
-                </p>
-                <span>،</span>
-                <p>
-                    {{postAddressUser.city}}
-                </p>
-                <span>،</span>
-                <p class="ToPersian">
-                    {{postAddressUser.address}}
-                </p>
-            </div>
-            <div>
-                <div>
-                    <p class="ToPersian">
-                        {{postAddressUser.post_code}}
-                    </p>
-                    <i class='fas fa-envelope'></i>
+            <div class="form-group form_name {% if change_pass.password_new.errors %} errror {% endif %}">
+                {{ change_pass.password_new }}
+                <div class="show">نمایش</div>
 
-                </div>
-                <span>|</span>
-                <div class="ToPersian">
-                    <p>
-                        {{postAddressUser.mobile_phone_number}}
-                    </p>
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <span>|</span>
-                <div class="ToPersian">
-                    <p>
-                        {{postAddressUser.phone_number}}
-                    </p>
-                    <i class="fas fa-phone"></i>
-                </div>
             </div>
-        </div>
-        {% endfor %}
+
+            <div class="form-group form_name {% if change_pass.password_accept.errors %} errror {% endif %}">
+                {{ change_pass.password_accept }}
+                <div class="show">نمایش</div>
+
+            </div>
+
+            <div class="" style="width: 100%;">
+                {% for error in change_pass.password_now.errors %}
+                <p style="color:red; ">{{error}}</p>
+                {% endfor %}
+            </div>
+
+            <div class="" style="width: 100%;">
+                {% for error in change_pass.password_new.errors %}
+                <p style="color:red; ">{{error}}</p>
+                {% endfor %}
+            </div>
+
+            <div class="" style="width: 100%;">
+                {% for error in change_pass.password_accept.errors %}
+                <p style="color:red; ">{{error}}</p>
+                {% endfor %}
+            </div>
+
+            <div class="send-group ">
+                <input type="submit" value="ارسـال">
+            </div>
+
+        </form>
+
     </div>
 
 </div>
 
 
 <script src="{% static 'js/address.js' %}"></script>
+<script src="{% static 'js/password.js' %}"></script>
 
 {% endblock %}

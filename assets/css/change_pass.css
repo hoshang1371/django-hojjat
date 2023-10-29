@@ -1,0 +1,75 @@
+
+.Left_UnpaidOrders form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-group {
+    direction: rtl;
+    position: relative;
+    margin: 15px;
+    padding: 10px;
+    /* height: 45px; */
+    display: flex;
+    flex-direction: row-reverse;
+    border: 1px solid #3a3b3885;
+    width: 50%
+}
+
+.form-group input {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #222;
+    font-size: 16px;
+    /* font-family: 'Poppins',sans-serif; */
+    font-family: 'samim';
+}
+
+.send-group {
+    display: flex;
+    justify-content: center;
+}
+
+
+.send-group input {
+    direction: rtl;
+    margin: 10px 20px;
+    background: #dbd067;
+    border: 1px solid #f0db1d;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-family: 'byekan', sans-serif;
+    width: 150px;
+    height: 50px;
+    transition: all 0.2s ease-in-out;
+    white-space: normal;
+}
+
+.send-group input:hover{
+    background: #83a83e;
+}
+
+.show {
+    position: absolute;
+    margin-top: 10px;
+    top: 10%;
+    left: 15%;
+    font-size: 13px;
+    font-weight: 700;
+    color: #222;
+    cursor: pointer;
+    display: none;
+    font-family: 'byekan';
+}
+
+.password:valid~.show {
+    display: block;
+}
+

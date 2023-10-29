@@ -40,6 +40,12 @@
                 {{ register_form.captcha }}
 
                 <div class="" style="width: 100%;">
+                    {% for error in register_form.captcha.errors %}
+                    <p style="color:red; ">{{error}}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="" style="width: 100%;">
                     {% for error in register_form.user_name.errors %}
                     <p style="color:red; ">{{error}}</p>
                     {% endfor %}
