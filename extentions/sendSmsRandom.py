@@ -22,8 +22,20 @@ from extentions import globalValue
 from ippanel import Client
 from ippanel import HTTPError, Error, ResponseCode
 
+
+from django.http import HttpResponse
+import datetime
+import logging
+
+from decouple import config
+
+
+logger = logging.getLogger(__name__)
+
 # you api key that generated from panel
 api_key = "tVnkn0VqCuVvolYqStkCNljo3AZef8gVmZgKq8FeRK0=	"
+# api_key = config('API_KEY')
+# pattern_code = config('PATTERN_CODE')
 
 # create client instance
 sms = Client(api_key)
@@ -46,6 +58,7 @@ def sendSms(code,mobilenumber):
 
         message_id = sms.send_pattern(
             "r1eppoe3ilfudqx",    # pattern code
+            # pattern_code,    # pattern code
             "3000505",      # originator
             mobilenumber,  # recipient
             pattern_values,  # pattern values
@@ -65,17 +78,19 @@ def sendSmsForVarifyAddress(user,stop):
     # sendSms('12345','09367262334')
     # global code
     print('sendSmsForVarifyAddressCode=',globalValue.code)
+    logger.warning('Homepage was accessed at '+str(datetime.datetime.now())+' hours!')
+
     # todo : مقدار 120 صحیح است
     for a in range(0,120):
     # for a in range(0,10):
         time.sleep(1)
         # print(stop()) 
         if stop():
+            # globalValue.code = ''
+            # print('sendSmsForVarifyAddressCodeEnd=',globalValue.code)
             break
         print(a)
 
-    globalValue.code = ''
-    print('sendSmsForVarifyAddressCodeEnd=',globalValue.code)
 
     # global code
     # print('sendSmsForVarifyAddress',code)

@@ -105,9 +105,15 @@
 
 .bill table tr td:first-child div:first-child {
     width: 100%;
+    display: -webkit-box; /* wkhtmltopdf uses this one */
+
     display: flex;
     align-items: center;
     justify-content: start;
+
+    -webkit-box-pack: start; /* wkhtmltopdf uses this one */
+    -webkit-flex-direction: row-reverse; /* wkhtmltopdf uses this one */
+
     flex-direction: row-reverse;
 }
 
@@ -119,12 +125,19 @@
 
 .bill table tr td:first-child div:nth-child(2) {
     width: 100%;
+
+
+
     display: flex;
     align-items: center;
     justify-content: start;
     font-size: 15px;
     font-family: 'samim';
     font-weight: normal;
+
+    display: -webkit-box; /* wkhtmltopdf uses this one */
+    -webkit-box-pack: start; /* wkhtmltopdf uses this one */
+    -webkit-flex-direction: row-reverse; /* wkhtmltopdf uses this one */
 }
 /* .bill table tr:nth-last-child(-n+3) td:nth-child(2) */
 /* .bill table tr:not(nth-last-child(-n+3)) td:nth-child(2){

@@ -22,6 +22,24 @@ class UserDataAdmin(admin.ModelAdmin):
 #     class Meta:
 #         model = UserData
 
+class CustomUserAdmin(UserAdmin):
+    fieldsets = (
+        *UserAdmin.fieldsets,  # original form fieldsets, expanded
+        (                      # new fieldset added on to the bottom
+            'آخرین کد تایید پیامکی',  # group heading of your choice; set to None for a blank space instead of a header
+            {
+                'fields': (
+                    'codeVarifySms',
+                    'codeVarifySmsDate',
+                ),
+            },
+        ),
+    )
+
+
+admin.site.register(User, CustomUserAdmin)
+
+
 admin.site.register(UserData,UserDataAdmin)
 
-admin.site.register(User, UserAdmin)
+# admin.site.register(User, UserAdmin)

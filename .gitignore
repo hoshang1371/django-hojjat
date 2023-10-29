@@ -2,3 +2,5 @@
 .venv
 venv
 db.sqlite3
+media_root
+static_cdn

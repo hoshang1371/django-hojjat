@@ -109,14 +109,19 @@ th {
     padding: 8px;
 
     font-family: 'samim';
-    /* display: flex; */
+    /* display: flex;
+    flex-direction: column; */
 }
 
 td a,
 th a {
     font-family: 'samim';
+    color: #3a3b38;
 }
-
+td div{
+    display: flex;
+    flex-direction: column;
+}
 /* td {
     direction: rtl;
     

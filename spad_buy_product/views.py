@@ -20,6 +20,14 @@ from rest_framework.response import Response
 from django.http.response import HttpResponse, JsonResponse
 from post_information.models import PostPrice
 from spad_eshop_settings.models import SiteSetting
+
+
+
+from django.http import HttpResponse
+import datetime
+import logging
+logger = logging.getLogger(__name__)
+
 # class ListOfOrder(ListView):
 #     template_name = '/list_of_buy.html'
 #     model = OrderDetail
@@ -37,6 +45,9 @@ from spad_eshop_settings.models import SiteSetting
 
 @login_required(login_url='/login')
 def List_user_open_order(request):
+    print("kir khar")
+    logger.warning('Homepage was accessed at '+str(datetime.datetime.now())+' hours!')
+
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
     order_partials_buy = order.orderdetail_set.all()
     post_price = PostPrice.objects.filter().first()

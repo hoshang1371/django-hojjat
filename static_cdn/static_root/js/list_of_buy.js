@@ -94,9 +94,10 @@ content_list_of_buy.forEach(inItem => {
     removeItembuy(inItem);
     //TODo
     let input_item = inItem.querySelector('.input_off_number_product_item')
-    input_item.addEventListener("keypress", function () {
+    input_item.addEventListener("keyup", function () {
         // console.log("kosKesh");
         var [id, count] = getElementOfIdAndCount(inItem);
+        console.log('counr=',count)
         var data_toSend = {
             id: id,
             count: count,
@@ -104,6 +105,13 @@ content_list_of_buy.forEach(inItem => {
 
         put_item_list_of_buy(data_toSend, csrftoken).then(data => {
             console.log(data);
+            if(data.err){
+                console.log(data.number)
+                inItem.querySelector(".ToPersianValue").value = (data.number.toString()).toPersinaDigit();
+
+                alert('این تعداد موجود نیست.')
+                return 0;
+            }
             // makeChanges(inItem,data);
             var totalPrice = document.querySelector(".Total_price_for_all_product_buyData");
             var count_off_all_product = document.querySelector(".count_off_all_product");
@@ -144,6 +152,11 @@ function increaseItemBuy(inItem) {
         }
 
         put_item_list_of_buy(data_toSend, csrftoken).then(data => {
+            console.log(data)
+            if(data.err){
+                alert('این تعداد موجود نیست.')
+                return 0;
+            }
             makeChanges(inItem, data);
         });
     });
@@ -156,7 +169,9 @@ function decreaseItemBuy(inItem) {
         var [id, count] = getElementOfIdAndCount(inItem);
         // console.log(id);        // console.log('csrftoken=',csrftoken);
         var Intcount = parseInt(count);
-        Intcount--;
+        if(Intcount>1){
+            Intcount--;
+        }
         count = Intcount.toString();
         var data_toSend = {
             id: id,

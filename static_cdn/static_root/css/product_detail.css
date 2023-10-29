@@ -679,6 +679,7 @@ input[type="submit"]:hover {
         margin-left: 0;
         margin-right: 0;
         height: 35%;
+        /* margin-bottom: 450px; */
     }
 
     .content_right>img {

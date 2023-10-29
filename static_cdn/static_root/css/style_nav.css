@@ -735,6 +735,7 @@ a {
         position: absolute;
         direction: rtl;
         display: flex;
+        justify-content: center;
         left: 50%;
         transform: translateX(-50%);
         -webkit-transform: translateX(-50%);
