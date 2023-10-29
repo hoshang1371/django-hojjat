@@ -2,7 +2,122 @@
 {% load static %} 
 {% block content %}
 
+<link rel="stylesheet" href="{% static 'css/UnpaidOrder.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'css/post_order.css' %}"> -->
+<link rel="stylesheet" href="{% static 'css/addresses.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/change_pass.css' %}">
+
 <link rel="stylesheet" href="{% static 'css/edit_account.css' %}">
+
+<div class="user_content">
+    <div>
+        <div class="right_listOfFeatures">
+            <div class="right_headerList">
+
+                <img src="{% static 'images/avatar.jpg' %}" alt="Avatar">
+                <div>
+                    <p> {{user.first_name}} {{user.last_name}} </p>
+                    <h4>{{user.email}}</h4>
+                </div>
+            </div>
+            <div class="khat"></div>
+
+            <div class="right_panelGruop">
+                <div>
+                    <div>
+                        <i class="fas fa-edit"></i>
+                        <a href="user/edit">ویرایش اطلاعات</a>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                        <a href="{% url 'changePass' %}"> تغییر پسوورد </a>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <i class="fa fa-ban" aria-hidden="true"></i>
+                        <a href="{% url 'user' %}"> سفارشات پرداخت نشده </a>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <i class="fa fa-history" aria-hidden="true"></i>
+                        <a href="{% url 'historyOrder' %}"> تاریخچه سفارشات </a>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="{% url 'addresses' %}"> آدرس‌ها </a>
+                    </div>
+                </div>
+                <div>
+
+                    <a href="{% url 'log-out' %}"> خروج از حساب </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="Left_UnpaidOrders">
+        <p> اطلاعات کاربر </p>
+        <div class="khat"></div>
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="form-group rdio_button {% if edit_form.choice_field.errors %} errror {% endif %}">
+                <label for="{{ edit_form.choice_field.id_for_label }}">{{ edit_form.choice_field.label }}</label>
+                {{ edit_form.choice_field }}
+                {% for error in edit_form.choice_field.errors %}
+                <p class="text-danger">{{error}}</p>
+                {% endfor %}
+            </div>
+    
+            <div class="form-group form_name {% if edit_form.first_name.errors %} errror {% endif %}">
+                {{ edit_form.first_name }} {% for error in edit_form.first_name.errors %}
+                <p class="text-danger">{{error}}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group form_name {% if edit_form.last_name.errors %} errror {% endif %}">
+                {{ edit_form.last_name }} {% for error in edit_form.last_name.errors %}
+                <p class="text-danger">{{error}}</p>
+                {% endfor %}
+            </div>
+    
+            <div class="form-group form_name {% if edit_form.email.errors %} errror {% endif %}">
+                {{ edit_form.email }} {% for error in edit_form.email.errors %}
+                <p class="text-danger">{{error}}</p>
+                {% endfor %}
+            </div>
+    
+    
+            <div class="form-group form_name">
+                <label for="">تاریخ تولد</label>
+                <div class="birth_day_content">
+                    {{ edit_form.ROZ }} 
+                    {{ edit_form.MAH }} 
+                    {{ edit_form.SAL }} 
+                </div>
+            </div>
+    
+            <div class="send-group ">
+                <input type="submit" value="ارسـال">
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+<script src="{% static 'js/address.js' %}"></script>
+<script src="{% static 'js/password.js' %}"></script>
+
+
+<!-- <link rel="stylesheet" href="{% static 'css/edit_account.css' %}">
 
 <section class="content_accunt">
     <form method="post" novalidate>
@@ -50,6 +165,6 @@
         </div>
     </form>
 
-    <script src="{% static 'js/password.js' %}"></script>
+    <script src="{% static 'js/password.js' %}"></script> -->
 
 {% endblock %}

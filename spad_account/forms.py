@@ -89,54 +89,7 @@ class EditUserForm(forms.Form):
     MAH = forms.ChoiceField(choices=MAH)
 
     ROZ = forms.ChoiceField(choices=ROZ)
-
-
-
-    # password_now = forms.CharField(
-    #     widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
-    #     label=' گذرواژه فعلی',
-    # )
-
-    # password_new = forms.CharField(
-    #     widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
-    #     label=' رمز عبور جدید ',
-    # )
-
-    # password_accept = forms.CharField(
-    #     widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
-    #     label=' رمز عبور جدید ',
-    # )
-
-    # def clean_password_accept(self):
-    #     password_new = self.cleaned_data.get('password_new')
-    #     password_accept = self.cleaned_data.get('password_accept')
-
-    #     if password_new != password_accept:
-    #         raise forms.ValidationError('کلمه های عبور مغایرت دارند')
-
-    #     return password_new
-
-
-
-    # password_accept = forms.CharField(
-    #     widget=forms.TextInput(attrs={'placeholder':' تاییدیه ',"class":"rtl"}),
-    #     label=' تاییدیه ',
-    #     validators=[
-    #         validators.EmailValidator(' تاییدیه ')
-    #     ]
-    # )
-
-    # birth_date= forms.DateField(label='تاریخ تولد', years=BIRTH_YEAR_CHOICES
-    #                             widget=forms.SelectDateWidget), month=BIRTH_MOUNT_CHOICES
-
-    # birth_year = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES))
-
-    # favorite_colors = forms.MultipleChoiceField(
-    #     required=False,
-    #     widget=forms.CheckboxSelectMultiple,
-    #     choices=FAVORITE_COLORS_CHOICES,
-    # )
-
+    
 class ChangePass(forms.Form):
     password_now = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
@@ -147,14 +100,6 @@ class ChangePass(forms.Form):
         widget=forms.PasswordInput(attrs={'placeholder':' رمز عبور جدید',"class":"rtl password"}),
         label=' رمز عبور جدید ',
     )
-
-    # password_accept = forms.CharField(
-    #     widget=forms.TextInput(attrs={'placeholder':' تاییدیه ',"class":"rtl"}),
-    #     label=' تاییدیه ',
-    #     validators=[
-    #         validators.EmailValidator(' تاییدیه ')
-    #     ]
-    # )
 
     password_accept = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder':' تکرار رمز عبور جدید',"class":"rtl password"}),

@@ -36,92 +36,65 @@
     background-color: red!important;
 }
 
-/* .rtl::placeholder{
-    color: red;
-    padding-right: 20px;
-} */
 
 .form-group {
-    text-align: center;
-    font-size: 30px;
-    background-color: #3e60a8;
-    padding: 30px 0px 30px 0px;
-    color: antiquewhite;
-    font-family: 'samim';
-    margin-bottom: 5px;
+
+    direction: rtl;
+    position: relative;
+    margin: 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    border: 1px solid #3a3b3885;
+    width: 50%;
+}
+
+.form-group div{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
 }
 
 .form_name{
     position: relative;
-    /* height: 45px;
-    width: 100%; */
     height: 100%;
     display: block;
     direction: rtl;
-    /* flex-direction: row-reverse;
-    justify-content: space-around;  */
 }
 .rdio_button{
     position: relative;
-    height: 100%;
-    display: block;
+    height: auto;
     direction: rtl;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .rdio_button label{
-    position: absolute;
-    right: 20px;
-    top: 20%;
-}
-.rdio_button div {
-    position: absolute;
-    left: 20px;
-    top: 20%;
-    height: 60%;
-    width: 38%;
-    font-size: 25px;
     font-family: 'samim';
+    margin-right: 1.5rem;
+    font-size: 18px;
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
- .rdio_button div div:first-child{
-    position: absolute;
-    margin-left: 20px;
-    width: 50%;
-    top: 20%;
-    left: 0px;
-}
-
-.rdio_button div div:first-child label{
-    width: 100%;
-}
-
-.rdio_button div div:last-child{
-    position: absolute;
-    margin-left: 20px;
-    width: 50%;
-    top: 20%;
-    right: 0;
-}
-
-.rdio_button div div:last-child label{
-    width: 100%;
-}
 
 .form_name label{
-    position: absolute;
-    right: 20px;
-    top: 20%;
+    font-family: 'samim';
+    margin-right: 1.5rem;
+    font-size: 18px;
+    color: gray;
 }
 
 
 
 
 .form_name input{
-    position: absolute;
-    left: 20px;
-    top: 20%;
-    height: 60%;
-    width: 38%;
+    height: 100%;
+    width: 100%;
+    background: transparent;
     border: none;
     outline: none;
     color: #222;
@@ -137,18 +110,7 @@
     font-family: 'samim';
     margin-bottom: 5px;
 }
-.send-group input{
-    background: #dbd067;
-    border: 1px solid #f0db1d;
-    color: white;
-    font-size: 18px;
-    letter-spacing: 1px;
-    font-size: 600;
-    cursor: pointer;
-    font-family: 'byekan',sans-serif;
-    height: 60px;
-    width: 38%;
-}
+
 
 .birth_day_content{
     position: absolute;
@@ -172,20 +134,7 @@
     font-family: 'samim';
 }
 
-/* .birth_day_content select:nth-child(1){
-    padding: 0px 0px 0px 5%;
-}
-.birth_day_content select:nth-child(2){
-    padding: 0px 5% 0px 5%;
-}
-.birth_day_content select:nth-child(3){
-    padding: 0px 5% 0px 0px;
-} */
 
 .birth_day_content select option{
     color: rgba(97, 93, 93, 0.822);
 }
-
-/* .fontSamim{
-    font-family: 'samim';
-} */
