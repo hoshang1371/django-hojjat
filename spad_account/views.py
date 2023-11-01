@@ -218,7 +218,6 @@ def edit_user_profile(request):
 
     edit_user_form = EditUserForm(request.POST or None)
     if request.method == 'POST':
-
         if edit_user_form.is_valid():
             first_name = edit_user_form.cleaned_data.get('first_name')
             last_name = edit_user_form.cleaned_data.get('last_name')
@@ -268,9 +267,11 @@ def edit_user_profile(request):
             user.save()
             user.userdata.save()
 
+            return redirect('/')
+            
     username = request.user.username
     site_setting = SiteSetting.objects.first()
-    return redirect('/')
+    
     
     contex = {
         'username' : username,
