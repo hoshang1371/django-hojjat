@@ -217,58 +217,60 @@ def edit_user_profile(request):
         raise Http404('کاربر مورد نظر یافت نشد')
 
     edit_user_form = EditUserForm(request.POST or None)
+    if request.method == 'POST':
 
-    if edit_user_form.is_valid():
-        first_name = edit_user_form.cleaned_data.get('first_name')
-        last_name = edit_user_form.cleaned_data.get('last_name')
-        email = edit_user_form.cleaned_data.get('email')
-        choice_field = edit_user_form.cleaned_data.get('choice_field')
-        SAL = edit_user_form.cleaned_data.get('SAL')
-        MAH = edit_user_form.cleaned_data.get('MAH')
-        ROZ = edit_user_form.cleaned_data.get('ROZ')
-        # password_now = edit_user_form.cleaned_data.get('password_now')
-        # password_new = edit_user_form.cleaned_data.get('password_new')
-        # password_accept = edit_user_form.cleaned_data.get('password_accept')
-
-
-
-        # check = user.check_password(password_now)
-        # if check == True:
-        #     if password_new == password_accept:
-        #         user.set_password(password_new)
+        if edit_user_form.is_valid():
+            first_name = edit_user_form.cleaned_data.get('first_name')
+            last_name = edit_user_form.cleaned_data.get('last_name')
+            email = edit_user_form.cleaned_data.get('email')
+            choice_field = edit_user_form.cleaned_data.get('choice_field')
+            SAL = edit_user_form.cleaned_data.get('SAL')
+            MAH = edit_user_form.cleaned_data.get('MAH')
+            ROZ = edit_user_form.cleaned_data.get('ROZ')
+            # password_now = edit_user_form.cleaned_data.get('password_now')
+            # password_new = edit_user_form.cleaned_data.get('password_new')
+            # password_accept = edit_user_form.cleaned_data.get('password_accept')
 
 
-        user.first_name = first_name
-        user.last_name = last_name
-        # if user.userdata.choiceField is None:
-        #     UserData.objects.create(user=user,choiceField=choice_field)
-        # else:
-        #     user.userdata.choiceField = choice_field
-        try:
-            user.userdata.choiceField = choice_field
-        except ObjectDoesNotExist:
-            UserData.objects.create(user=user,choiceField=choice_field)
-        
-        try:
-            user.userdata.SAL = SAL
-        except ObjectDoesNotExist:
-            UserData.objects.create(user=user, SAL=SAL)
 
-        try:
-            user.userdata.MAH = MAH
-        except ObjectDoesNotExist:
-            UserData.objects.create(user=user, MAH=MAH)
+            # check = user.check_password(password_now)
+            # if check == True:
+            #     if password_new == password_accept:
+            #         user.set_password(password_new)
 
-        try:
-            user.userdata.ROZ = ROZ
-        except ObjectDoesNotExist:
-            UserData.objects.create(user=user, ROZ=ROZ)
 
-        user.save()
-        user.userdata.save()
+            user.first_name = first_name
+            user.last_name = last_name
+            # if user.userdata.choiceField is None:
+            #     UserData.objects.create(user=user,choiceField=choice_field)
+            # else:
+            #     user.userdata.choiceField = choice_field
+            try:
+                user.userdata.choiceField = choice_field
+            except ObjectDoesNotExist:
+                UserData.objects.create(user=user,choiceField=choice_field)
+            
+            try:
+                user.userdata.SAL = SAL
+            except ObjectDoesNotExist:
+                UserData.objects.create(user=user, SAL=SAL)
+
+            try:
+                user.userdata.MAH = MAH
+            except ObjectDoesNotExist:
+                UserData.objects.create(user=user, MAH=MAH)
+
+            try:
+                user.userdata.ROZ = ROZ
+            except ObjectDoesNotExist:
+                UserData.objects.create(user=user, ROZ=ROZ)
+
+            user.save()
+            user.userdata.save()
 
     username = request.user.username
     site_setting = SiteSetting.objects.first()
+    return redirect('/')
     
     contex = {
         'username' : username,
